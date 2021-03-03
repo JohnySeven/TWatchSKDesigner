@@ -1,0 +1,35 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:model="using:TWatchSKDesigner.ViewModels"
+             xmlns:conv="using:TWatchSKDesigner.Converters"
+             xmlns:def="using:TWatchSKDesigner.Models"
+             x:DataType="model:ComponentPropertiesViewModel" Width="250"
+             mc:Ignorable="d" d:DesignWidth="250" d:DesignHeight="450"
+             x:Class="TWatchSKDesigner.Views.ComponentProperties">
+  <UserControl.Resources>
+    <conv:PropertyEditorConverter x:Key="PropertyDataTemplate" />
+  </UserControl.Resources>
+  <DockPanel LastChildFill="True">
+    <ComboBox DockPanel.Dock="Top" SelectedIndex="{Binding SelectedComponentIndex, Mode=TwoWay}" HorizontalAlignment="Stretch" Items="{CompiledBinding Components}">
+      <ComboBox.ItemTemplate>
+        <DataTemplate DataType="def:ComponentDef">
+          <StackPanel Orientation="Horizontal">
+            <Label Content="{Binding Type}" />
+          </StackPanel>
+        </DataTemplate>
+      </ComboBox.ItemTemplate>
+    </ComboBox>
+    <ListBox Items="{CompiledBinding ComponentProperties, Mode=OneWay}" SelectionMode="Single">
+        <ListBox.ItemTemplate>
+          <DataTemplate>
+            <Grid ColumnDefinitions="125 1*">
+              <Label Content="{Binding Name}" /> 
+              <ContentPresenter Content="{Binding .}" Grid.Column="1" ContentTemplate="{Binding EditorType, Converter={StaticResource PropertyDataTemplate}} " />              
+            </Grid>
+          </DataTemplate>
+      </ListBox.ItemTemplate>
+    </ListBox>
+  </DockPanel>
+</UserControl>
