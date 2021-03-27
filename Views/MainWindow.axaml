@@ -23,14 +23,16 @@
       <MenuItem Header="_File">
         <MenuItem Header="_Open..."/>
         <Separator/>
-        <MenuItem Header="_Exit"/>
+        <MenuItem Header="_Exit" Command="{Binding ExitCommand}"/>
       </MenuItem>
       <MenuItem Header="_Edit">
         <MenuItem Header="Copy"/>
         <MenuItem Header="Paste"/>
       </MenuItem>
     </Menu>
-    <local:ComponentProperties DockPanel.Dock="Right" IsVisible="{Binding ShowProperties, Mode=OneWay}" DataContext="{Binding PropertiesViewModel, Mode=OneWay}" />
+    <Grid DockPanel.Dock="Right" IsVisible="{Binding ShowProperties, Mode=OneWay}">
+      <local:ComponentProperties DataContext="{Binding PropertiesViewModel, Mode=OneWay}" />
+    </Grid>
 
     <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
       <Grid>

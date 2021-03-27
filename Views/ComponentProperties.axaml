@@ -24,9 +24,9 @@
     <ListBox Items="{CompiledBinding ComponentProperties, Mode=OneWay}" SelectionMode="Single">
         <ListBox.ItemTemplate>
           <DataTemplate>
-            <Grid ColumnDefinitions="125 1*">
-              <Label Content="{Binding Name}" /> 
-              <ContentPresenter Content="{Binding .}" Grid.Column="1" ContentTemplate="{Binding EditorType, Converter={StaticResource PropertyDataTemplate}} " />              
+            <Grid ColumnDefinitions="Auto 1*" HorizontalAlignment="Stretch">
+              <Label Content="{Binding Name}" VerticalContentAlignment="Center" FontWeight="Bold" Margin="0,0,4,0" /> 
+              <ContentPresenter Content="{Binding .}" HorizontalAlignment="Stretch" Grid.Column="1" ContentTemplate="{Binding EditorType, Converter={StaticResource PropertyDataTemplate}} " />              
             </Grid>
           </DataTemplate>
       </ListBox.ItemTemplate>

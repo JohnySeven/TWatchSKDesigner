@@ -5,9 +5,11 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
+using System.Reactive;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using TWatchSKDesigner.Views;
 
 namespace TWatchSKDesigner.ViewModels
 {
@@ -39,6 +41,7 @@ namespace TWatchSKDesigner.ViewModels
         }
 
         public ICommand? StartEditingView { get; private set; }
+        public ICommand? ExitCommand { get; set; }
 
         public MainWindowViewModel()
         {

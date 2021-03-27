@@ -17,18 +17,26 @@ namespace TWatchSKDesigner.ViewModels
 {
     public class WatchView : ComponentDef
     {
-        private string _Name;
+        private string? _Name;
 
         [JsonProperty("name")]
         [ComponentProperty(typeof(TextBox))]
-        public string Name
+        public string? Name
         {
             get { return _Name; }
             set { _Name = value; this.RaisePropertyChanged(nameof(Name)); }
         }
 
+        private string? _Layout;
+
         [JsonProperty("layout")]
-        public string? Layout { get; set; }
+        [ComponentProperty(typeof(EnumComboBox<ViewLayout>))]
+        public string? Layout
+        {
+            get { return _Layout; }
+            set { _Layout = value; this.RaisePropertyChanged(nameof(Layout)); }
+        }
+
         [JsonProperty("components")]
         public JArray? Components { get; set; }
 
@@ -43,14 +51,24 @@ namespace TWatchSKDesigner.ViewModels
         [JsonIgnore]
         public new string Type { get; private set; } = "View";
 
-        [JsonIgnore]
         private bool _isSelected;
 
+        [JsonIgnore]
         public bool IsSelected
         {
             get { return _isSelected; }
             set { this.RaiseAndSetIfChanged(ref _isSelected, value); }
         }
+
+        private string? _Background;
+        [JsonProperty("background")]
+        [ComponentProperty(typeof(TextBox))]
+        public string? Background
+        {
+            get { return _Background; }
+            set { _Background = value; this.RaisePropertyChanged(nameof(Background)); }
+        }
+
 
         public void LoadAllComponents()
         {

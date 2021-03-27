@@ -3,6 +3,7 @@ using Avalonia.Controls;
 using Avalonia.Controls.Templates;
 using Avalonia.Data;
 using Avalonia.Markup.Xaml;
+using ReactiveUI;
 using System;
 using TWatchSKDesigner.Controls;
 using TWatchSKDesigner.Converters;
@@ -31,8 +32,6 @@ namespace TWatchSKDesigner.Views
                     };
                 }));
 
-
-
                 PropertyEditorConverter.EditorTemplates.Add(typeof(EnumComboBox<ComponentType>), new FuncDataTemplate<object>((v, s) =>
                 {
                     return new EnumComboBox<ComponentType>()
@@ -59,6 +58,22 @@ namespace TWatchSKDesigner.Views
                         HorizontalAlignment = Avalonia.Layout.HorizontalAlignment.Stretch
                     };
                 }));
+
+                PropertyEditorConverter.EditorTemplates.Add(typeof(EnumComboBox<ViewLayout>), new FuncDataTemplate<object>((v, s) =>
+                {
+                    return new EnumComboBox<ViewLayout>()
+                    {
+                        DataContext = v
+                    };
+                }));
+
+                PropertyEditorConverter.EditorTemplates.Add(typeof(BindingEditor), new FuncDataTemplate<object>((v, s) =>
+                {
+                    return new BindingEditor()
+                    {
+                        DataContext = v
+                    };
+                }));
             }
         }
 
@@ -69,11 +84,20 @@ namespace TWatchSKDesigner.Views
             DataContext = new MainWindowViewModel();
             AvaloniaXamlLoader.Load(this);
             LoadData();
+            Model.ExitCommand = ReactiveCommand.Create(() =>
+            {
+                Close();
+            });
+        }
+
+        private void Exit_Clicked(object sender, EventArgs eventArgs)
+        {
+            Close();
         }
 
         private async void LoadData()
         {
-            await Model?.LoadView("sk_view.json");
+            _ = await Model?.LoadView("sk_view.json");
         }
 
     }

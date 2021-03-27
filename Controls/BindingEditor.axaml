@@ -1,0 +1,13 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:local="using:TWatchSKDesigner.Models"
+             mc:Ignorable="d" d:DesignWidth="200"
+             x:Class="TWatchSKDesigner.Controls.BindingEditor"
+             x:DataType="local:ComponentProperty">
+  <Grid ColumnDefinitions="1* Auto" Margin="3">
+    <TextBlock TextTrimming="CharacterEllipsis" VerticalAlignment="Center" ToolTip.Tip="{Binding Path=Value.Path, FallbackValue=none}" Text="{Binding Path=Value.Path, FallbackValue=none}" />
+    <Button Grid.Column="1" Content="..." Margin="2" />
+  </Grid>
+</UserControl>

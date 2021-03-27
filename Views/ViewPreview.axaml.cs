@@ -14,6 +14,8 @@ namespace TWatchSKDesigner.Views
 {
     public class ViewPreview : UserControl
     {
+        private WatchView _attached;
+
         public Border Root { get; }
 
         public ViewPreview()
@@ -31,25 +33,55 @@ namespace TWatchSKDesigner.Views
         {
             if(DataContext is WatchView view)
             {
+                Detach();
                 LoadViewPreview(view);
+            }
+            else
+            {
+                Detach();
             }
             base.OnDataContextChanged(e);
         }
 
+        private void Detach()
+        {
+            if(_attached != null)
+            {
+                _attached.PropertyChanged -= View_PropertyChanged;
+            }
+        }
+
+        private void View_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if(e.PropertyName == nameof(WatchView.Layout))
+            {
+                LoadLayout(_attached.Layout);
+                LoadComponents(_attached);
+            }
+        }
+
         private void LoadViewPreview(WatchView view)
         {
+            _attached = view;
+            view.PropertyChanged += View_PropertyChanged;
+
             LoadLayout(view.Layout);
 
-            foreach(var component in view.LoadedComponents)
+            LoadComponents(view);
+        }
+
+        private void LoadComponents(WatchView view)
+        {
+            foreach (var component in view.LoadedComponents)
             {
                 Control renderedComponent = null;
 
-                if(component is LabelDef label)
+                if (component is LabelDef label)
                 {
                     renderedComponent = LoadLabel(label);
                 }
 
-                if(renderedComponent != null)
+                if (renderedComponent != null)
                 {
                     SetLayout(component, renderedComponent);
                     ((Panel)Root.Child).Children.Add(renderedComponent);
@@ -63,43 +95,17 @@ namespace TWatchSKDesigner.Views
             {
                 DataContext = labelDef,
                 [!Label.ContentProperty] = new Avalonia.Data.Binding("Text", Avalonia.Data.BindingMode.TwoWay),
-                Foreground = GetForeground(labelDef.Color),
-                FontSize = GetFontSize(labelDef.Font)
+                [!Label.ForegroundProperty] = new Avalonia.Data.Binding("Color", Avalonia.Data.BindingMode.OneWay)
+                {
+                    Converter = new BrushFromTextConverter()
+                },
+                [!Label.FontSizeProperty] = new Avalonia.Data.Binding("Font", Avalonia.Data.BindingMode.OneWay)
+                {
+                    Converter = new FontSizeConverter()
+                }
             };
 
             return ret;
-        }
-
-        private double GetFontSize(string? font)
-        {
-            if(string.IsNullOrEmpty(font))
-            {
-                return 8.0;
-            }
-            else
-            {
-                return double.Parse(new string(font.ToCharArray().Where(c => char.IsNumber(c)).ToArray()));
-            }
-        }
-
-        private IBrush? GetForeground(string? color)
-        {
-            if(string.IsNullOrEmpty(color))
-            {
-                return Brushes.White;
-            }
-            else if(color.StartsWith("#"))
-            {
-                return new SolidColorBrush(Colors.Red);
-            }
-            else if(Color.TryParse(color, out Color parsedColor))
-            {
-                return new SolidColorBrush(parsedColor);
-            }
-            else
-            {
-                return null;
-            }
         }
 
         private void SetLayout(ComponentDef componentDef, Control control)
@@ -108,8 +114,14 @@ namespace TWatchSKDesigner.Views
             {
                 if(componentDef.Location != null && componentDef.Location.Length == 2)
                 {
-                    Canvas.SetLeft(control, componentDef.Location[0]);
-                    Canvas.SetRight(control, componentDef.Location[0]);
+                    control.Bind(Canvas.LeftProperty, new Avalonia.Data.Binding("Location")
+                    {
+                        Converter = new DoubleFromIntArray() { Index = 0 }
+                    });
+                    control.Bind(Canvas.TopProperty, new Avalonia.Data.Binding("Location")
+                    {
+                        Converter = new DoubleFromIntArray() { Index = 1 }
+                    });
                 }
             }
 
