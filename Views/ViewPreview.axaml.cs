@@ -64,10 +64,16 @@ namespace TWatchSKDesigner.Views
         {
             _attached = view;
             view.PropertyChanged += View_PropertyChanged;
+            Root.Bind(Border.BackgroundProperty, new Avalonia.Data.Binding("Background")
+            {
+                Path = "Background",
+                Source = view,
+                Converter = new BrushFromTextConverter()
+            });
 
             LoadLayout(view.Layout);
-
             LoadComponents(view);
+            
         }
 
         private void LoadComponents(WatchView view)

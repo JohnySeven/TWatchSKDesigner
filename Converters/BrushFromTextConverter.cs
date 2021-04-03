@@ -13,15 +13,25 @@ namespace TWatchSKDesigner.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var color = value.ToString();
+            var color = value?.ToString();
             
             if (string.IsNullOrEmpty(color))
             {
-                return Brushes.White;
+                return Brushes.Transparent;
             }
             else if (color.StartsWith("#"))
             {
-                return new SolidColorBrush(Colors.Red);
+                if (color.Length == 7)
+                {
+                    var r = byte.Parse(color.Substring(1, 2), NumberStyles.HexNumber);
+                    var g = byte.Parse(color.Substring(3, 2), NumberStyles.HexNumber);
+                    var b = byte.Parse(color.Substring(5, 2), NumberStyles.HexNumber);
+                    return new SolidColorBrush(Color.FromRgb(r, g, b));
+                }
+                else
+                {
+                    return Brushes.Black;
+                }
             }
             else if (Color.TryParse(color, out Color parsedColor))
             {

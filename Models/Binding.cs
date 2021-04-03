@@ -17,5 +17,15 @@ namespace TWatchSKDesigner.Models
 
         [JsonProperty("period")]
         public int Period { get; set; }
+
+        public Binding Copy()
+        {
+            return new Binding()
+            {
+                Path = Path,
+                Multiply = Multiply,
+                Period = Period
+            };
+        }
     }
 }

@@ -21,8 +21,9 @@
   <DockPanel LastChildFill="True">
     <Menu DockPanel.Dock="Top">
       <MenuItem Header="_File">
-        <MenuItem Header="_Open..."/>
+        <MenuItem Header="_Open..." Command="{Binding OpenUIFromSK}"/>
         <Separator/>
+        <MenuItem Header="_Save" />
         <MenuItem Header="_Exit" Command="{Binding ExitCommand}"/>
       </MenuItem>
       <MenuItem Header="_Edit">
@@ -35,7 +36,7 @@
     </Grid>
 
     <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
-      <Grid>
+      <Grid Background="Gray">
         <ItemsControl Items="{CompiledBinding Views, Mode=OneTime}" x:DataType="model:MainWindowViewModel">
           <ItemsControl.ItemsPanel>
             <ItemsPanelTemplate>
@@ -63,6 +64,9 @@
             </DataTemplate>
           </ItemsControl.ItemTemplate>
         </ItemsControl>
+        <Grid IsVisible="{Binding ShowOpenHelpText}">
+          <Label VerticalAlignment="Center" HorizontalAlignment="Center" Content="Please open UI definition file from Signal K Server via File -> Open." />
+        </Grid>
       </Grid>
     </ScrollViewer>
   </DockPanel>

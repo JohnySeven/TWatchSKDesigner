@@ -1,0 +1,22 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" SizeToContent="WidthAndHeight" d:DesignHeight="450"
+        x:Class="TWatchSKDesigner.Modals.BindingEditorModal" WindowStartupLocation="CenterOwner"
+        Title="Edit binding" ShowInTaskbar="False" SystemDecorations="BorderOnly">
+  <Grid Margin="10" ColumnDefinitions="Auto 200" RowDefinitions="Auto Auto Auto Auto">
+    <Label Content="SK Path" VerticalContentAlignment="Center" />
+    <Label Grid.Row="1" Content="Period (ms)" VerticalContentAlignment="Center" />
+    <Label Grid.Row="2" Content="Multiply" VerticalContentAlignment="Center" />
+    
+    <TextBox Grid.Column="1" Margin="3" Text="{Binding Path, Mode=TwoWay}" />
+    <NumericUpDown Value="{Binding Period}" Minimum="0" Maximum="1000000" Grid.Column="1" Grid.Row="1" Margin="3" />
+    <NumericUpDown Value="{Binding Multiply}" Grid.Column="1" Grid.Row="2" Margin="3" />
+    
+    <StackPanel Margin="10" Spacing="10" HorizontalAlignment="Center" Orientation="Horizontal" Grid.Row="3" Grid.ColumnSpan="2">
+      <Button Click="OnOkClick" HorizontalContentAlignment="Center" IsDefault="True" Width="100" Content="OK" />
+      <Button Click="OnCancelClick" HorizontalContentAlignment="Center" IsCancel="True" Width="100" Content="Cancel" />
+    </StackPanel>
+  </Grid>
+</Window>

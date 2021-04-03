@@ -1,5 +1,6 @@
 using Avalonia.Collections;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using ReactiveUI;
 using System;
 using System.Collections.Generic;
@@ -9,6 +10,7 @@ using System.Reactive;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using TWatchSKDesigner.Modals;
 using TWatchSKDesigner.Views;
 
 namespace TWatchSKDesigner.ViewModels
@@ -43,21 +45,19 @@ namespace TWatchSKDesigner.ViewModels
         public ICommand? StartEditingView { get; private set; }
         public ICommand? ExitCommand { get; set; }
 
+        public SignalKManager SignalKManager { get; private set; }
+
+        private bool _ShowOpenHelpText = true;
+
+        public bool ShowOpenHelpText
+        {
+            get { return _ShowOpenHelpText; }
+            set { _ShowOpenHelpText = value; OnPropertyChanged(nameof(ShowOpenHelpText)); }
+        }
+
+
         public MainWindowViewModel()
         {
-            Views.Add(new WatchView()
-            {
-                Name = "Sample 1"
-            });
-            Views.Add(new WatchView()
-            {
-                Name = "Sample 2"
-            });
-            Views.Add(new WatchView()
-            {
-                Name = "Sample 3"
-            });
-
             StartEditingView = ReactiveCommand.Create<WatchView>(v =>
             {
                 ShowProperties = true;
@@ -72,16 +72,61 @@ namespace TWatchSKDesigner.ViewModels
                     }
                 }
             });
+
+            SignalKManager = new SignalKManager();
         }
 
-        public async Task<bool> LoadView(string path)
+        public async void OpenUIFromSK()
+        {
+            try
+            {
+                bool canLoadView = false;
+
+                if (!SignalKManager.TokenIsPresent)
+                {
+                    var result = await SignalKLogin.ShowLogin(SignalKManager);
+                    canLoadView = result.IsSuccess;
+                }
+                else
+                {
+                    canLoadView = true;
+                }
+
+                if (canLoadView)
+                {
+                    var loadSKPathsResult = await SignalKManager.LoadSKPaths();
+                    if (loadSKPathsResult.IsSuccess)
+                    {
+                        var loadResult = await SignalKManager.DownloadView();
+
+                        if (loadResult.IsSuccess)
+                        {
+                            ShowOpenHelpText = false;
+                            await LoadView(loadResult.Data);
+                        }
+                        else
+                        {
+                            await MessageBox.Show(loadResult.ErrorMessage);
+                        }
+                    }
+                    else
+                    {
+                        await MessageBox.Show(loadSKPathsResult.ErrorMessage);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                await MessageBox.Show(ex.Message);
+            }
+        }
+
+        public async Task<bool> LoadView(JObject viewJson)
         {
             var ret = false;
             try
             {
-                var json = await File.ReadAllTextAsync(path);
-
-                UI = await Task.Run(() => JsonConvert.DeserializeObject<WatchDynamicUI>(json));
+                UI = await Task.Run(() => JsonConvert.DeserializeObject<WatchDynamicUI>(viewJson.ToString()));
                 Views.Clear();
                 UI.Views?.ForEach(v =>
                 {
@@ -93,7 +138,7 @@ namespace TWatchSKDesigner.ViewModels
             }
             catch (Exception ex)
             {
-
+               await MessageBox.Show(ex.Message);
             }
 
             return ret;

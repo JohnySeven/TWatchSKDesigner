@@ -8,14 +8,18 @@ using System;
 using TWatchSKDesigner.Controls;
 using TWatchSKDesigner.Converters;
 using TWatchSKDesigner.Enums;
+using TWatchSKDesigner.Modals;
 using TWatchSKDesigner.ViewModels;
 
 namespace TWatchSKDesigner.Views
 {
     public class MainWindow : Window
     {
+        public static MainWindow? Instance { get; private set; }
+
         public MainWindow()
         {
+            Instance = this;
             InitializeComponent();
 #if DEBUG
             this.AttachDevTools();
@@ -75,6 +79,8 @@ namespace TWatchSKDesigner.Views
                     };
                 }));
             }
+
+            
         }
 
         public MainWindowViewModel? Model => DataContext as MainWindowViewModel;
@@ -83,7 +89,7 @@ namespace TWatchSKDesigner.Views
         {
             DataContext = new MainWindowViewModel();
             AvaloniaXamlLoader.Load(this);
-            LoadData();
+
             Model.ExitCommand = ReactiveCommand.Create(() =>
             {
                 Close();
@@ -94,11 +100,5 @@ namespace TWatchSKDesigner.Views
         {
             Close();
         }
-
-        private async void LoadData()
-        {
-            _ = await Model?.LoadView("sk_view.json");
-        }
-
     }
 }

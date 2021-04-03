@@ -8,6 +8,7 @@
     <AvaloniaResource Include="Assets\**" />
   </ItemGroup>
   <ItemGroup>
+    <None Remove="Assets\SignalK.png" />
     <None Remove="sk_view.json" />
   </ItemGroup>
   <ItemGroup>
