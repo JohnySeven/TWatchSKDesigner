@@ -33,8 +33,20 @@ namespace TWatchSKDesigner.ViewModels
 
         internal void LoadViewObjects(WatchView? view)
         {
+            if (View != null)
+            {
+                View.LoadedComponents.CollectionChanged -= LoadedComponents_CollectionChanged;
+            }
             View = view;
-            if(view?.Components != null)
+
+            View.LoadedComponents.CollectionChanged += LoadedComponents_CollectionChanged;
+
+            RefreshComponents(view);
+        }
+
+        private void RefreshComponents(WatchView? view)
+        {
+            if (view?.Components != null)
             {
                 var list = view.LoadedComponents;
 
@@ -42,13 +54,18 @@ namespace TWatchSKDesigner.ViewModels
 
                 Components.Add(view);
 
-                foreach(var item in list)
+                foreach (var item in list)
                 {
                     Components.Add(item);
                 }
 
                 SelectedComponentIndex = 0;
             }
+        }
+
+        private void LoadedComponents_CollectionChanged(object? sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            RefreshComponents(View);
         }
 
         private int _selectedComponentIndex;
@@ -69,10 +86,8 @@ namespace TWatchSKDesigner.ViewModels
 
             if (component != null)
             {
-
-                var propertyList = ComponentProperty.GetProperties(component);
-
-                ComponentProperties.Clear();
+                var propertyList = ComponentProperty.GetProperties(component, OnPropertyChanged);
+                ClearProperties();
 
                 foreach (var property in propertyList)
                 {
@@ -83,6 +98,17 @@ namespace TWatchSKDesigner.ViewModels
             {
                 ComponentProperties.Clear();
             }
+        }
+
+        private void OnPropertyChanged(ComponentProperty property)
+        {
+            System.Diagnostics.Debug.WriteLine($"View {View?.Name} object {SelectedComponent?.Type} property {property.Name} changed to {property.Value}");
+            View?.SynchronizeJson();
+        }
+
+        private void ClearProperties()
+        {
+            ComponentProperties.Clear();
         }
 
         private ComponentDef? _selectedComponent;

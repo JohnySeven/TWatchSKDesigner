@@ -94,16 +94,15 @@ namespace TWatchSKDesigner.ViewModels
                     var self = jApiData["self"]?.ToString();
                     if (self != null)
                     {
-                        self = self.Substring("vessels.".Length);
+                        self = self["vessels.".Length..];
                         var paths = new List<SKPath>();
-                        var jSelf = jApiData["vessels"][self] as JObject;
-                        if(jSelf != null)
+                        if (jApiData["vessels"]?[self] is JObject jSelf)
                         {
                             foreach (var name in jSelf)
                             {
                                 if (name.Value?.Type == JTokenType.Object)
                                 {
-                                    EnumeratePaths((JObject)name.Value, "", paths);
+                                    EnumeratePaths((JObject)name.Value, name.Key, paths);
                                 }
                             }
 
@@ -187,9 +186,32 @@ namespace TWatchSKDesigner.ViewModels
             }
         }
 
-        public Task<OperationResult> StoreView(JObject viewDefinition)
+        public async Task<OperationResult> StoreView(JObject viewDefinition)
         {
-            throw new NotImplementedException();
+            var uri = $"http://{_ServerAddress}/signalk/v1/applicationData/global/twatch/1.0/ui";
+            var http = client.Value;
+
+            var root = new JObject
+            {
+                ["default"] = viewDefinition
+            };
+            try
+            {
+                var response = await http.PostAsync(uri, new Models.SK.JsonContent(root.ToString()));
+
+                if(response.IsSuccessStatusCode)
+                {
+                    return new OperationResult();
+                }
+                else
+                {
+                    return new OperationResult(response.ReasonPhrase);
+                }
+            }
+            catch (Exception ex)
+            {
+                return new OperationResult(ex.Message);
+            }
         }
 
         private static HttpClient InitHttpClient()

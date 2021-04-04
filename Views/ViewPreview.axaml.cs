@@ -3,7 +3,9 @@ using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 using Avalonia.Media;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
+using System.Collections.Specialized;
 using System.Linq;
 using TWatchSKDesigner.Converters;
 using TWatchSKDesigner.Helpers;
@@ -48,6 +50,7 @@ namespace TWatchSKDesigner.Views
             if(_attached != null)
             {
                 _attached.PropertyChanged -= View_PropertyChanged;
+                _attached.LoadedComponents.CollectionChanged -= LoadedComponents_CollectionChanged;
             }
         }
 
@@ -64,6 +67,7 @@ namespace TWatchSKDesigner.Views
         {
             _attached = view;
             view.PropertyChanged += View_PropertyChanged;
+
             Root.Bind(Border.BackgroundProperty, new Avalonia.Data.Binding("Background")
             {
                 Path = "Background",
@@ -73,7 +77,12 @@ namespace TWatchSKDesigner.Views
 
             LoadLayout(view.Layout);
             LoadComponents(view);
-            
+            view.LoadedComponents.CollectionChanged += LoadedComponents_CollectionChanged;
+        }
+
+        private void LoadedComponents_CollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
+        {
+            _attached.SynchronizeJson();
         }
 
         private void LoadComponents(WatchView view)

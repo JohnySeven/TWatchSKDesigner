@@ -85,5 +85,11 @@ namespace TWatchSKDesigner.ViewModels
                 }
             }
         }
+
+        internal void SynchronizeJson()
+        {
+            var json = JsonConvert.SerializeObject(LoadedComponents);
+            Components = JArray.Parse(json);
+        }
     }
 }

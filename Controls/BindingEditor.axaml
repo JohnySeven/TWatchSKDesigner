@@ -7,7 +7,7 @@
              x:Class="TWatchSKDesigner.Controls.BindingEditor"
              x:DataType="local:ComponentProperty">
   <Grid ColumnDefinitions="1* Auto" Margin="3">
-    <TextBlock TextTrimming="CharacterEllipsis" VerticalAlignment="Center" ToolTip.Tip="{Binding Path=Value.Path, FallbackValue=none}" Text="{Binding Path=Value.Path, FallbackValue=none}" />
+    <TextBlock x:Name="SKPath" TextTrimming="CharacterEllipsis" VerticalAlignment="Center" ToolTip.Tip="{Binding Path=Value.Path, FallbackValue=none, Mode=TwoWay}" Text="{Binding Path=Value.Path, FallbackValue=none}" />
     <Button Click="OnButtonClick" Grid.Column="1" Content="..." Margin="2" />
   </Grid>
 </UserControl>

@@ -22,14 +22,19 @@ namespace TWatchSKDesigner.Models
                 _Value = value;
                 this.RaiseAndSetIfChanged(ref _Value, value);
                 Property?.SetValue(Parent, value);
+                if(OnChanged != null && OnChanged.TryGetTarget(out Action<ComponentProperty> callback))
+                {
+                    callback(this);
+                }
             }
         }
 
         public PropertyInfo? Property { get; set; }
         public object? Parent { get; set; }
         public Type? EditorType { get; set; }
+        public WeakReference<Action<ComponentProperty>>? OnChanged { get; private set; }
 
-        public static ComponentProperty[] GetProperties(object instance)
+        public static ComponentProperty[] GetProperties(object instance, Action<ComponentProperty> onChanged)
         {
             var properties = instance.GetType().
                 GetProperties()
@@ -40,7 +45,8 @@ namespace TWatchSKDesigner.Models
                             Property = p,
                             Parent = instance,
                             Value = p.GetValue(instance),
-                            EditorType = p.GetCustomAttributes(true).OfType<ComponentPropertyAttribute>().First().EditorType
+                            EditorType = p.GetCustomAttributes(true).OfType<ComponentPropertyAttribute>().First().EditorType,
+                            OnChanged = new WeakReference<Action<ComponentProperty>>(onChanged)
                         })
                 .ToArray();
 

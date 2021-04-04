@@ -12,7 +12,7 @@ namespace TWatchSKDesigner.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var font = value.ToString();
+            var font = value?.ToString();
             if (string.IsNullOrEmpty(font))
             {
                 return 8.0;

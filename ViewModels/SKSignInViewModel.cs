@@ -12,7 +12,12 @@ namespace TWatchSKDesigner.ViewModels
     {
         public SKSignInViewModel()
         {
-
+#if DEBUG
+            _Address = "pi.boat:3000";
+            _User = "signalk";
+            _Password = "signalk";
+            _IsValid = true;
+#endif
         }
 
         private string? _Address;

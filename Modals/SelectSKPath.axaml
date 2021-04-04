@@ -1,0 +1,24 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" SizeToContent="WidthAndHeight"
+        x:Class="TWatchSKDesigner.Modals.SelectSKPath"
+        Title="Select SignalK path" x:Name="Window" WindowStartupLocation="CenterOwner" ShowInTaskbar="False" SystemDecorations="BorderOnly">
+  <Grid RowDefinitions="300 Auto" Width="300">
+    <ListBox Margin="3" SelectedItem="{Binding #Window.SelectedPath, Mode=TwoWay}" Items="{Binding #Window.Paths}">
+      <ListBox.ItemTemplate>
+        <DataTemplate>
+          <DockPanel>
+            <Image Source="/Assets/SignalK.png" DockPanel.Dock="Left" Width="16" Height="16" />
+            <TextBlock Text="{Binding Path}" />
+          </DockPanel>
+        </DataTemplate>
+      </ListBox.ItemTemplate>
+    </ListBox>
+    <StackPanel Margin="10" Spacing="10" HorizontalAlignment="Center" Orientation="Horizontal" Grid.Row="1">
+      <Button Click="OnOkClick" HorizontalContentAlignment="Center" IsDefault="True" Width="100" Content="OK" />
+      <Button Click="OnCancelClick" HorizontalContentAlignment="Center" IsCancel="True" Width="100" Content="Cancel" />
+    </StackPanel>
+  </Grid>
+</Window>

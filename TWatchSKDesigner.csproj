@@ -9,12 +9,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Remove="Assets\SignalK.png" />
-    <None Remove="sk_view.json" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="sk_view.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Avalonia" Version="0.10.0" />

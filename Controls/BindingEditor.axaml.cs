@@ -28,7 +28,7 @@ namespace TWatchSKDesigner.Controls
 
         private async void OnButtonClick(object sender, RoutedEventArgs e)
         {
-            Binding? binding = (Property?.Value as Binding)?.Copy() ?? new Binding();
+            Binding? binding = (Property?.Value as Binding)?.Copy() ?? new Binding() { Multiply = 1.0f, Period = 1000 };
 
             var modal = new BindingEditorModal()
             {
@@ -38,6 +38,7 @@ namespace TWatchSKDesigner.Controls
             if(await modal.ShowDialog<bool>(MainWindow.Instance))
             {
                 Property.Value = binding;
+                this.Find<TextBlock>("SKPath").Text = binding.Path;
             }
         }
     }

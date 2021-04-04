@@ -29,10 +29,13 @@ namespace TWatchSKDesigner.Modals
 
         private async void LoginClicked(object sender, RoutedEventArgs e)
         {
-            if (await Model.PerformLogin())
+            await ProgressWindow.ShowProgress("Authenticating with SignalK...", async () =>
             {
-                Close(true);
-            }
+                if (await Model.PerformLogin())
+                {
+                    Close(true);
+                }
+            });
         }
 
         private void CancelClicked(object sender, RoutedEventArgs e)

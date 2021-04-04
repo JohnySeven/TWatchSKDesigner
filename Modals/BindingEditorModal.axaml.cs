@@ -2,6 +2,7 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
+using TWatchSKDesigner.Models;
 
 namespace TWatchSKDesigner.Modals
 {
@@ -13,8 +14,9 @@ namespace TWatchSKDesigner.Modals
 #if DEBUG
             this.AttachDevTools();
 #endif
-
         }
+
+        public Binding? Model => (Binding?)DataContext;
 
         private void InitializeComponent()
         {
@@ -29,6 +31,18 @@ namespace TWatchSKDesigner.Modals
         private void OnCancelClick(object sender, RoutedEventArgs e)
         {
             Close(false);
+        }
+
+        private async void PickSKPath(object sender, RoutedEventArgs e)
+        {
+            var skPathPick = new SelectSKPath();
+
+            if(await skPathPick.ShowDialog<bool>(this))
+            {
+                //this is hack, we need to create real model!
+                var skPath = this.Find<TextBox>("SKPath");
+                skPath.Text = skPathPick.SelectedPath?.Path;
+            }
         }
     }
 }

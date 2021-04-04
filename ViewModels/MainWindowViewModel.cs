@@ -1,4 +1,5 @@
 using Avalonia.Collections;
+using Avalonia.Controls;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using ReactiveUI;
@@ -11,6 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using TWatchSKDesigner.Modals;
+using TWatchSKDesigner.Models;
 using TWatchSKDesigner.Views;
 
 namespace TWatchSKDesigner.ViewModels
@@ -47,6 +49,15 @@ namespace TWatchSKDesigner.ViewModels
 
         public SignalKManager SignalKManager { get; private set; }
 
+        private WatchView? _SelectedView;
+
+        public WatchView? SelectedView
+        {
+            get { return _SelectedView; }
+            set { _SelectedView = value; OnPropertyChanged(nameof(SelectedView)); }
+        }
+
+
         private bool _ShowOpenHelpText = true;
 
         public bool ShowOpenHelpText
@@ -54,6 +65,15 @@ namespace TWatchSKDesigner.ViewModels
             get { return _ShowOpenHelpText; }
             set { _ShowOpenHelpText = value; OnPropertyChanged(nameof(ShowOpenHelpText)); }
         }
+
+        private bool _ViewLoaded;
+
+        public bool ViewLoaded
+        {
+            get { return _ViewLoaded; }
+            set { _ViewLoaded = value; OnPropertyChanged(nameof(ViewLoaded)); }
+        }
+
 
 
         public MainWindowViewModel()
@@ -63,10 +83,11 @@ namespace TWatchSKDesigner.ViewModels
                 ShowProperties = true;
                 _propertiesViewModel.LoadViewObjects(v);
                 v.IsSelected = true;
+                SelectedView = v;
 
-                foreach(var view in Views)
+                foreach (var view in Views)
                 {
-                    if(view != v)
+                    if (view != v)
                     {
                         view.IsSelected = false;
                     }
@@ -74,6 +95,8 @@ namespace TWatchSKDesigner.ViewModels
             });
 
             SignalKManager = new SignalKManager();
+            Json = "";
+            JsonError = "";
         }
 
         public async void OpenUIFromSK()
@@ -94,15 +117,21 @@ namespace TWatchSKDesigner.ViewModels
 
                 if (canLoadView)
                 {
-                    var loadSKPathsResult = await SignalKManager.LoadSKPaths();
-                    if (loadSKPathsResult.IsSuccess)
+                    OperationResult loadSKPathsResult = null;
+
+                    await ProgressWindow.ShowProgress("Loading Signal K paths...", async () =>
+                    {
+                       loadSKPathsResult = await SignalKManager.LoadSKPaths();
+                    });
+
+                    if (loadSKPathsResult?.IsSuccess == true)
                     {
                         var loadResult = await SignalKManager.DownloadView();
 
                         if (loadResult.IsSuccess)
                         {
                             ShowOpenHelpText = false;
-                            await LoadView(loadResult.Data);
+                            ViewLoaded = await LoadView(loadResult.Data);
                         }
                         else
                         {
@@ -111,7 +140,7 @@ namespace TWatchSKDesigner.ViewModels
                     }
                     else
                     {
-                        await MessageBox.Show(loadSKPathsResult.ErrorMessage);
+                        await MessageBox.Show(loadSKPathsResult?.ErrorMessage ?? "Error!");
                     }
                 }
             }
@@ -121,20 +150,158 @@ namespace TWatchSKDesigner.ViewModels
             }
         }
 
-        public async Task<bool> LoadView(JObject viewJson)
+        internal Task<OperationResult> SaveView()
+        {
+            if (SelectedTabIndex == 0)
+            {
+                UpdateJson();
+            }
+
+            var viewJson = JObject.Parse(Json);
+
+            return SignalKManager.StoreView(viewJson);
+        }
+
+        internal void AddNewLabel()
+        {
+            SelectedView.LoadedComponents.Add(new LabelDef() { Type = "label", Font = "roboto40" });
+        }
+
+        internal void CreateNewView()
+        {
+            var newView = new WatchView()
+            {
+                Name = "New view",
+                Components = new JArray(),
+                Layout = "column_mid",
+                ViewType = "normal",
+                Background = "white"
+            };
+
+            UI.Views.Add(newView);
+
+            newView.LoadAllComponents();
+
+            Views.Add(newView);
+        }
+
+        private string _Json;
+
+        public string Json
+        {
+            get { return _Json; }
+            set
+            {
+                _Json = value; OnPropertyChanged(nameof(Json));
+                TryParseJson();
+            }
+        }
+
+        private async void TryParseJson()
+        {
+            var error = "";
+
+            await Task.Run(() =>
+            {
+                try
+                {
+                    JObject.Parse(Json);
+                }
+                catch (Exception ex)
+                {
+                    error = ex.Message;
+                }
+            });
+
+            JsonError = error;
+        }
+
+        private string _JsonError;
+
+        public string JsonError
+        {
+            get { return _JsonError; }
+            set { _JsonError = value; OnPropertyChanged(nameof(JsonError)); }
+        }
+
+
+        private int _SelectedTabIndex;
+
+        public int SelectedTabIndex
+        {
+            get { return _SelectedTabIndex; }
+            set
+            {
+                _SelectedTabIndex = value;
+                OnPropertyChanged(nameof(SelectedTabIndex));
+                if(value == 0) //switching to preview
+                {
+                    SwitchedToPreview();
+                }
+                else if(value == 1) //switching to JSON
+                {
+                    UpdateJson();
+                }
+            }
+        }
+        public void UpdateJson()
+        {
+            //Update JSON from edits of designer
+            if (UI?.Views != null)
+            {
+                foreach(var view in UI.Views)
+                {
+                    view.SynchronizeJson();
+                }
+
+                Json = JsonConvert.SerializeObject(UI, Formatting.Indented, new JsonSerializerSettings()
+                {
+                    NullValueHandling = NullValueHandling.Ignore
+                });
+            }
+            else
+            {
+                Json = "{ }";
+            }
+        }
+
+        private async void SwitchedToPreview()
+        {
+            //Update Preview from switch from Json
+            try
+            {
+                var obj = JObject.Parse(Json);
+                await LoadView(obj);
+            }
+            catch (Exception ex)
+            {
+                await MessageBox.Show("Json error: " + ex.Message);
+            }
+        }
+
+        public async Task<bool> LoadView(JObject? viewJson)
         {
             var ret = false;
             try
             {
-                UI = await Task.Run(() => JsonConvert.DeserializeObject<WatchDynamicUI>(viewJson.ToString()));
-                Views.Clear();
-                UI.Views?.ForEach(v =>
+                if (viewJson != null)
                 {
-                    v.LoadAllComponents();
-                    Views.Add(v);
-                });
+                    Json = viewJson.ToString();
+                    UI = await Task.Run(() => JsonConvert.DeserializeObject<WatchDynamicUI>(viewJson.ToString()));
+                    Views.Clear();
+                    if (UI.Views == null)
+                    {
+                        UI.Views = new List<WatchView>();
+                    }
 
-                ret = true;
+                    UI.Views?.ForEach(v =>
+                    {
+                        v.LoadAllComponents();
+                        Views.Add(v);
+                    });
+
+                    ret = true;
+                }
             }
             catch (Exception ex)
             {

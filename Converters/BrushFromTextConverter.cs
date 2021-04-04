@@ -17,7 +17,7 @@ namespace TWatchSKDesigner.Converters
             
             if (string.IsNullOrEmpty(color))
             {
-                return Brushes.Transparent;
+                return Brushes.Black;
             }
             else if (color.StartsWith("#"))
             {

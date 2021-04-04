@@ -2,6 +2,7 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Templates;
 using Avalonia.Data;
+using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
 using ReactiveUI;
 using System;
@@ -24,7 +25,11 @@ namespace TWatchSKDesigner.Views
 #if DEBUG
             this.AttachDevTools();
 #endif
+            InitializeEditorTemplates();
+        }
 
+        private static void InitializeEditorTemplates()
+        {
             if (PropertyEditorConverter.EditorTemplates.Count == 0)
             {
                 PropertyEditorConverter.EditorTemplates.Add(typeof(TextBox), new FuncDataTemplate<object>((v, s) =>
@@ -79,8 +84,6 @@ namespace TWatchSKDesigner.Views
                     };
                 }));
             }
-
-            
         }
 
         public MainWindowViewModel? Model => DataContext as MainWindowViewModel;
@@ -89,16 +92,37 @@ namespace TWatchSKDesigner.Views
         {
             DataContext = new MainWindowViewModel();
             AvaloniaXamlLoader.Load(this);
+        }
 
-            Model.ExitCommand = ReactiveCommand.Create(() =>
+        private void Exit_Clicked(object sender, RoutedEventArgs eventArgs)
+        {
+            Close();
+        }
+
+        private async void Save_Clicked(object sender, RoutedEventArgs eventArgs)
+        {
+            await ProgressWindow.ShowProgress("Saving view...", async () =>
             {
-                Close();
+                var result = await Model?.SaveView();
+                if(result?.IsSuccess == true)
+                {
+                    await MessageBox.Show("Saved!");
+                }
+                else
+                {
+                    await MessageBox.Show(result?.ErrorMessage);
+                }
             });
         }
 
-        private void Exit_Clicked(object sender, EventArgs eventArgs)
+        private void NewView_Clicked(object sender, RoutedEventArgs eventArgs)
         {
-            Close();
+            Model.CreateNewView();
+        }
+
+        private void NewLabel_Clicked(object sender, RoutedEventArgs eventArgs)
+        {
+            Model.AddNewLabel();
         }
     }
 }
