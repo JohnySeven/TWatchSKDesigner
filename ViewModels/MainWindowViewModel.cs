@@ -14,6 +14,7 @@ using System.Windows.Input;
 using TWatchSKDesigner.Modals;
 using TWatchSKDesigner.Models;
 using TWatchSKDesigner.Views;
+using System.Linq;
 
 namespace TWatchSKDesigner.ViewModels
 {
@@ -132,6 +133,11 @@ namespace TWatchSKDesigner.ViewModels
                         {
                             ShowOpenHelpText = false;
                             ViewLoaded = await LoadView(loadResult.Data);
+                        }
+                        else if (loadResult.StatusCode == 404)
+                        {
+                            ShowOpenHelpText = false;
+                            ViewLoaded = await LoadView(JObject.Parse("{ }"));
                         }
                         else
                         {
@@ -254,14 +260,45 @@ namespace TWatchSKDesigner.ViewModels
                     view.SynchronizeJson();
                 }
 
-                Json = JsonConvert.SerializeObject(UI, Formatting.Indented, new JsonSerializerSettings()
+                var json = JObject.FromObject(UI, new JsonSerializer()
                 {
                     NullValueHandling = NullValueHandling.Ignore
                 });
+
+                RemoveNulls(json);
+
+                Json = json.ToString(Formatting.Indented);
             }
             else
             {
                 Json = "{ }";
+            }
+        }
+
+        private void RemoveNulls(JObject json)
+        {
+            var properties = json.Properties().ToArray();
+
+            foreach(var property in properties)
+            {
+                if(property.Value == null || property.Value.Type == JTokenType.Null)
+                {
+                    property.Remove();
+                }
+                else if(property.Value.Type == JTokenType.Object)
+                {
+                    RemoveNulls((JObject)property.Value);
+                }
+                else if(property.Value.Type == JTokenType.Array)
+                {
+                    foreach(var item in ((JArray)property.Value))
+                    {
+                        if(item?.Type == JTokenType.Object)
+                        {
+                            RemoveNulls((JObject)item);
+                        }
+                    }
+                }
             }
         }
 

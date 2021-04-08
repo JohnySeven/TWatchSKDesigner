@@ -31,12 +31,16 @@ namespace TWatchSKDesigner.ViewModels
             Data = data;
         }
 
-        public OperationResult(string errorMessage)
+        public OperationResult(string errorMessage, int statusCode)
         {
+            IsSuccess = false;
             ErrorMessage = errorMessage;
             Data = default;
+            StatusCode = statusCode;
         }
 
         public T? Data { get; set; }
+
+        public int StatusCode { get; set; }
     }
 }

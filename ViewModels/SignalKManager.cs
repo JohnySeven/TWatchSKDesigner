@@ -38,7 +38,7 @@ namespace TWatchSKDesigner.ViewModels
         private Lazy<HttpClient> client = new Lazy<HttpClient>(InitHttpClient);
         
 
-        public async Task<OperationResult> Authorize(string server, string user, string password)
+        public async Task<OperationResult> Authorize(string server, int port, string user, string password)
         {
             var http = client.Value;
 
@@ -46,7 +46,7 @@ namespace TWatchSKDesigner.ViewModels
             {
 
                 var requestJson = JsonConvert.SerializeObject(new { username = user, password = password });
-                var response = await http.PostAsync($"http://{server}/signalk/v1/auth/login", new Models.SK.JsonContent(requestJson));
+                var response = await http.PostAsync($"http://{server}:{port}/signalk/v1/auth/login", new Models.SK.JsonContent(requestJson));
 
                 if (response.StatusCode == System.Net.HttpStatusCode.OK)
                 {
@@ -54,7 +54,7 @@ namespace TWatchSKDesigner.ViewModels
 
                     var tokenInfo = JsonConvert.DeserializeObject<AuthorizationResult>(tokenInfoJson);
                     _token = tokenInfo?.Token;
-                    ServerAddress = server;
+                    ServerAddress = $"{server}:{port}";
                     http.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _token);
                     OnPropertyChanged(nameof(tokenInfo));
 
@@ -177,12 +177,15 @@ namespace TWatchSKDesigner.ViewModels
                 }
                 else
                 {
-                    return new OperationResult<JObject>(response.ReasonPhrase ?? "Request error!");
+                    return new OperationResult<JObject>(response.ReasonPhrase ?? "Request error!", (int)response.StatusCode)
+                    {
+                        IsSuccess = false
+                    };
                 }
             }
             catch (Exception ex)
             {
-                return new OperationResult<JObject>(ex.Message);
+                return new OperationResult<JObject>(ex.Message, ex.HResult);
             }
         }
 

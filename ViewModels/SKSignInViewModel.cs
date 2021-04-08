@@ -10,14 +10,16 @@ namespace TWatchSKDesigner.ViewModels
 {
     public class SKSignInViewModel : ViewModelBase
     {
-        public SKSignInViewModel()
+        public SKSignInViewModel(SignalKManager signalKManager)
         {
-#if DEBUG
-            _Address = "pi.boat:3000";
-            _User = "signalk";
-            _Password = "signalk";
-            _IsValid = true;
-#endif
+            SKManager = signalKManager;
+            //#if DEBUG
+            //            _Address = "pi.boat";
+            //            _User = "signalk";
+            //            _Password = "signalk";
+            //            _IsValid = true;
+            //#endif
+            _Port = 3000;
         }
 
         private string? _Address;
@@ -52,7 +54,13 @@ namespace TWatchSKDesigner.ViewModels
             set { _IsWorking = value; OnPropertyChanged(nameof(IsWorking)); }
         }
 
-        public Action<string> OnMessage { get; set; }
+        private int _Port;
+
+        public int Port
+        {
+            get { return _Port; }
+            set { _Port = value; OnPropertyChanged(nameof(Port)); UpdateValid(); }
+        }
 
         private bool _IsValid;
 
@@ -66,10 +74,10 @@ namespace TWatchSKDesigner.ViewModels
 
         private void UpdateValid()
         {
-            IsValid = !string.IsNullOrEmpty(Address) && !string.IsNullOrEmpty(User) && !string.IsNullOrEmpty(Password);
+            IsValid = !string.IsNullOrEmpty(Address) && !string.IsNullOrEmpty(User) && !string.IsNullOrEmpty(Password) && Port > 0 && Port < ushort.MaxValue;
         }
 
-        private string _ErrorMessage;
+        private string _ErrorMessage = "";
 
         public string ErrorMessage
         {
@@ -81,16 +89,23 @@ namespace TWatchSKDesigner.ViewModels
 
         public async Task<bool> PerformLogin()
         {
-            var result = await SKManager.Authorize(Address, User, Password);
-
-            if(result.IsSuccess)
+            if (Address != null && User != null && Password != null)
             {
-                return true;
+                var result = await SKManager.Authorize(Address, Port, User, Password);
+
+                if (result.IsSuccess)
+                {
+                    return true;
+                }
+                else
+                {
+                    ErrorMessage = result.ErrorMessage;
+
+                    return false;
+                }
             }
             else
             {
-                ErrorMessage = result.ErrorMessage;
-
                 return false;
             }
         }

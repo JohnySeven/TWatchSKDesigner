@@ -12,15 +12,20 @@ namespace TWatchSKDesigner.Modals
     {
         public SignalKLogin()
         {
+            //To support designer
+        }
+
+        public SignalKLogin(SignalKManager signalKManager)
+        {
             InitializeComponent();
 
-            DataContext = new SKSignInViewModel();
+            DataContext = new SKSignInViewModel(signalKManager);
 #if DEBUG
             this.AttachDevTools();
 #endif
         }
 
-        public SKSignInViewModel? Model => (SKSignInViewModel?)DataContext;
+        public SKSignInViewModel Model => (SKSignInViewModel)DataContext;
 
         private void InitializeComponent()
         {
@@ -46,8 +51,7 @@ namespace TWatchSKDesigner.Modals
 
         public static async Task<OperationResult<SKSignInViewModel>> ShowLogin(SignalKManager signalKManager)
         {
-            var dialog = new SignalKLogin();
-            dialog.Model.SKManager = signalKManager;
+            var dialog = new SignalKLogin(signalKManager);
 
             if(await dialog.ShowDialog<bool>(MainWindow.Instance))
             {
@@ -55,7 +59,7 @@ namespace TWatchSKDesigner.Modals
             }
             else
             {
-                return new OperationResult<SKSignInViewModel>("Canceled by user");
+                return new OperationResult<SKSignInViewModel>("Canceled by user", -1);
             }
         }
     }
