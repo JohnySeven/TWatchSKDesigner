@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="240" d:DesignHeight="240"
              x:Class="TWatchSKDesigner.Views.ViewPreview">
-  <Border x:Name="Root" Background="Transparent" Width="240" Height="240" BorderBrush="Gray" BorderThickness="1">
+  <Border x:Name="Root" BorderThickness="2" Background="Transparent" Width="240" Height="240" BorderBrush="Transparent">
     
   </Border>
 </UserControl>

@@ -51,13 +51,14 @@ namespace TWatchSKDesigner.ViewModels
         [JsonIgnore]
         public new string Type { get; private set; } = "View";
 
+        
         private bool _isSelected;
 
         [JsonIgnore]
         public bool IsSelected
         {
             get { return _isSelected; }
-            set { this.RaiseAndSetIfChanged(ref _isSelected, value); }
+            set { _isSelected = value; OnPropertyChanged(nameof(IsSelected)); }
         }
 
         private string? _Background;

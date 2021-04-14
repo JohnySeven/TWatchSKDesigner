@@ -76,6 +76,13 @@ namespace TWatchSKDesigner.ViewModels
         }
 
 
+        private bool _NoViews;
+
+        public bool NoViews
+        {
+            get { return _NoViews; }
+            set { _NoViews = value; OnPropertyChanged(nameof(NoViews)); }
+        }
 
         public MainWindowViewModel()
         {
@@ -96,8 +103,21 @@ namespace TWatchSKDesigner.ViewModels
             });
 
             SignalKManager = new SignalKManager();
-            Json = "";
-            JsonError = "";
+            _Json = "";
+            _JsonError = "";
+        }
+
+        private async void DeleteView(WatchView view)
+        {
+            if (await ConfirmBox.Show($"Are you sure you want to delete {view.Name}?") == true)
+            {
+                if (Views.Remove(view))
+                {
+                    UI.Views?.Remove(view);
+                }
+
+                NoViews = Views.Count == 0;
+            }
         }
 
         public async void OpenUIFromSK()
@@ -118,7 +138,7 @@ namespace TWatchSKDesigner.ViewModels
 
                 if (canLoadView)
                 {
-                    OperationResult loadSKPathsResult = null;
+                    OperationResult? loadSKPathsResult = null;
 
                     await ProgressWindow.ShowProgress("Loading Signal K paths...", async () =>
                     {
@@ -170,7 +190,10 @@ namespace TWatchSKDesigner.ViewModels
 
         internal void AddNewLabel()
         {
-            SelectedView.LoadedComponents.Add(new LabelDef() { Type = "label", Font = "roboto40" });
+            if (SelectedView != null)
+            {
+                SelectedView.LoadedComponents.Add(new LabelDef() { Type = "label", Font = "roboto40" });
+            }
         }
 
         internal void CreateNewView()
@@ -189,6 +212,8 @@ namespace TWatchSKDesigner.ViewModels
             newView.LoadAllComponents();
 
             Views.Add(newView);
+
+            NoViews = Views.Count == 0;
         }
 
         private string _Json;
@@ -337,7 +362,13 @@ namespace TWatchSKDesigner.ViewModels
                         Views.Add(v);
                     });
 
+                    NoViews = Views.Count == 0;
+
                     ret = true;
+                }
+                else
+                {
+                    NoViews = true;
                 }
             }
             catch (Exception ex)

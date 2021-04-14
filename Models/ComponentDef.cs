@@ -10,10 +10,11 @@ using System.Threading.Tasks;
 using TWatchSKDesigner.Controls;
 using TWatchSKDesigner.Enums;
 using TWatchSKDesigner.Helpers;
+using TWatchSKDesigner.ViewModels;
 
 namespace TWatchSKDesigner.Models
 {
-    public class ComponentDef : ReactiveObject
+    public class ComponentDef : ViewModelBase
     {
         [JsonProperty("location")]
         public int[]? Location { get; set; }
