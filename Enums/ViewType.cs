@@ -8,7 +8,6 @@ namespace TWatchSKDesigner.Enums
 {
     public enum ViewType
     {
-        Normal,
-        WatchFace
+        Normal
     }
 }
