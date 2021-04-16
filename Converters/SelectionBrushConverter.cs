@@ -15,7 +15,7 @@ namespace TWatchSKDesigner.Converters
         {
             if(value is bool boolValue)
             {
-                return boolValue ? Brushes.LightBlue : Brushes.Transparent;
+                return boolValue ? Brushes.LightBlue : Brushes.LightGray;
             }
             else
             {

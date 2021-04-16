@@ -12,7 +12,7 @@
     <conv:PropertyEditorConverter x:Key="PropertyDataTemplate" />
   </UserControl.Resources>
   <DockPanel LastChildFill="True">
-    <ComboBox DockPanel.Dock="Top" SelectedIndex="{Binding SelectedComponentIndex, Mode=TwoWay}" HorizontalAlignment="Stretch" Items="{CompiledBinding Components}">
+    <ComboBox DockPanel.Dock="Top" SelectedItem="{Binding SelectedComponent, Mode=TwoWay}" HorizontalAlignment="Stretch" Items="{CompiledBinding Components}">
       <ComboBox.ItemTemplate>
         <DataTemplate DataType="def:ComponentDef">
           <StackPanel Orientation="Horizontal">

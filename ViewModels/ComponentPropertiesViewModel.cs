@@ -59,7 +59,7 @@ namespace TWatchSKDesigner.ViewModels
                     Components.Add(item);
                 }
 
-                SelectedComponentIndex = 0;
+                SelectedComponent = Components.FirstOrDefault();
             }
         }
 
@@ -68,22 +68,8 @@ namespace TWatchSKDesigner.ViewModels
             RefreshComponents(View);
         }
 
-        private int _selectedComponentIndex;
-
-        public int SelectedComponentIndex
-        {
-            get { return _selectedComponentIndex; }
-            set
-            {
-                this.RaiseAndSetIfChanged(ref _selectedComponentIndex, value);
-                SelectComponent(_selectedComponentIndex != -1 ? Components[_selectedComponentIndex] : null);
-            }
-        }
-
         private void SelectComponent(ComponentDef? component)
         {
-            SelectedComponent = component;
-
             if (component != null)
             {
                 var propertyList = ComponentProperty.GetProperties(component, OnPropertyChanged);
@@ -116,9 +102,7 @@ namespace TWatchSKDesigner.ViewModels
         public ComponentDef? SelectedComponent
         {
             get { return _selectedComponent; }
-            set { this.RaiseAndSetIfChanged(ref _selectedComponent, value); }
+            set { this.RaiseAndSetIfChanged(ref _selectedComponent, value); SelectComponent(value); }
         }
-
-
     }
 }
