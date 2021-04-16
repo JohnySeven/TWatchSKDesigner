@@ -117,12 +117,12 @@ namespace TWatchSKDesigner.Views
 
         private void NewView_Clicked(object sender, RoutedEventArgs eventArgs)
         {
-            Model.CreateNewView();
+            Model?.CreateNewView();
         }
 
         private void NewLabel_Clicked(object sender, RoutedEventArgs eventArgs)
         {
-            Model.AddNewLabel();
+            Model?.AddNewLabel();
         }
     }
 }

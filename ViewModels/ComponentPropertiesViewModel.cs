@@ -37,6 +37,7 @@ namespace TWatchSKDesigner.ViewModels
             {
                 View.LoadedComponents.CollectionChanged -= LoadedComponents_CollectionChanged;
             }
+
             View = view;
 
             View.LoadedComponents.CollectionChanged += LoadedComponents_CollectionChanged;
@@ -66,6 +67,11 @@ namespace TWatchSKDesigner.ViewModels
         private void LoadedComponents_CollectionChanged(object? sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
             RefreshComponents(View);
+            if(e.NewItems?.Count > 0)
+            {
+                var addedComponent = e.NewItems.OfType<ComponentDef>().First();
+                SelectedComponent = addedComponent;
+            }
         }
 
         private void SelectComponent(ComponentDef? component)
