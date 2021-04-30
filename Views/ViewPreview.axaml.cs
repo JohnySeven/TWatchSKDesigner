@@ -16,7 +16,7 @@ namespace TWatchSKDesigner.Views
 {
     public class ViewPreview : UserControl
     {
-        private WatchView _attached;
+        private WatchView? _attached;
 
         public Border Root { get; }
 
@@ -56,7 +56,7 @@ namespace TWatchSKDesigner.Views
 
         private void View_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            if(e.PropertyName == nameof(WatchView.Layout))
+            if(e.PropertyName == nameof(WatchView.Layout) && _attached != null)
             {
                 LoadLayout(_attached.Layout);
                 LoadComponents(_attached);
@@ -82,14 +82,14 @@ namespace TWatchSKDesigner.Views
 
         private void LoadedComponents_CollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
         {
-            _attached.SynchronizeJson();
+            _attached?.SynchronizeJson();
         }
 
         private void LoadComponents(WatchView view)
         {
             foreach (var component in view.LoadedComponents)
             {
-                Control renderedComponent = null;
+                Control? renderedComponent = null;
 
                 if (component is LabelDef label)
                 {
@@ -117,6 +117,14 @@ namespace TWatchSKDesigner.Views
                 [!Label.FontSizeProperty] = new Avalonia.Data.Binding("Font", Avalonia.Data.BindingMode.OneWay)
                 {
                     Converter = new FontSizeConverter()
+                },
+                [!Label.BackgroundProperty] = new Avalonia.Data.Binding("IsSelected", Avalonia.Data.BindingMode.OneWay)
+                {
+                    Converter = new SelectionBrushConverter()
+                    {
+                        SelectedColor = new SolidColorBrush(Colors.LightBlue),
+                        UnselectedColor = Brushes.Transparent
+                    }
                 }
             };
 

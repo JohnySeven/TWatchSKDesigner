@@ -31,7 +31,7 @@ namespace TWatchSKDesigner.ViewModels
 
         public ObservableCollection<ComponentProperty> ComponentProperties { get; private set; } = new ObservableCollection<ComponentProperty>();
 
-        internal void LoadViewObjects(WatchView? view)
+        internal void LoadViewObjects(WatchView view)
         {
             if (View != null)
             {
@@ -81,6 +81,8 @@ namespace TWatchSKDesigner.ViewModels
                 var propertyList = ComponentProperty.GetProperties(component, OnPropertyChanged);
                 ClearProperties();
 
+                component.IsSelected = true;
+
                 foreach (var property in propertyList)
                 {
                     ComponentProperties.Add(property);
@@ -108,7 +110,15 @@ namespace TWatchSKDesigner.ViewModels
         public ComponentDef? SelectedComponent
         {
             get { return _selectedComponent; }
-            set { this.RaiseAndSetIfChanged(ref _selectedComponent, value); SelectComponent(value); }
+            set
+            {
+                if(_selectedComponent != null)
+                {
+                    _selectedComponent.IsSelected = false;
+                }
+                this.RaiseAndSetIfChanged(ref _selectedComponent, value);
+                SelectComponent(value); 
+            }
         }
     }
 }

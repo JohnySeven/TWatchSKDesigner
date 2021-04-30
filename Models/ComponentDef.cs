@@ -26,6 +26,15 @@ namespace TWatchSKDesigner.Models
         [ComponentProperty(typeof(EnumComboBox<ComponentType>))]
         public string? Type { get; set; }
 
+        private bool _IsSelected;
+
+        public bool IsSelected
+        {
+            get { return _IsSelected; }
+            set { _IsSelected = value; OnPropertyChanged(nameof(IsSelected)); }
+        }
+
+
         public static ComponentDef GetComponent(JObject component)
         {
             switch (component["type"]?.ToString())

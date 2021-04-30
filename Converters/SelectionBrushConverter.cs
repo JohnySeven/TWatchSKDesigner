@@ -11,11 +11,13 @@ namespace TWatchSKDesigner.Converters
 {
     public class SelectionBrushConverter : IValueConverter
     {
+        public ISolidColorBrush SelectedColor { get; set; } = Brushes.LightBlue;
+        public ISolidColorBrush UnselectedColor { get; set; } = Brushes.LightGray;
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             if(value is bool boolValue)
             {
-                return boolValue ? Brushes.LightBlue : Brushes.LightGray;
+                return boolValue ? SelectedColor : UnselectedColor;
             }
             else
             {
