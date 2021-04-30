@@ -1,0 +1,83 @@
+{ //when float number is updated watch is using formula: (number + offset) * multiply
+  "m/s": {
+    "kn": {
+      "multiply": 1.944
+    },
+    "km/h": {
+      "multiply": 3.6
+    }
+  },
+  "m3": {
+    "liter": {
+      "multiply": 1000
+    },
+    "gallon": {
+      "multiply": 264.172
+    },
+    "gallon (imp)": {
+      "multiply": 219.969
+    }
+  },
+  "m3/s": {
+    "l/min": {
+      "multiply": 60000.0
+    },
+    "l/h": {
+      "multiply": 3600000.0
+    },
+    "g/min": {
+      "multiply": 15850.323141
+    },
+    "g/h": {
+      "multiply": 951019.3885
+    }
+  },
+  "K": {
+    "C": {
+      "offset": -272.15
+    },
+    "F": { "offset": -457.87 }
+  },
+  "Hz": {
+    "1/min": { "multiply": 60 },
+    "rpm": { "multiply": 60 }
+  },
+  "m": {
+    "fathom": {
+      "multiply": 0.546806649
+    },
+    "feet": { "multiply": 3.2808399 },
+    "inches": { "multiply": 39.3700787 },
+    "km": { "multiply": 0.001 },
+    "nm": { "multiply": 0.000539956803 }
+  },
+  "Pa": {
+    "hPa": {
+      "multiply": 0.01
+    },
+    "bar": { "multiply": 0.00001 },
+    "mbar": {
+      "multiply": 0.01
+    },
+    "psi": {
+      "multiply": 0.000145037738
+    },
+    "mmHg": {
+      "multiply": 0.00750061683
+    }
+  },
+  "rad/s": {
+    "deg/s": {
+      "multiply": 57.2957795
+    },
+    "deg/min": {
+      "multiply": 3437.74677
+    }
+  },
+  "ratio": {
+    "%": { "multiply": 100.0 }
+  },
+  "rad": {
+    "deg": { "mutiply": 57.2957795 }
+  }
+}

@@ -15,11 +15,13 @@ namespace TWatchSKDesigner.Models.SK
         }
         public string Path { get; set; }
         public string? Source { get; set; }
-        public JObject? Meta { get; set; }
+        public string? Value { get; set; }
+        public string? Units { get; set; }
+        public string? Description { get; set; }
 
         public override string ToString()
         {
-            return $"{Path}, Source={Source}";
+            return $"{Path}, Source={Source}, Units={Units}, Description={Description}";
         }
     }
 }

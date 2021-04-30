@@ -24,11 +24,11 @@ namespace TWatchSKDesigner.Models
         }
 
 
-        private string _Font;
+        private string? _Font;
 
         [JsonProperty("font")]
         [ComponentProperty(typeof(EnumComboBox<ComponentFont>))]
-        public string Font
+        public string? Font
         {
             get { return _Font; }
             set { _Font = value; this.RaisePropertyChanged(nameof(Font)); }
@@ -45,14 +45,22 @@ namespace TWatchSKDesigner.Models
             set { _Color = value; this.RaisePropertyChanged(nameof(Color)); }
         }
 
-        private Binding _Binding;
+        private Binding? _Binding;
 
         [JsonProperty("binding")]
         [ComponentProperty(typeof(BindingEditor))]
-        public Binding Binding
+        public Binding? Binding
         {
             get { return _Binding; }
-            set { _Binding = value; this.RaisePropertyChanged(nameof(Binding)); }
+            set
+            {
+                _Binding = value; 
+                this.RaisePropertyChanged(nameof(Binding));
+                if(value != null)
+                {
+                    Text = "--";
+                }
+            }
         }
 
     }

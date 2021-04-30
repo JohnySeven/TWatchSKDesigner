@@ -5,10 +5,12 @@
         mc:Ignorable="d" SizeToContent="WidthAndHeight" d:DesignHeight="450"
         x:Class="TWatchSKDesigner.Modals.BindingEditorModal" WindowStartupLocation="CenterOwner"
         Title="Edit binding" ShowInTaskbar="False" SystemDecorations="BorderOnly">
-  <Grid Margin="10" ColumnDefinitions="Auto 300" RowDefinitions="Auto Auto Auto Auto">
+  <Grid Margin="10" ColumnDefinitions="Auto 300" RowDefinitions="Auto Auto Auto Auto Auto Auto">
     <Label Content="SK Path" VerticalContentAlignment="Center" />
     <Label Grid.Row="1" Content="Period (ms)" VerticalContentAlignment="Center" />
     <Label Grid.Row="2" Content="Multiply" VerticalContentAlignment="Center" />
+    <Label Grid.Row="3" Content="Offset" VerticalContentAlignment="Center" />
+    <Label Grid.Row="4" Content="Decimals" VerticalContentAlignment="Center" />
 
     <Grid ColumnDefinitions="1* Auto" Margin="3" Grid.Column="1" HorizontalAlignment="Stretch">
       <TextBox x:Name="SKPath" Text="{Binding Path, Mode=TwoWay}" />
@@ -17,9 +19,16 @@
       </Button>
     </Grid>
     <NumericUpDown Value="{Binding Period, Mode=TwoWay}" Minimum="0" Maximum="1000000" Grid.Column="1" Grid.Row="1" Margin="3" />
-    <NumericUpDown Value="{Binding Multiply, Mode=TwoWay}" Grid.Column="1" Grid.Row="2" Margin="3" />
+    <Grid ColumnDefinitions="1* Auto" Margin="3" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Stretch">
+      <NumericUpDown x:Name="Multiply" Value="{Binding Multiply, Mode=TwoWay}" Margin="3" />
+      <Button Click="SelectUnits" Grid.Column="1" DockPanel.Dock="Right" BorderBrush="Black" Margin="4,0,0,0" Background="Transparent">
+        <TextBlock>Units</TextBlock>
+      </Button>
+    </Grid>
+    <NumericUpDown  x:Name="OffSet" Value="{Binding OffSet, Mode=TwoWay}" Grid.Column="1" Grid.Row="3" Margin="3" />
+    <NumericUpDown Increment="1" Value="{Binding Decimals, Mode=TwoWay}" Minimum="0" Maximum="5" Grid.Column="1" Grid.Row="4" Margin="3" />
     
-    <StackPanel Margin="10" Spacing="10" HorizontalAlignment="Center" Orientation="Horizontal" Grid.Row="3" Grid.ColumnSpan="2">
+    <StackPanel Margin="10" Spacing="10" HorizontalAlignment="Center" Orientation="Horizontal" Grid.Row="5" Grid.ColumnSpan="2">
       <Button Click="OnOkClick" HorizontalContentAlignment="Center" IsDefault="True" Width="100" Content="OK" />
       <Button Click="OnCancelClick" HorizontalContentAlignment="Center" IsCancel="True" Width="100" Content="Cancel" />
     </StackPanel>

@@ -135,10 +135,15 @@ namespace TWatchSKDesigner.ViewModels
         {
             if(path.ContainsKey("value"))
             {
+                var meta = path["meta"] as JObject;
+                var value = path["value"] as JToken;
+
                 paths.Add(new SKPath(currentPath)
                 {
                     Source = path["$source"]?.ToString() ?? "",
-                    Meta = path["meta"] as JObject
+                    Units = meta?["units"]?.ToString() ?? "",
+                    Description = meta?["description"]?.ToString() ?? "",
+                    Value = value?.ToString()
                 });
             }
             else

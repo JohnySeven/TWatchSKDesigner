@@ -1,0 +1,27 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:model="using:TWatchSKDesigner.ViewModels"
+        xmlns:sk="using:TWatchSKDesigner.Models.SK"
+        mc:Ignorable="d" SizeToContent="WidthAndHeight"
+        x:Class="TWatchSKDesigner.Modals.SelectUnitConversion"
+        Title="Select Unit conversion" x:Name="Window" WindowStartupLocation="CenterOwner" ShowInTaskbar="False" SystemDecorations="BorderOnly">
+  <DockPanel>
+    <StackPanel Margin="10" DockPanel.Dock="Bottom" Spacing="10" HorizontalAlignment="Center" Orientation="Horizontal" Grid.Row="1">
+      <Button Click="OnOkClick" HorizontalContentAlignment="Center" IsDefault="True" Width="100" Content="OK" />
+      <Button Click="OnCancelClick" HorizontalContentAlignment="Center" IsCancel="True" Width="100" Content="Cancel" />
+    </StackPanel>
+    <ListBox Height="300" Width="300" Margin="3" SelectedItem="{Binding #Window.SelectedConversion, Mode=TwoWay}" Items="{Binding #Window.Conversions}">
+      <ListBox.ItemTemplate>
+        <DataTemplate>
+          <StackPanel Orientation="Horizontal">
+            <TextBlock Text="{Binding From}" />
+            <TextBlock Text=" → " />
+            <TextBlock Text="{Binding To}" />
+          </StackPanel>
+        </DataTemplate>
+      </ListBox.ItemTemplate>
+    </ListBox>
+  </DockPanel>
+</Window>

@@ -15,6 +15,12 @@ namespace TWatchSKDesigner.Models
         [JsonProperty("multiply")]
         public float? Multiply { get; set; }
 
+        [JsonProperty("offset")]
+        public float? OffSet { get; set; }
+
+        [JsonProperty("decimals")]
+        public int Decimals { get; set; }
+
         [JsonProperty("period")]
         public int Period { get; set; }
 
@@ -24,7 +30,8 @@ namespace TWatchSKDesigner.Models
             {
                 Path = Path,
                 Multiply = Multiply,
-                Period = Period
+                Period = Period,
+                OffSet = OffSet
             };
         }
     }

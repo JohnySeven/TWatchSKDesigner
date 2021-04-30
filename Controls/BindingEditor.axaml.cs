@@ -35,7 +35,7 @@ namespace TWatchSKDesigner.Controls
                 DataContext = binding
             };
 
-            if(await modal.ShowDialog<bool>(MainWindow.Instance))
+            if (await modal.ShowDialog<bool>(MainWindow.Instance) && Property != null)
             {
                 Property.Value = binding;
                 this.Find<TextBlock>("SKPath").Text = binding.Path;

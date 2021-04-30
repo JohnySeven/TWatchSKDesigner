@@ -4,23 +4,24 @@ using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
 using System.Collections;
 using TWatchSKDesigner.Models.SK;
+using TWatchSKDesigner.ViewModels;
 using TWatchSKDesigner.Views;
 
 namespace TWatchSKDesigner.Modals
 {
     public class SelectSKPath : Window
     {
+        
         public SelectSKPath()
         {
             InitializeComponent();
+            DataContext = new SelectSKPathModel();
 #if DEBUG
             this.AttachDevTools();
 #endif
         }
 
-        public SKPath[]? Paths => MainWindow.Instance?.Model?.SignalKManager.GetSignalKPaths();
-
-        public SKPath? SelectedPath { get; set; }
+        public SelectSKPathModel? Model => DataContext as SelectSKPathModel;
 
         private void InitializeComponent()
         {
@@ -29,7 +30,7 @@ namespace TWatchSKDesigner.Modals
 
         private void OnOkClick(object sender, RoutedEventArgs e)
         {
-            if (SelectedPath != null)
+            if (Model?.SelectedPath != null)
             {
                 Close(true);
             }
