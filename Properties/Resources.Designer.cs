@@ -68,10 +68,6 @@ namespace TWatchSKDesigner.Properties {
         ///    },
         ///    &quot;km/h&quot;: {
         ///      &quot;multiply&quot;: 3.6
-        ///    },
-        ///    &quot;kg&quot;: {
-        ///      &quot;pound&quot;: { &quot;multiply&quot;: 2.205 },
-        ///      &quot;metric ton&quot;: { &quot;multiply&quot;: 0.001 }
         ///    }
         ///  },
         ///  &quot;m3&quot;: {
@@ -87,7 +83,13 @@ namespace TWatchSKDesigner.Properties {
         ///  },
         ///  &quot;m3/s&quot;: {
         ///    &quot;l/min&quot;: {
-        ///      &quot;mul [rest of string was truncated]&quot;;.
+        ///      &quot;multiply&quot;: 60000.0
+        ///    },
+        ///    &quot;l/h&quot;: {
+        ///      &quot;multiply&quot;: 3600000.0
+        ///    },
+        ///    &quot;g/min&quot;: {
+        ///      &quot;mult [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string Conversions {
             get {
