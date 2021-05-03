@@ -83,6 +83,14 @@ namespace TWatchSKDesigner.Views
                         DataContext = v
                     };
                 }));
+
+                PropertyEditorConverter.EditorTemplates.Add(typeof(ColorPickerEditor), new FuncDataTemplate<object>((v, s) =>
+                {
+                    return new ColorPickerEditor()
+                    {
+                        DataContext = v
+                    };
+                }));
             }
         }
 

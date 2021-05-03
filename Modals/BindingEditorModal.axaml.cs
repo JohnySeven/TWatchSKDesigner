@@ -21,14 +21,43 @@ namespace TWatchSKDesigner.Modals
 
         public Binding? Model => (Binding?)DataContext;
 
+        private bool Validate(out string errorMessage)
+        {
+            var ret = true;
+
+            if (!string.IsNullOrEmpty(Model?.Format) && Model?.Format.Contains("$$") == false)
+            {
+                ret = false;
+                errorMessage = "Binding format must contain $$ symbols to make replacement working!";
+            }
+            else if(Model?.Period < 1000)
+            {
+                errorMessage = "Period must be at least 1000 ms!";
+                ret = false;
+            }
+            else
+            {
+                errorMessage = "";
+            }
+
+            return ret;
+        }
+
         private void InitializeComponent()
         {
             AvaloniaXamlLoader.Load(this);
         }
 
-        private void OnOkClick(object sender, RoutedEventArgs e)
+        private async void OnOkClick(object sender, RoutedEventArgs e)
         {
-            Close(true);
+            if (!Validate(out string errorMessage))
+            {
+                await MessageBox.Show(errorMessage);
+            }
+            else
+            {
+                Close(true);
+            }
         }
 
         private void OnCancelClick(object sender, RoutedEventArgs e)

@@ -21,8 +21,13 @@ namespace TWatchSKDesigner.Models
         [JsonProperty("decimals")]
         public int Decimals { get; set; }
 
+        [JsonProperty("format")]
+        public string? Format { get; set; }
+
         [JsonProperty("period")]
         public int Period { get; set; }
+
+        //Note if you add anything here, update copy method!
 
         public Binding Copy()
         {
@@ -31,7 +36,9 @@ namespace TWatchSKDesigner.Models
                 Path = Path,
                 Multiply = Multiply,
                 Period = Period,
-                OffSet = OffSet
+                OffSet = OffSet,
+                Format = Format,
+                Decimals = Decimals
             };
         }
     }

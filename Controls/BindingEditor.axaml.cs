@@ -6,14 +6,13 @@ using ReactiveUI;
 using System;
 using TWatchSKDesigner.Modals;
 using TWatchSKDesigner.Models;
+using TWatchSKDesigner.ViewModels;
 using TWatchSKDesigner.Views;
 
 namespace TWatchSKDesigner.Controls
 {
     public class BindingEditor : UserControl
     {
-        
-
         public BindingEditor()
         {
             InitializeComponent();

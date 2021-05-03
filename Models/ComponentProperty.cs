@@ -5,10 +5,11 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using TWatchSKDesigner.ViewModels;
 
 namespace TWatchSKDesigner.Models
 {
-    public class ComponentProperty : ReactiveObject
+    public class ComponentProperty : ViewModelBase
     {
         public string? Name { get; set; }
 
@@ -20,7 +21,7 @@ namespace TWatchSKDesigner.Models
             set
             {
                 _Value = value;
-                this.RaiseAndSetIfChanged(ref _Value, value);
+                OnPropertyChanged(nameof(Value));
                 Property?.SetValue(Parent, value);
                 if(OnChanged != null && OnChanged.TryGetTarget(out Action<ComponentProperty> callback))
                 {

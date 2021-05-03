@@ -19,8 +19,14 @@
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="Controls\ColorPickerEditor.axaml.cs">
+      <DependentUpon>ColorPickerEditor.axaml</DependentUpon>
+    </Compile>
     <Compile Update="Modals\ConfirmBox.axaml.cs">
       <DependentUpon>ConfirmBox.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="Modals\ColorPicker.axaml.cs">
+      <DependentUpon>ColorPicker.axaml</DependentUpon>
     </Compile>
     <Compile Update="Modals\SelectUnitConversion.axaml.cs">
       <DependentUpon>SelectUnitConversion.axaml</DependentUpon>

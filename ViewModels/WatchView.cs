@@ -63,7 +63,7 @@ namespace TWatchSKDesigner.ViewModels
 
         private string? _Background;
         [JsonProperty("background")]
-        [ComponentProperty(typeof(TextBox))]
+        [ComponentProperty(typeof(ColorPickerEditor))]
         public string? Background
         {
             get { return _Background; }

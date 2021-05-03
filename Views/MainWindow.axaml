@@ -32,51 +32,53 @@
         <MenuItem Header="Paste"/>
       </MenuItem>
     </Menu>
-    <DockPanel DockPanel.Dock="Right" IsVisible="{Binding ShowProperties, Mode=OneWay}">
-      <WrapPanel DockPanel.Dock="Bottom">
-        <Button Content="Add new Label" Margin="3" Click="NewLabel_Clicked" />
-      </WrapPanel>
-      <local:ComponentProperties DataContext="{Binding PropertiesViewModel, Mode=OneWay}" />
-    </DockPanel>
 
     <TabControl IsEnabled="{Binding ViewLoaded}" TabStripPlacement="Bottom" SelectedIndex="{Binding SelectedTabIndex, Mode=TwoWay}">
       <TabItem Header="Designer">
-        <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
-          <Grid>
-            <ItemsControl Items="{CompiledBinding Views, Mode=OneWay}" x:DataType="model:MainWindowViewModel">
-              <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                  <WrapPanel Orientation="Horizontal" />
-                </ItemsPanelTemplate>
-              </ItemsControl.ItemsPanel>
-              <ItemsControl.ItemTemplate>
-                <DataTemplate DataType="model:WatchView">
-                  <Border Margin="20" Padding="2" Background="{Binding IsSelected, Mode=OneWay, Converter={StaticResource BrushIsSelected}}">
-                    <Grid>
-                      <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                      </Grid.RowDefinitions>
-                      <local:ViewPreview />
-                      <StackPanel Margin="6" Orientation="Horizontal" Grid.Row="1">
-                        <Button Content="Edit" Command="{Binding #Window.DataContext.StartEditingView}" CommandParameter="{Binding .}" />
-                        <Button Content="Delete" Command="{Binding #Window.DataContext.DeleteView}" CommandParameter="{Binding .}" />
-                        <Label Margin="6,0,0,0" VerticalContentAlignment="Center" Content="{Binding Name}" FontWeight="Bold" />
-                      </StackPanel>
-                    </Grid>
-                  </Border>
+        <DockPanel>
+          <DockPanel DockPanel.Dock="Right" IsVisible="{Binding ShowProperties, Mode=OneWay}">
+            <WrapPanel DockPanel.Dock="Bottom">
+              <Button Content="Add new Label" Margin="3" Click="NewLabel_Clicked" />
+            </WrapPanel>
+            <local:ComponentProperties DataContext="{Binding PropertiesViewModel, Mode=OneWay}" />
+          </DockPanel>
+          <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+            <Grid>
+              <ItemsControl Items="{CompiledBinding Views, Mode=OneWay}" x:DataType="model:MainWindowViewModel">
+                <ItemsControl.ItemsPanel>
+                  <ItemsPanelTemplate>
+                    <WrapPanel Orientation="Horizontal" />
+                  </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                  <DataTemplate DataType="model:WatchView">
+                    <Border Margin="20" Padding="2" Background="{Binding IsSelected, Mode=OneWay, Converter={StaticResource BrushIsSelected}}">
+                      <Grid>
+                        <Grid.RowDefinitions>
+                          <RowDefinition Height="Auto" />
+                          <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <local:ViewPreview />
+                        <StackPanel Margin="6" Orientation="Horizontal" Grid.Row="1">
+                          <Button Content="Edit" Command="{Binding #Window.DataContext.StartEditingView}" CommandParameter="{Binding .}" />
+                          <Button Content="Delete" Command="{Binding #Window.DataContext.DeleteView}" CommandParameter="{Binding .}" />
+                          <Label Margin="6,0,0,0" VerticalContentAlignment="Center" Content="{Binding Name}" FontWeight="Bold" />
+                        </StackPanel>
+                      </Grid>
+                    </Border>
 
-                </DataTemplate>
-              </ItemsControl.ItemTemplate>
-            </ItemsControl>
-            <Grid IsVisible="{Binding ShowOpenHelpText}">
-              <Label VerticalAlignment="Center" HorizontalAlignment="Center" Content="Please open UI definition file from Signal K Server via File -> Open." />
+                  </DataTemplate>
+                </ItemsControl.ItemTemplate>
+              </ItemsControl>
+              <Grid IsVisible="{Binding ShowOpenHelpText}">
+                <Label VerticalAlignment="Center" HorizontalAlignment="Center" Content="Please open UI definition file from Signal K Server via File -> Open." />
+              </Grid>
+              <Grid IsVisible="{Binding NoViews}">
+                <Label VerticalAlignment="Center" HorizontalAlignment="Center" Content="There is no view to display. To add new view press Edit -> New view." />
+              </Grid>
             </Grid>
-            <Grid IsVisible="{Binding NoViews}">
-              <Label VerticalAlignment="Center" HorizontalAlignment="Center" Content="There is no view to display. To add new view press Edit -> New view." />
-            </Grid>
-          </Grid>
-        </ScrollViewer>
+          </ScrollViewer>
+        </DockPanel>
       </TabItem>
       <TabItem Header="JSON">
         <DockPanel>

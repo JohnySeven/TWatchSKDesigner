@@ -37,7 +37,7 @@ namespace TWatchSKDesigner.Models
 
         private string? _Color;
 
-        [ComponentProperty(typeof(TextBox))]
+        [ComponentProperty(typeof(ColorPickerEditor))]
         [JsonProperty("color")]
         public string? Color
         {

@@ -1,0 +1,49 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:model="using:TWatchSKDesigner.ViewModels"
+        xmlns:sk="using:TWatchSKDesigner.Models.SK"
+        xmlns:conv="using:TWatchSKDesigner.Converters"
+        x:Name="Window"
+        mc:Ignorable="d" SizeToContent="WidthAndHeight"
+        x:Class="TWatchSKDesigner.Modals.ColorPicker"
+        Title="Select color" x:CompileBindings="True" x:DataType="model:ColorPickerModel" WindowStartupLocation="CenterOwner" ShowInTaskbar="False" SystemDecorations="BorderOnly">
+  <Window.Resources>
+    <conv:BrushFromTextConverter x:Key="BrushFromConverter" />
+  </Window.Resources>
+  <StackPanel Margin="10">
+    <StackPanel Margin="6" DockPanel.Dock="Bottom">
+      <TextBlock Text="Red" />
+      <Slider Minimum="0" Maximum="255" Value="{Binding R}" />
+      <TextBlock Text="Green" />
+      <Slider Minimum="0" Maximum="255" Value="{Binding G}" />
+      <TextBlock Text="Blue" />
+      <Slider Minimum="0" Maximum="255" Value="{Binding B}" />
+    </StackPanel>
+    <TextBlock Text="Pick color" Margin="3" />
+    <ComboBox VirtualizationMode="Simple" Margin="3" SelectedItem="{Binding SelectedColor, Mode=TwoWay}" Items="{Binding SampleColors}" HorizontalAlignment="Stretch">
+      <ItemsControl.ItemTemplate>
+        <DataTemplate DataType="Color">
+          <StackPanel Orientation="Horizontal">
+            <Border Width="32" Height="32" VerticalAlignment="Center">
+              <Border.Background>
+                <SolidColorBrush Color="{Binding }" />
+              </Border.Background>
+            </Border>
+            <TextBlock Margin="6,0,0,0" Text="{Binding }" VerticalAlignment="Center" />
+          </StackPanel>
+        </DataTemplate>
+      </ItemsControl.ItemTemplate>
+    </ComboBox>
+    <Border Width="128" Height="128" BorderBrush="Gray" Margin="6" BorderThickness="1">
+      <Border.Background>
+        <SolidColorBrush Color="{Binding Color}" />
+      </Border.Background>
+    </Border>
+    <StackPanel Margin="10" DockPanel.Dock="Bottom" Spacing="10" HorizontalAlignment="Center" Orientation="Horizontal" Grid.Row="1">
+      <Button Click="OnOkClick" HorizontalContentAlignment="Center" IsDefault="True" Width="100" Content="OK" />
+      <Button Click="OnCancelClick" HorizontalContentAlignment="Center" IsCancel="True" Width="100" Content="Cancel" />
+    </StackPanel>
+  </StackPanel>
+</Window>
