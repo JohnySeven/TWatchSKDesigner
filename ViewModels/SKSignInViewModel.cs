@@ -1,6 +1,8 @@
-﻿using ReactiveUI;
+﻿using Newtonsoft.Json.Linq;
+using ReactiveUI;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reactive.Linq;
 using System.Text;
@@ -20,6 +22,8 @@ namespace TWatchSKDesigner.ViewModels
             _IsValid = true;
 #endif
             _Port = 3000;
+
+            LoadSettings();
         }
 
         private string? _Address;
@@ -95,6 +99,7 @@ namespace TWatchSKDesigner.ViewModels
 
                 if (result.IsSuccess)
                 {
+                    await SaveSettings();
                     return true;
                 }
                 else
@@ -107,6 +112,53 @@ namespace TWatchSKDesigner.ViewModels
             else
             {
                 return false;
+            }
+        }
+
+        private static string LoginSettingsPath => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "TWatchSK.Designer.json");
+
+        private async Task SaveSettings()
+        {
+            var json = new JObject
+            {
+                [nameof(User)] = User,
+                [nameof(Address)] = Address,
+                [nameof(Port)] = Port
+            };
+
+            try
+            {
+                await File.WriteAllTextAsync(LoginSettingsPath, json.ToString());
+            }
+            catch (Exception)
+            {
+
+            }
+        }
+
+        private async void LoadSettings()
+        {
+            if(File.Exists(LoginSettingsPath))
+            {
+                try
+                {
+
+                    var json = await File.ReadAllTextAsync(LoginSettingsPath);
+
+                    var loginInfo = JObject.Parse(json);
+
+                    User = loginInfo[nameof(User)]?.ToString();
+                    if(int.TryParse(loginInfo[nameof(Port)]?.ToString(), out int parsedPort))
+                    {
+                        Port = parsedPort;
+                    }
+
+                    Address = loginInfo[nameof(Address)]?.ToString();
+                }
+                catch (Exception)
+                {
+
+                }
             }
         }
     }
