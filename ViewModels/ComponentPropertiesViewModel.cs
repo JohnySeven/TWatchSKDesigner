@@ -78,7 +78,7 @@ namespace TWatchSKDesigner.ViewModels
         {
             if (component != null)
             {
-                var propertyList = ComponentProperty.GetProperties(component, OnPropertyChanged);
+                var propertyList = ComponentProperty.GetProperties(_view ?? throw new InvalidOperationException(), component, OnPropertyChanged);
                 ClearProperties();
 
                 component.IsSelected = true;

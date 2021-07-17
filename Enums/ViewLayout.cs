@@ -8,6 +8,7 @@ namespace TWatchSKDesigner.Enums
 {
     public enum ViewLayout
     {
+        none,
         off,
         center,
         column_left,   /**< column left align*/

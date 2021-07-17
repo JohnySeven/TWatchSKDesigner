@@ -16,11 +16,27 @@ namespace TWatchSKDesigner.Models
 {
     public class ComponentDef : ViewModelBase
     {
+        private int[]? _Location;
+
         [JsonProperty("location")]
-        public int[]? Location { get; set; }
+        [ComponentProperty(typeof(XYEditor), ViewLayout.off)]
+        public int[]? Location
+        {
+            get { return _Location; }
+            set { _Location = value; OnPropertyChanged(nameof(Location)); }
+        }
+
+        /*
+        private int[]? _Size;
 
         [JsonProperty("size")]
-        public int[]? Size { get; set; }
+        [ComponentProperty(typeof(XYEditor), ViewLayout.off)]
+        public int[]? Size
+        {
+            get { return _Size; }
+            set { _Size = value; OnPropertyChanged(nameof(Size)); }
+        }*/
+
 
         [JsonProperty("type")]
         [ComponentProperty(typeof(EnumComboBox<ComponentType>))]

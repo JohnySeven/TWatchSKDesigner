@@ -5,6 +5,7 @@ using Avalonia.Media;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
+using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
 using TWatchSKDesigner.Converters;
@@ -17,6 +18,8 @@ namespace TWatchSKDesigner.Views
     public class ViewPreview : UserControl
     {
         private WatchView? _attached;
+
+        private Dictionary<ComponentDef, Control> _controlToComponent = new Dictionary<ComponentDef, Control>();
 
         public Border Root { get; }
 
@@ -51,6 +54,21 @@ namespace TWatchSKDesigner.Views
             {
                 _attached.PropertyChanged -= View_PropertyChanged;
                 _attached.LoadedComponents.CollectionChanged -= LoadedComponents_CollectionChanged;
+
+                foreach(var component in _attached.LoadedComponents)
+                {
+                    component.PropertyChanged -= Component_PropertyChanged;
+                }
+
+                _controlToComponent.Clear();
+            }
+        }
+
+        private void Component_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if(Root.Child is Canvas && sender is ComponentDef component)
+            {
+                SetLayout(component, _controlToComponent[component]);
             }
         }
 
@@ -66,6 +84,7 @@ namespace TWatchSKDesigner.Views
         private void LoadViewPreview(WatchView view)
         {
             _attached = view;
+            _controlToComponent.Clear();
             view.PropertyChanged += View_PropertyChanged;
 
             Root.Bind(Border.BackgroundProperty, new Avalonia.Data.Binding("Background")
@@ -77,12 +96,33 @@ namespace TWatchSKDesigner.Views
 
             LoadLayout(view.Layout);
             LoadComponents(view);
+
+            foreach (var component in _attached.LoadedComponents)
+            {
+                component.PropertyChanged += Component_PropertyChanged;
+            }
             view.LoadedComponents.CollectionChanged += LoadedComponents_CollectionChanged;
         }
 
         private void LoadedComponents_CollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
         {
             _attached?.SynchronizeJson();
+            if (e.NewItems != null)
+            {
+                foreach (var item in e.NewItems.OfType<ComponentDef>())
+                {
+                    item.PropertyChanged += Component_PropertyChanged;
+                }
+            }
+
+            if(e.OldItems != null)
+            {
+                foreach (var item in e.OldItems.OfType<ComponentDef>())
+                {
+                    item.PropertyChanged -= Component_PropertyChanged;
+                    _controlToComponent.Remove(item);
+                }
+            }
         }
 
         private void LoadComponents(WatchView view)
@@ -98,6 +138,10 @@ namespace TWatchSKDesigner.Views
 
                 if (renderedComponent != null)
                 {
+                    if (!_controlToComponent.ContainsKey(component))
+                    {
+                        _controlToComponent.Add(component, renderedComponent);
+                    }
                     SetLayout(component, renderedComponent);
                     ((Panel)Root.Child).Children.Add(renderedComponent);
                 }
@@ -148,11 +192,11 @@ namespace TWatchSKDesigner.Views
                 }
             }
 
-            if(componentDef.Size != null && componentDef.Size.Length == 2)
+            /*if(componentDef.Size != null && componentDef.Size.Length == 2)
             {
                 control.SetValue(WidthProperty, (double)componentDef.Size[0]);
                 control.SetValue(HeightProperty, (double)componentDef.Size[1]);
-            }
+            }*/
         }
 
         private void LoadLayout(string? layout)

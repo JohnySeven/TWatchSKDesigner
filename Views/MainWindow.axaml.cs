@@ -91,6 +91,14 @@ namespace TWatchSKDesigner.Views
                         DataContext = v
                     };
                 }));
+
+                PropertyEditorConverter.EditorTemplates.Add(typeof(XYEditor), new FuncDataTemplate<object>((v, s) =>
+                {
+                    return new XYEditor()
+                    {
+                        DataContext = v
+                    };
+                }));
             }
         }
 

@@ -15,12 +15,6 @@ namespace TWatchSKDesigner.ViewModels
         public SKSignInViewModel(SignalKManager signalKManager)
         {
             SKManager = signalKManager;
-#if DEBUG
-            _Address = "pi.boat";
-            _User = "signalk";
-            _Password = "signalk";
-            _IsValid = true;
-#endif
             _Port = 3000;
 
             LoadSettings();
