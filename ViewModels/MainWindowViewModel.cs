@@ -45,8 +45,22 @@ namespace TWatchSKDesigner.ViewModels
             set { this.RaiseAndSetIfChanged(ref _showProperties, value); }
         }
 
+        private bool _ShowMovingPlacers;
+
+        public bool ShowMovingPlacers
+        {
+            get { return _ShowMovingPlacers; }
+            set { this.RaiseAndSetIfChanged(ref _ShowMovingPlacers, value); }
+        }
+
+        private WatchView? _movingView;
+
         public ICommand? StartEditingView { get; private set; }
         public ICommand? ExitCommand { get; set; }
+
+        public ICommand? MoveCommand { get; set; }
+
+        public ICommand? MoveViewAtPlaceCommand { get; set; }
 
         public SignalKManager SignalKManager { get; private set; }
 
@@ -102,6 +116,27 @@ namespace TWatchSKDesigner.ViewModels
                 }
             });
 
+            MoveCommand = ReactiveCommand.Create<WatchView>(v =>
+            {
+                ShowMovingPlacers = true;
+                _movingView = v;
+                StartEditingView.Execute(v);
+            });
+
+            MoveViewAtPlaceCommand = ReactiveCommand.Create<WatchView>(v =>
+            {
+                if(_movingView != null && _movingView != v)
+                {
+                    var placeIndex = Views.IndexOf(v);
+                    Views.Remove(_movingView);
+
+                    Views.Insert(placeIndex, _movingView);
+                    _movingView = null;
+                }
+
+                ShowMovingPlacers = false;
+            });
+
             SignalKManager = new SignalKManager();
             _Json = "";
             _JsonError = "";
@@ -117,6 +152,10 @@ namespace TWatchSKDesigner.ViewModels
                 }
 
                 NoViews = Views.Count == 0;
+                if(!NoViews)
+                {
+                    StartEditingView.Execute(Views.Last());
+                }
             }
         }
 
@@ -214,6 +253,8 @@ namespace TWatchSKDesigner.ViewModels
             Views.Add(newView);
 
             NoViews = Views.Count == 0;
+
+            StartEditingView.Execute(newView);
         }
 
         private string _Json;

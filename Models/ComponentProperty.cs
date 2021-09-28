@@ -36,6 +36,7 @@ namespace TWatchSKDesigner.Models
         public Type? EditorType { get; set; }
         public WeakReference<Action<ComponentProperty>>? OnChanged { get; private set; }
         public ViewLayout VisibleOnLayout { get; private set; }
+        public bool UpdateViewLayoutOnChange { get; private set; }
 
         private static bool IsVisibleInLayout(WatchView view, ComponentProperty componentPropertyAttribute)
         {
@@ -69,7 +70,8 @@ namespace TWatchSKDesigner.Models
                     Value = p.GetValue(instance),
                     EditorType = p.GetCustomAttributes(true).OfType<ComponentPropertyAttribute>().First().EditorType,
                     VisibleOnLayout = p.GetCustomAttributes(true).OfType<ComponentPropertyAttribute>().First().VisibleOnLayout,
-                    OnChanged = new WeakReference<Action<ComponentProperty>>(onChanged)
+                    OnChanged = new WeakReference<Action<ComponentProperty>>(onChanged),
+                    UpdateViewLayoutOnChange = p.GetCustomAttributes(true).OfType<ComponentPropertyAttribute>().First().UpdateLayoutOnChange
                 })
                 .Where(p => IsVisibleInLayout(view, p))
                 .ToArray();

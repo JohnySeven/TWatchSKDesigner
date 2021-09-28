@@ -98,6 +98,11 @@ namespace TWatchSKDesigner.ViewModels
         {
             System.Diagnostics.Debug.WriteLine($"View {View?.Name} object {SelectedComponent?.Type} property {property.Name} changed to {property.Value}");
             View?.SynchronizeJson();
+
+            if(property.UpdateViewLayoutOnChange)
+            {
+                View?.OnLayoutChanged();
+            }
         }
 
         private void ClearProperties()

@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:model="using:TWatchSKDesigner.ViewModels"
+        xmlns:material="clr-namespace:MaterialDesign.Avalonia.PackIcon;assembly=MaterialDesign.Avalonia.PackIcon"
         xmlns:conv="using:TWatchSKDesigner.Converters"
         xmlns:local="using:TWatchSKDesigner.Views"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
@@ -38,7 +39,12 @@
         <DockPanel>
           <DockPanel DockPanel.Dock="Right" IsVisible="{Binding ShowProperties, Mode=OneWay}">
             <WrapPanel DockPanel.Dock="Bottom">
-              <Button Content="Add new Label" Margin="3" Click="NewLabel_Clicked" />
+              <Button Margin="3" Click="NewLabel_Clicked" ToolTip.Tip="Add new Label">
+                <material:PackIcon Kind="Label" />
+              </Button>
+              <!--<Button Margin="3" ToolTip.Tip="Add new button">
+                <material:PackIcon Kind="Button" />
+              </Button>-->
             </WrapPanel>
             <local:ComponentProperties DataContext="{Binding PropertiesViewModel, Mode=OneWay}" />
           </DockPanel>
@@ -58,15 +64,28 @@
                           <RowDefinition Height="Auto" />
                           <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                          <ColumnDefinition Width="Auto" />
+                          <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
                         <local:ViewPreview />
                         <StackPanel Margin="6" Orientation="Horizontal" Grid.Row="1">
-                          <Button Content="Edit" Command="{Binding #Window.DataContext.StartEditingView}" CommandParameter="{Binding .}" />
-                          <Button Content="Delete" Command="{Binding #Window.DataContext.DeleteView}" CommandParameter="{Binding .}" />
+                          <Button ToolTip.Tip="Edit view" Command="{Binding #Window.DataContext.StartEditingView}" CommandParameter="{Binding .}">
+                            <material:PackIcon Kind="Pencil" />
+                          </Button>
+                          <Button ToolTip.Tip="Delete view" Command="{Binding #Window.DataContext.DeleteView}" CommandParameter="{Binding .}">
+                            <material:PackIcon Kind="Delete" />
+                          </Button>
+                          <Button ToolTip.Tip="Move view" CommandParameter="{Binding .}" Command="{Binding #Window.DataContext.MoveCommand}">
+                            <material:PackIcon Kind="MoveResizeVariant" />
+                          </Button>
                           <Label Margin="6,0,0,0" VerticalContentAlignment="Center" Content="{Binding Name}" FontWeight="Bold" />
                         </StackPanel>
+                        <Button CommandParameter="{Binding .}" Command="{Binding #Window.DataContext.MoveViewAtPlaceCommand}" Grid.Column="1" ToolTip.Tip="Place selected view here" IsVisible="{Binding #Window.DataContext.ShowMovingPlacers}"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                          <material:PackIcon Kind="SelectPlace" VerticalAlignment="Center" />
+                        </Button>
                       </Grid>
                     </Border>
-
                   </DataTemplate>
                 </ItemsControl.ItemTemplate>
               </ItemsControl>

@@ -13,6 +13,11 @@ namespace TWatchSKDesigner.Models
 {
     public class LabelDef : ComponentDef
     {
+        public LabelDef()
+        {
+            Icon = MaterialDesign.Avalonia.PackIcon.PackIconKind.Label;
+        }
+
         private string? _Text;
 
         [JsonProperty("text")]
@@ -58,7 +63,7 @@ namespace TWatchSKDesigner.Models
                 this.RaisePropertyChanged(nameof(Binding));
                 if(value != null)
                 {
-                    Text = "--";
+                    Text = value?.Format?.Replace("$$", "--") ?? "--";
                 }
             }
         }

@@ -11,14 +11,17 @@ namespace TWatchSKDesigner
     [AttributeUsage(AttributeTargets.Property)]
     public class ComponentPropertyAttribute : Attribute
     {
-        public ComponentPropertyAttribute(Type editorType, ViewLayout visibleOnLayout = ViewLayout.none)
+        public ComponentPropertyAttribute(Type editorType, ViewLayout visibleOnLayout = ViewLayout.none, bool updateLayoutOnChange = false)
         {
             EditorType = editorType;
             VisibleOnLayout = visibleOnLayout;
+            UpdateLayoutOnChange = updateLayoutOnChange;
         }
 
         public Type EditorType { get; set; }
 
         public ViewLayout VisibleOnLayout { get; set; }
+
+        public bool UpdateLayoutOnChange { get; set; }
     }
 }

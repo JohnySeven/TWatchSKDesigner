@@ -120,13 +120,14 @@ namespace TWatchSKDesigner.Views
             await ProgressWindow.ShowProgress("Saving view...", async () =>
             {
                 var result = await Model?.SaveView();
-                if(result?.IsSuccess == true)
+
+                if(result.IsSuccess == true)
                 {
                     await MessageBox.Show("Saved!");
                 }
                 else
                 {
-                    await MessageBox.Show(result?.ErrorMessage);
+                    await MessageBox.Show(result.ErrorMessage);
                 }
             });
         }

@@ -37,6 +37,11 @@ namespace TWatchSKDesigner.ViewModels
             set { _Layout = value; this.RaisePropertyChanged(nameof(Layout)); }
         }
 
+        public void OnLayoutChanged()
+        {
+            this.RaisePropertyChanged(nameof(Layout));
+        }
+
         [JsonProperty("components")]
         public JArray? Components { get; set; }
 
@@ -91,6 +96,11 @@ namespace TWatchSKDesigner.ViewModels
         {
             var json = JsonConvert.SerializeObject(LoadedComponents);
             Components = JArray.Parse(json);
+        }
+
+        public WatchView()
+        {
+            Icon = MaterialDesign.Avalonia.PackIcon.PackIconKind.Watch;
         }
     }
 }

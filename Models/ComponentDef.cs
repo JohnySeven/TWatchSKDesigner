@@ -1,4 +1,5 @@
 ﻿using Avalonia.Controls;
+using MaterialDesign.Avalonia.PackIcon;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using ReactiveUI;
@@ -19,7 +20,7 @@ namespace TWatchSKDesigner.Models
         private int[]? _Location;
 
         [JsonProperty("location")]
-        [ComponentProperty(typeof(XYEditor), ViewLayout.off)]
+        [ComponentProperty(typeof(XYEditor), ViewLayout.off, true)]
         public int[]? Location
         {
             get { return _Location; }
@@ -49,6 +50,9 @@ namespace TWatchSKDesigner.Models
             get { return _IsSelected; }
             set { _IsSelected = value; OnPropertyChanged(nameof(IsSelected)); }
         }
+
+        [JsonIgnore]
+        public PackIconKind Icon { get; protected set; }
 
 
         public static ComponentDef GetComponent(JObject component)

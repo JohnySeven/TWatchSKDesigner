@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:model="using:TWatchSKDesigner.ViewModels"
              xmlns:conv="using:TWatchSKDesigner.Converters"
+             xmlns:material="clr-namespace:MaterialDesign.Avalonia.PackIcon;assembly=MaterialDesign.Avalonia.PackIcon"
              xmlns:def="using:TWatchSKDesigner.Models"
              x:DataType="model:ComponentPropertiesViewModel" Width="250"
              mc:Ignorable="d" d:DesignWidth="250" d:DesignHeight="450"
@@ -16,6 +17,7 @@
       <ComboBox.ItemTemplate>
         <DataTemplate DataType="def:ComponentDef">
           <StackPanel Orientation="Horizontal">
+            <material:PackIcon VerticalAlignment="Center" Kind="{Binding Icon}" />
             <Label Content="{Binding Type}" />
           </StackPanel>
         </DataTemplate>
