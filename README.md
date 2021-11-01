@@ -6,7 +6,7 @@ Watch face designer and utility program for TWatchSK project.
 ## Installing TWatchSKDesigner
 BAS: write this after Jan gets the first version ready to release.
 
-# Installing TWatchSK
+## Installing TWatchSK
 After you install TWatchSKDesigner, the first thing you'll want to use it for is to install TWatchSK onto your T-WATCH-2020. (If you think you'd like to contribute to the development of TWatchSK, [click here] BAS: link to the document that tells, briefly, how to fork and clone the project.) The following steps will guide you through the process.
 1. Do the first step.
 2. Do the second step.
@@ -14,7 +14,7 @@ After you install TWatchSKDesigner, the first thing you'll want to use it for is
 
 Your T-WATCH-2020 now has TWatchSK installed, and whenever it's turned on, it will be running TWatchSK. (That's the only program that it will run, unless you install some other program, which will overwrite TWatchSK. That is, you can install and run only one program on T-WATCH-2020 at any time.) [Click here](https://github.com/JohnySeven/TWatchSK#readme) to see everything that TWatchSK can do, and to learn how to use it.
 
-# Updating TWatchSK
+## Updating TWatchSK
 Periodically, new versions of TWatchSK will be released. You can check for the lastest release version [here](https://github.com/JohnySeven/TWatchSK/releases), and if there is a newer version than the version on your watch, you can follow these steps to install the latest version. (You can check the version from the TWatchSK *Watch Info* menu. It is also briefly displayed whenever TWatchSK is started, on the startup screen.)
 1. Step one.
 2. Step two.
