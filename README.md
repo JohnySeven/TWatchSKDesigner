@@ -23,4 +23,6 @@ Periodically, new versions of TWatchSK will be released. You can check for the l
 ## DynamicViews - Custom Screens for Displaying Signal K Data
 Out of the box, the only information from Signal K that TWatchSK displays is (a) any Notifications* sent by Signal K, and (b) basic data about your T-WATCH-2020, such as its battery life and internal temperature. (These are on their only to demonstrate the DynamicViews feature. Battery life is always visible on the top of the TWatchSK home screen, and you don't need to monitor the internal temperature.)
 
+(* Notifications: TWatchSK will automatically display any notifications from Signal K. Signal K automatically sends very few notifications - one example is a notification when a new version is released. But there are many Signa K plugins that send notifications, one of the simplest being the Simple Notifications Plugin, which allows you to set notification thresholds for any Signal K Path.)
+
 [![.NET](https://github.com/JohnySeven/TWatchSKDesigner/actions/workflows/dotnet.yml/badge.svg)](https://github.com/JohnySeven/TWatchSKDesigner/actions/workflows/dotnet.yml)
