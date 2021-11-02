@@ -38,7 +38,7 @@ As soon as you install Designer and connect it to your Signal K Server ("Server"
 *The three Paths sent to the Signal K Server by every TWatchSK*
 
 ### 1. Watch Battery Status Only
-<font size="4">This will be about as simple as a DynamicView can be: just one data field with a single label, using the default colors for everything.
+This will be about as simple as a DynamicView can be: just one data field with a single label, using the default colors for everything.
 1. Start Designer and connect to your Server.
 2. Select Edit _ New view from the menu and you'll see a new, blank view. You'll also see the Edit Window on the right side, with the View displayed. You can see its name, "New view", at the bottom of the View itself, and in the "Name" field of the Edit Window.
 3. Change the "Name" field to "Watch Battery". Notice as you type the new name, it appears at the bottom of the View itself.
@@ -47,6 +47,6 @@ As soon as you install Designer and connect it to your Signal K Server ("Server"
 6. Click on the Signal K icon in the upper right of the Binding Window and a list of all Paths on your Server will pop up.
 7. Click on "TWatchSK.battery" and click OK. The pop-up list will close and the Path will be displayed in the Binding Window.
 8. We could change any of the other fields that define how the data from this Path will be displayed, but we're not going to, so click on the "OK" button. The Binding Window will close, you'll see the Path displayed in the Edit Window, and the "Text" field will change to "--". The -- is a placeholder for where the actual data will appear.
-9. Change the "Text" field to "Battery -- %". As you type, the text will appear on the View itself, because Designer is a real-time WYSIWYG editor as much as possible.</font>
+9. Change the "Text" field to "Battery -- %". As you type, the text will appear on the View itself, because Designer is a real-time WYSIWYG editor as much as possible.
 
 [![.NET](https://github.com/JohnySeven/TWatchSKDesigner/actions/workflows/dotnet.yml/badge.svg)](https://github.com/JohnySeven/TWatchSKDesigner/actions/workflows/dotnet.yml)
