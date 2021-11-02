@@ -49,4 +49,12 @@ This will be about as simple as a DynamicView can be: just one data field with a
 8. We could change any of the other fields that define how the data from this Path will be displayed, but we're not going to, so click on the "OK" button. The Binding Window will close, you'll see the Path displayed in the Edit Window, and the "Text" field will change to "--". The -- is a placeholder for where the actual data will appear.
 9. Change the "Text" field to "Battery -- %". As you type, the text will appear on the View itself, because Designer is a real-time WYSIWYG editor as much as possible.
 
+You should now have a View that looks like this:
+![image](https://user-images.githubusercontent.com/15186790/139965546-6f5a00e8-9575-406f-9fc3-2823593d010b.png)
+
+When loaded onto your watch (in a process described later), you'll have a single DynamicView that will look just like the body of the image above, but with the current value of the watch's battery percentage displayed instead of the "--".
+
+### Watch Bettery Status Only - Version 2.0
+(BAS: do it again, with a label, a binding, and a label this time. Or a label and a binding, but with --% in the Text of the Binding.)
+
 [![.NET](https://github.com/JohnySeven/TWatchSKDesigner/actions/workflows/dotnet.yml/badge.svg)](https://github.com/JohnySeven/TWatchSKDesigner/actions/workflows/dotnet.yml)
