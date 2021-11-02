@@ -25,7 +25,7 @@ Out of the box, the only information from Signal K that TWatchSK displays is (a)
 
 ![image](https://user-images.githubusercontent.com/15186790/139879628-1e463149-4694-4368-9102-70d2bc9fd57e.png)
 
-A DynamicView screen showing vessel speed, outside temperature, and barometric pressure (BAS: Show a couple more, with color, and labels, etc.)
+*A DynamicView screen showing vessel speed, outside temperature, and barometric pressure* (BAS: Show a couple more, with color, and labels, etc.)
 
 DynamicViews are defined with JSON, so it would not be practical to create them through a user interface on the watch itself. The original reason for writing Designer was to allow you to easily define DynamicViews on your computer, which would then be installed onto the watch.
 
@@ -35,10 +35,10 @@ DynamicViews are defined with JSON, so it would not be practical to create them 
 As soon as you install Designer and connect it to your Signal K Server ("Server" from now on), it will have access to every active Signal K Path on the Server. As soon as you install TWatchSK on your watch and connect it to your Server, it will start sending data to three Paths: TWatchSK.battery, TWatchSK.temperature, and TWatchSK.uptime. (If you have given your watch a name other than "TWatchSK" while setting it up, your watch's name will replace "TWatchSK" in these three Paths.) So even if you have no other data being sent to the Server, you will have these three Paths, so that's what we're going to use for all of the DynamicViews in this tutorial. The steps will be identical when creating DynamicViews for "real" data.
 ![image](https://user-images.githubusercontent.com/15186790/139891245-1c3758b2-373c-4f1e-ab57-99f8db7bc135.png)
 
-*The three Paths sent to the Signal K Server by every TWatchSK
+*The three Paths sent to the Signal K Server by every TWatchSK*
 
 ### 1. Watch Battery Status Only
-This will be about as simple as a DynamicView can be: just one data field with a single label, using the default colors for everything.
+<font size="1">This will be about as simple as a DynamicView can be: just one data field with a single label, using the default colors for everything.
 1. Start Designer and connect to your Server.
 2. Select Edit _ New view from the menu and you'll see a new, blank view. You'll also see the Edit Window on the right side, with the View displayed. You can see its name, "New view", at the bottom of the View itself, and in the "Name" field of the Edit Window.
 3. Change the "Name" field to "Watch Battery". Notice as you type the new name, it appears at the bottom of the View itself.
@@ -47,6 +47,6 @@ This will be about as simple as a DynamicView can be: just one data field with a
 6. Click on the Signal K icon in the upper right of the Binding Window and a list of all Paths on your Server will pop up.
 7. Click on "TWatchSK.battery" and click OK. The pop-up list will close and the Path will be displayed in the Binding Window.
 8. We could change any of the other fields that define how the data from this Path will be displayed, but we're not going to, so click on the "OK" button. The Binding Window will close, you'll see the Path displayed in the Edit Window, and the "Text" field will change to "--". The -- is a placeholder for where the actual data will appear.
-9. Change the "Text" field to "Battery -- %". As you type, the text will appear on the View itself, because Designer is a real-time WYSIWYG editor as much as possible.
+9. Change the "Text" field to "Battery -- %". As you type, the text will appear on the View itself, because Designer is a real-time WYSIWYG editor as much as possible.</font>
 
 [![.NET](https://github.com/JohnySeven/TWatchSKDesigner/actions/workflows/dotnet.yml/badge.svg)](https://github.com/JohnySeven/TWatchSKDesigner/actions/workflows/dotnet.yml)
