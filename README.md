@@ -38,7 +38,7 @@ As soon as you install Designer and connect it to your Signal K Server ("Server"
 *The three Paths sent to the Signal K Server by every TWatchSK*
 
 ### 1. Watch Battery Status Only
-<font size="1">This will be about as simple as a DynamicView can be: just one data field with a single label, using the default colors for everything.
+<font size="4">This will be about as simple as a DynamicView can be: just one data field with a single label, using the default colors for everything.
 1. Start Designer and connect to your Server.
 2. Select Edit _ New view from the menu and you'll see a new, blank view. You'll also see the Edit Window on the right side, with the View displayed. You can see its name, "New view", at the bottom of the View itself, and in the "Name" field of the Edit Window.
 3. Change the "Name" field to "Watch Battery". Notice as you type the new name, it appears at the bottom of the View itself.
