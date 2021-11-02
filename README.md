@@ -21,7 +21,10 @@ Periodically, new versions of TWatchSK will be released. You can check for the l
 3. Step last.
 
 ## DynamicViews - Custom Screens for Displaying Signal K Data
-Out of the box, the only information from Signal K that TWatchSK displays is (a) any Notifications* sent by Signal K, and (b) basic data about your T-WATCH-2020, such as its battery life and internal temperature. (These are on the watch only to demonstrate the DynamicViews feature. Battery life is always visible on the top of the TWatchSK home screen, and you don't need to monitor the internal temperature.) (BAS: We may decide not to install ANY DynamicViews out of the box, so the previous may not be accurate.)
+Out of the box, the only information from Signal K that TWatchSK displays is (a) any Notifications* sent by Signal K, and (b) basic data about your T-WATCH-2020, such as its battery life and internal temperature. (These are on the watch only to demonstrate the DynamicViews feature. Battery life is always visible on the top of the TWatchSK home screen, and you don't need to monitor the internal temperature.) (BAS: We may decide not to install ANY DynamicViews out of the box, so the previous may not be accurate.) The DynamicViews feature of TWatchSK allows you to define additional screens for the watch, each of which can display the data from one, two, three, or four Signal K Paths.
+
+![image](https://user-images.githubusercontent.com/15186790/139879628-1e463149-4694-4368-9102-70d2bc9fd57e.png)
+*A DynamicView screen showing vessel speed, outside temperature, and barometric pressure
 
 (* Notifications: TWatchSK will automatically display any notifications from Signal K. Signal K sends very few notifications out of the box - one example is a notification when a new version is released. But there are many Signal K plugins that send notifications, one of the simplest being the Simple Notifications Plugin, which allows you to set notification thresholds for any Signal K Path. For example, you can set up an Alert notification if your engine coolant temperature is hotter than normal, and an Alarm notification if it gets into the dangerously hot range. Both of these would automatically be displayed by TWatchSK.)
 
