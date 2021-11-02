@@ -5,6 +5,7 @@ using Avalonia.Data;
 using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
 using ReactiveUI;
+using Splat;
 using System;
 using TWatchSKDesigner.Controls;
 using TWatchSKDesigner.Converters;
@@ -130,6 +131,21 @@ namespace TWatchSKDesigner.Views
                     await MessageBox.Show(result.ErrorMessage);
                 }
             });
+        }
+
+        private async void UploadFirmware_Cliked(object sender, RoutedEventArgs eventArgs)
+        {
+            var model = Model ?? throw new InvalidOperationException("Model isn't set!");
+            var result = await model.FlashTWatch();
+
+            if(result.IsSuccess)
+            {
+                await MessageBox.Show("TWatch SK firmware upload has been succesful!");
+            }
+            else
+            {
+                await MessageBox.Show($"{result.Code}: {result.ErrorMessage}");
+            }
         }
 
         private void NewView_Clicked(object sender, RoutedEventArgs eventArgs)

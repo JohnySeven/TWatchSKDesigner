@@ -15,6 +15,8 @@ using TWatchSKDesigner.Modals;
 using TWatchSKDesigner.Models;
 using TWatchSKDesigner.Views;
 using System.Linq;
+using TWatchSKDesigner.Intefaces;
+using Splat;
 
 namespace TWatchSKDesigner.ViewModels
 {
@@ -140,6 +142,55 @@ namespace TWatchSKDesigner.ViewModels
             SignalKManager = new SignalKManager();
             _Json = "";
             _JsonError = "";
+        }
+
+        public async Task<Result> FlashTWatch()
+        {
+            var ret = new Result();
+            var taskMonitor = new ProgressWindowTaskMonitor();
+            await taskMonitor.Run(async () =>
+            {
+                var esp32svc = Locator.Current.GetService<IEsp32ToolService>();
+                var initResult = await esp32svc.Initialize(taskMonitor);
+
+                if(initResult.IsSuccess)
+                {
+                    var downloadResult = await esp32svc.DownloadLatestFirmware(taskMonitor);
+
+                    if(downloadResult.IsSuccess && downloadResult.Data != null)
+                    {
+                        var availablePorts = await esp32svc.GetAvailableSerialPorts();
+                        string? selectedPort = null;
+
+                        if (availablePorts.Count == 0)
+                        {
+                            ret.OnError("NOPORT", "Please connect your TWatch 2020 into USB port!");
+                        }
+                        else if (availablePorts.Count == 1)
+                        {
+                            selectedPort = availablePorts.First();
+                        }
+                        else
+                        {
+                            //pick from UI
+                            var dialogService = Locator.Current.GetService<IUIDialogService>();
+                            selectedPort = await dialogService.ShowPortSelectionDialog(availablePorts);
+                        }
+
+                        if(selectedPort != null)
+                        {
+                            ret = await esp32svc.FlashFirmware(selectedPort, downloadResult.Data.FullName, taskMonitor);
+                        }
+                    }
+                    
+                }
+                else
+                {
+                    ret = initResult;
+                }
+            });
+
+            return ret;
         }
 
         private async void DeleteView(WatchView view)

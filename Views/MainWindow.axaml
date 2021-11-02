@@ -27,10 +27,13 @@
         <MenuItem Header="_Save" Click="Save_Clicked" IsEnabled="{Binding ViewLoaded}" />
         <MenuItem Header="_Exit" Click="Exit_Clicked" />
       </MenuItem>
-      <MenuItem Header="_Edit">
+      <MenuItem Header="_Edit" IsEnabled="{Binding ViewLoaded}">
         <MenuItem Header="_New view" Click="NewView_Clicked" />
         <MenuItem Header="Copy"/>
         <MenuItem Header="Paste"/>
+      </MenuItem>
+      <MenuItem Header="Firmware">
+        <MenuItem Header="Update" Click="UploadFirmware_Cliked"  />
       </MenuItem>
     </Menu>
 
