@@ -31,79 +31,10 @@ namespace TWatchSKDesigner.Views
 
         private static void InitializeEditorTemplates()
         {
-            if (PropertyEditorConverter.EditorTemplates.Count == 0)
-            {
-                PropertyEditorConverter.EditorTemplates.Add(typeof(TextBox), new FuncDataTemplate<object>((v, s) =>
-                {
-                    return new TextBox()
-                    {
-                        [!TextBox.TextProperty] = new Binding("Value", BindingMode.TwoWay),
-                        HorizontalAlignment = Avalonia.Layout.HorizontalAlignment.Stretch
-                    };
-                }));
-
-                PropertyEditorConverter.EditorTemplates.Add(typeof(EnumComboBox<ComponentType>), new FuncDataTemplate<object>((v, s) =>
-                {
-                    return new EnumComboBox<ComponentType>()
-                    {
-                        DataContext = v,
-                        HorizontalAlignment = Avalonia.Layout.HorizontalAlignment.Stretch
-                    };
-                }));
-
-                PropertyEditorConverter.EditorTemplates.Add(typeof(EnumComboBox<ComponentFont>), new FuncDataTemplate<object>((v, s) =>
-                {
-                    return new EnumComboBox<ComponentFont>()
-                    {
-                        DataContext = v,
-                        HorizontalAlignment = Avalonia.Layout.HorizontalAlignment.Stretch
-                    };
-                }));
-
-                PropertyEditorConverter.EditorTemplates.Add(typeof(EnumComboBox<ViewType>), new FuncDataTemplate<object>((v, s) =>
-                {
-                    return new EnumComboBox<ViewType>()
-                    {
-                        DataContext = v,
-                        HorizontalAlignment = Avalonia.Layout.HorizontalAlignment.Stretch
-                    };
-                }));
-
-                PropertyEditorConverter.EditorTemplates.Add(typeof(EnumComboBox<ViewLayout>), new FuncDataTemplate<object>((v, s) =>
-                {
-                    return new EnumComboBox<ViewLayout>()
-                    {
-                        DataContext = v
-                    };
-                }));
-
-                PropertyEditorConverter.EditorTemplates.Add(typeof(BindingEditor), new FuncDataTemplate<object>((v, s) =>
-                {
-                    return new BindingEditor()
-                    {
-                        DataContext = v
-                    };
-                }));
-
-                PropertyEditorConverter.EditorTemplates.Add(typeof(ColorPickerEditor), new FuncDataTemplate<object>((v, s) =>
-                {
-                    return new ColorPickerEditor()
-                    {
-                        DataContext = v
-                    };
-                }));
-
-                PropertyEditorConverter.EditorTemplates.Add(typeof(XYEditor), new FuncDataTemplate<object>((v, s) =>
-                {
-                    return new XYEditor()
-                    {
-                        DataContext = v
-                    };
-                }));
-            }
+            PropertyEditorConverter.InitializeTemplates();
         }
 
-        public MainWindowViewModel? Model => DataContext as MainWindowViewModel;
+        public MainWindowViewModel Model => DataContext as MainWindowViewModel ?? throw new InvalidOperationException();
 
         private void InitializeComponent()
         {
@@ -120,7 +51,7 @@ namespace TWatchSKDesigner.Views
         {
             await ProgressWindow.ShowProgress("Saving view...", async () =>
             {
-                var result = await Model?.SaveView();
+                var result = await Model.SaveView();
 
                 if(result.IsSuccess == true)
                 {
@@ -135,17 +66,21 @@ namespace TWatchSKDesigner.Views
 
         private async void UploadFirmware_Cliked(object sender, RoutedEventArgs eventArgs)
         {
-            var model = Model ?? throw new InvalidOperationException("Model isn't set!");
-            var result = await model.FlashTWatch();
+            var firmwareDialog = new FlashFirmwareModal();
 
-            if(result.IsSuccess)
-            {
-                await MessageBox.Show("TWatch SK firmware upload has been succesful!");
-            }
-            else
-            {
-                await MessageBox.Show($"{result.Code}: {result.ErrorMessage}");
-            }
+            await firmwareDialog.ShowDialog(this);
+
+            //var model = Model ?? throw new InvalidOperationException("Model isn't set!");
+            //var result = await model.FlashTWatch();
+
+            //if(result.IsSuccess)
+            //{
+            //    await MessageBox.Show("TWatch SK firmware upload has been succesful!");
+            //}
+            //else
+            //{
+            //    await MessageBox.Show($"{result.Code}: {result.ErrorMessage}");
+            //}
         }
 
         private void NewView_Clicked(object sender, RoutedEventArgs eventArgs)

@@ -144,6 +144,7 @@ namespace TWatchSKDesigner.ViewModels
             _JsonError = "";
         }
 
+        /*
         public async Task<Result> FlashTWatch()
         {
             var ret = new Result();
@@ -191,7 +192,7 @@ namespace TWatchSKDesigner.ViewModels
             });
 
             return ret;
-        }
+        }*/
 
         private async void DeleteView(WatchView view)
         {

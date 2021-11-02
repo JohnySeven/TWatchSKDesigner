@@ -12,7 +12,7 @@ namespace TWatchSKDesigner.Intefaces
     {
         Task<List<string>> GetAvailableSerialPorts();
         Task<Result> Initialize(ITaskStatusMonitor statusMonitor);
-        Task<Result> FlashFirmware(string portName, string firmwareFile, ITaskStatusMonitor statusMonitor);
+        Task<Result> FlashFirmware(string portName, string firmwareFile, bool eraseFlash, ITaskStatusMonitor statusMonitor);
         Task<Result<FileInfo>> DownloadLatestFirmware(ITaskStatusMonitor taskMonitor);
     }
 }

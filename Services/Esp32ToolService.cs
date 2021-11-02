@@ -81,7 +81,7 @@ namespace TWatchSKDesigner.Services
             return ret;
         }
 
-        public async Task<Result> FlashFirmware(string portName, string firmwareFile, ITaskStatusMonitor statusMonitor)
+        public async Task<Result> FlashFirmware(string portName, string firmwareFile, bool eraseFlash, ITaskStatusMonitor statusMonitor)
         {
             var infoResult = await LoadFirmwareInfo(firmwareFile);
 
@@ -90,11 +90,16 @@ namespace TWatchSKDesigner.Services
                 var firmwareInfo = infoResult.Data;
                 var eraseCommand = $"--chip esp32 --port {portName} erase_flash";
 
-                statusMonitor.OnProgress("Erasing flash...");
+                Result? eraseResult = null;
 
-                var eraseResult = await InvokeEspTool(eraseCommand, statusMonitor);
+                if (eraseFlash)
+                {
+                    statusMonitor.OnProgress("Erasing flash...");
 
-                if (eraseResult.IsSuccess)
+                    eraseResult = await InvokeEspTool(eraseCommand, statusMonitor);
+                }
+
+                if (!eraseFlash || eraseResult?.IsSuccess == true)
                 {
                     statusMonitor.OnProgress($"Uploading new Firmware version {firmwareInfo.Version}...");
                     //sample
