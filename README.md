@@ -91,24 +91,26 @@ Be sure to select the correct View, and then the correct label, before you make 
 Our first example did not result in a very attractive screen - just one line at the top - and you would probably never want to use a screen like that. You might want to use a layout like our second example, if you don't have very many DynamicViews, especially for data that's very important. This example will demonstrate a more commonly used layout - one that will more efficiently use the screen by displaying three different Paths: TWatchSK.battery, TWatchSK.temperature, and TWatchSK.uptime (the number of seconds since the watch was last rebooted). Each of them will be displayed slightly differently.
 
 1. Select Edit _ New view from the menu and you'll see a new, blank View.
-3. Change the "Name" field to "All Watch Info".
-4. In the "Layout" field, select "column_mid".
-5. Click on the white square to the right of "Background", and the Color Window will pop up.
-6. Move the Red, Green, and Blue sliders around until you get a color like shown below, then click on "OK".
+2. Change the "Name" field to "All Watch Info".
+3. In the "Layout" field, select "column_mid".
+4. Click on the white square to the right of "Background", and the Color Window will pop up.
+5. Move the Red, Green, and Blue sliders around until you get a color like shown below, then click on "OK".
 
 ![image](https://user-images.githubusercontent.com/15186790/140180604-21432b42-8658-46f0-b718-3142b0a35c41.png)
 
-7. Click on the "New label" button at the bottom of the Edit Window.
-8. Change the "Text" to "Watch Stats".
-9. Change the "Font" to "montserrat28".
-10. Change the "Color" to "DarkOrange".
-11. Create a new label and set these fields: Text = 10 asterisks; Font = montserrat28; Color = DarkGreen.
-12. Create a new label and set these fields: Font = montserrat28; Color = Aqua; Binding = TWatchSK.battery (with Format = "Battery: $$%").
-13. Create a new label and set these fields: Font = montserrat28; Color = Crimson; Binding = TWatchSK.temperature (with Format = "CPU temp: $$")
-14. Create a new label and set these fields: Font = montserrat28; Color = Blue; Binding = TWatchSK.uptime (with Format = "$$")
+6. Click on the "New label" button at the bottom of the Edit Window.
+7. Change the "Text" to "Watch Stats".
+8. Change the "Font" to "montserrat28".
+9. Change the "Color" to "DarkOrange".
+10. Create a new label and set these fields: Text = 10 asterisks; Font = montserrat28; Color = DarkGreen.
+11. Create a new label and set these fields: Font = montserrat28; Color = Aqua; Binding = TWatchSK.battery (with Format = "Battery: $$%").
+12. Create a new label and set these fields: Font = montserrat28; Color = Crimson; Binding = TWatchSK.temperature (with Format = "CPU temp: $$")
+13. Create a new label and set these fields: Font = montserrat28; Color = Blue; Binding = TWatchSK.uptime (with Format = "$$")
+
+You should now have a new View that looks like this: ![image](https://user-images.githubusercontent.com/15186790/140182214-c72724a2-1002-4ef8-b07a-abd29499e779.png)
 
 ## About Colors
-While the rest of the TWatchSK screens have different Day and Night modes, the DynamicView screens do not. So when choosing colors, consider how those colors will look in low light, when the screen's display brightness is very low, and also in daylight, when the brightness is high. The colors used 
+While the rest of the TWatchSK screens have different Day and Night modes, the DynamicView screens do not. So when choosing colors, consider how those colors will look in low light, when the screen's display brightness is very low, and also in daylight, when the brightness is high. The colors used in the previous example might work for your eyes, or they might not, so experiment!
 
 
 
