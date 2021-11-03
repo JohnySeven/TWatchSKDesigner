@@ -49,20 +49,18 @@ This will be about as simple as a DynamicView can be: just one data field with a
 8. Click on "TWatchSK.battery" in the scrollable list and click OK. The pop-up list will close and the Path will be displayed in the Binding Window.
 9. We could change any of the other fields that define how the data from this Path will be displayed, but for this example, we're going to change only the "Format" field, which determines how the values from the Binding will be displayed. Type "Battery: $$%" in that field. The "$$" represents the value that will come from the specified Path for this Binding (TWatchSK.battery), and the "Battery:" and "%" are just text that will display around the value. So the actual output will look like this: **Battery: 88%** (NOTE: If all you want to output is the value, with no other text, leave the "Format" field blank.)
 10. Click on the "OK" button. The Binding Window will close, you'll see the Path displayed in the Edit Window, and the "Text" field will change to "Battery: --%". The "--" is a placeholder for where the actual data will appear.
-11. Change the "Text" field to "Battery -- %". As you type, the text will appear on the View itself, because Designer is a real-time WYSIWYG editor as much as possible.
-12. Click on File _ Save, then "OK", to save this new View to disk.
+11. Click on File _ Save, then "OK", to save this new View to disk.
 
 You should now have a View that looks like this:
 ![image](https://user-images.githubusercontent.com/15186790/140117214-596edf24-9cb9-4519-a9ba-14ff82ba86d2.png)
 
-
 When loaded onto your watch (in a process described later), you'll have a single DynamicView that will look just like the body of the image above, but with the current value of the watch's battery percentage displayed instead of the "--".
 
 ### Watch Battery Status Only - Version 2.0
-Obviously, we didn't use very much of the screen for the first one, so now we'll do another one that uses much more of the screen to display the same information.
-1. Select Edit _ New view from the menu and you'll see a new, blank View. The Edit Window on the right side will have the new View displayed. You can see its name, "New view", at the bottom of the View itself, and in the "Name" field of the Edit Window.
+Obviously, we didn't use very much of the screen for the first one, so now we'll do another one that uses much more of the screen to display the same information. We'll have three labels on this screen: "Watch Battery" at the top, then the battery percentage in the middle, then the word "Percent" at the bottom. We'll also introduce different colors and fonts in this example.
+1. Select Edit _ New view from the menu and you'll see a new, blank View.
 3. Change the "Name" field to "Watch Battery 2".
-4. In the "Layout" field, select "row_mid".
+4. In the "Layout" field, select "column_mid".
 5. Click on the white square to the right of "Background", and the Color Window will pop up.
 6. Click in the "Pick color" field, select Aqua, then click on "OK".
 7. Click on the "New label" button at the bottom of the Edit Window.
@@ -70,11 +68,17 @@ Obviously, we didn't use very much of the screen for the first one, so now we'll
 9. Change the "Font" field to "montserrat32" to make it fit.
 10. Click on the "New label" button at the bottom of the Edit Window.
 11. Leave the "Text" field blank - it will come from the "Format" field on the Binding Window, below.
-12. Click on the ... by the the "Binding" field, then the Signal K icon, then select "TWatchSK.battery", then click OK.
-13. As noted above, the "Format" field will determine how this label is displayed
-14. Click "OK" to close the Binding Window.
-15. 
-16. 
-17. 
+12. This label is going to display only a number - an integer from 1 to 100 - so we can make it really large. Select "roboto80" in the "Font" field.
+13. Click on the "..." by the the "Binding" field, then the Signal K icon, then select "TWatchSK.battery", then click OK.
+14. Since this label is going to display only the value from this Binding, you don't need to specify any "Format". But you can accomplish the same thing by putting "$$" into the "Format" field.
+15. Click "OK" to close the Binding Window.
+16. Click on the "New label" button at the bottom of the Edit Window.
+17. Change the "Text" field to "Percent". 
+18. To make it consistent with the text at the top of the screen, change the "Font" to "montserrat32".
+19. Click on File _ Save, then "OK", to save this new View to disk.
+
+You should now have a View that looks like this:
+![image](https://user-images.githubusercontent.com/15186790/140144567-fbcb512c-f7c0-4b8c-b771-e66a13ace3fd.png)
+
 
 [![.NET](https://github.com/JohnySeven/TWatchSKDesigner/actions/workflows/dotnet.yml/badge.svg)](https://github.com/JohnySeven/TWatchSKDesigner/actions/workflows/dotnet.yml)
