@@ -35,7 +35,7 @@ You probably won't want to put every Path from Signal K into a DynamicView - a t
 
 Here's a simple example: set up a Notification* in Signal K for engine oil pressure below 40 psi, and create a DynamicView that includes engine oil pressure. If oil pressure drops below 40 psi, you'll get a Notification, and then you can bring up the DynamicView on your watch to see if it's staying stable or continuing to drop. If it's maintaining 39 psi, you might decide it's OK to keep running the engine, but if you see that it's continuing to drop, you'll know to shut off the engine.
 
-DynamicViews are defined with JSON, so it would not be practical to create them through a user interface on the watch itself. The original reason for writing Designer was to allow you to easily define DynamicViews on your computer, which would then be installed onto the watch.
+DynamicViews are defined with JSON, so it would not be practical to create them through a user interface on the watch itself. Designer was created to allow you to easily define DynamicViews on your computer, which can then be installed onto the watch.
 
 (* Notifications: TWatchSK will automatically display any notifications from Signal K. Signal K sends very few notifications out of the box - one example is a notification when a new version is released. But there are many Signal K plugins that send notifications, one of the simplest being the Simple Notifications Plugin, which allows you to set notification thresholds for any Signal K Path. For example, you can set up an Alert notification if your engine coolant temperature is hotter than normal, and an Alarm notification if it gets into the dangerously hot range. Both of these would automatically be displayed by TWatchSK.)
 
@@ -45,7 +45,7 @@ As soon as you install Designer and connect it to your Signal K Server ("Server"
 
 *The three Paths sent to the Signal K Server by every TWatchSK*
 
-### 1. Watch Battery Status Only
+### Example 1. Watch Battery Status Only
 This will be about as simple as a DynamicView can be: just one data field with a single label, using the default colors for everything.
 
 1. Start Designer and connect to your Server.
@@ -65,7 +65,7 @@ You should now have a View that looks like this:
 
 When loaded onto your watch (in a process described later), you'll have a single DynamicView that will look just like the body of the image above, but with the current value of the watch's battery percentage displayed instead of the "--".
 
-### 2. Watch Battery Status Only - Version 2.0
+### Example 2. Watch Battery Status Only - Version 2.0
 Obviously, we didn't use very much of the screen for the first one, so now we'll do another one that uses much more of the screen to display the same information. We'll have three labels on this screen: "Watch Battery" at the top, then the battery percentage in the middle, then the word "Percent" at the bottom. We'll also introduce different colors and fonts in this example.
 
 1. Select Edit _ New view from the menu and you'll see a new, blank View.
@@ -95,7 +95,7 @@ At this point, you have two Views. If you ever want to edit an existing View, th
 
 Be sure to select the correct View, and then the correct label, before you make any changes. And when you're finished, always remember to File _ Save.
 
-### 3. Three Values on One View
+### Example 3. Three Values on One View
 Our first example did not result in a very attractive screen - just one line at the top - and you would probably never want to use a screen like that. You might want to use a layout like our second example, if you don't have very many DynamicViews, especially for data that's very important. This example will demonstrate a more commonly used layout - one that will more efficiently use the screen by displaying three different Paths: TWatchSK.battery, TWatchSK.temperature, and TWatchSK.uptime (the number of seconds since the watch was last rebooted). Each of them will be displayed slightly differently.
 
 1. Select Edit _ New view from the menu and you'll see a new, blank View.
@@ -133,5 +133,20 @@ If you installed the DynamicViews that we've created so far, the third example w
 If you want to display the temperature as Fahrenheit, that's a more complicated conversion, but still easily accomplished. The formula to convert from Kelvin to Fahrenheit is *degrees Kelvin × 1.8 - 459.67*. So the "Multiply" field would be **1.8** and the "Offset" field would be **-459.67**.
 
 The only other field on the Binding Window that we haven't touched on yet is "Period (ms)". This is the number of milliseconds between updates of this Binding's value. It defaults to 1000 (1 second), but you can make it however many seconds you like. However, you probably don't need updates more often than once per second for any data, so while this field is customizable, there is probably very little benefit from changing it.
+
+## Downloading DynamicView Into TWatchSK
+There will be more examples of more complex DynamicViews below, but now is a good time to show you how to get your DynamicViews from your computer to your watch. It's simple!
+
+1. Connect your watch to your computer with the USB cable that came with the watch.
+2. On the watch, from the home screen (the screen that shows date and time), touch the four squares icon to bring up the menu.
+3. Select the "Display" menu.
+4. Tap the "Download DynamicViews" button.
+
+That's it! Now, from the home screen, swipe left to see the first DynamicView, swipe again to see the second, and so on. (BAS: hopefully this will be true.) After the last DynamicView, one more swipe left will return to the home screen. Similarly, you can swipe right from the home screen to go through the DynamicViews in reverse order.
+
+## Changing the Order of DynamicViews
+Once you have more than one View, you may want to re-order them. Here's how.
+
+1. BAS: finish this
 
 [![.NET](https://github.com/JohnySeven/TWatchSKDesigner/actions/workflows/dotnet.yml/badge.svg)](https://github.com/JohnySeven/TWatchSKDesigner/actions/workflows/dotnet.yml)
