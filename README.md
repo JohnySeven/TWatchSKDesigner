@@ -40,7 +40,7 @@ As soon as you install Designer and connect it to your Signal K Server ("Server"
 ### 1. Watch Battery Status Only
 This will be about as simple as a DynamicView can be: just one data field with a single label, using the default colors for everything.
 1. Start Designer and connect to your Server.
-2. Select Edit _ New view from the menu and you'll see a new, blank view. You'll also see the Edit Window on the right side, with the View displayed. You can see its name, "New view", at the bottom of the View itself, and in the "Name" field of the Edit Window.
+2. Select Edit _ New view from the menu and you'll see a new, blank View. You'll also see the Edit Window on the right side, with the View displayed. You can see its name, "New view", at the bottom of the View itself, and in the "Name" field of the Edit Window.
 3. Change the "Name" field to "Watch Battery". Notice as you type the new name, it appears at the bottom of the View itself.
 4. Click on the "New label" button at the bottom of the Edit Window. Notice that the top of the Edit Window has changed to "label" to indicate that now you're editing a label, not the View itself.
 5. Click on the ... by the the "Binding" field, and the Binding Window will open.
@@ -48,6 +48,7 @@ This will be about as simple as a DynamicView can be: just one data field with a
 7. Click on "TWatchSK.battery" and click OK. The pop-up list will close and the Path will be displayed in the Binding Window.
 8. We could change any of the other fields that define how the data from this Path will be displayed, but we're not going to, so click on the "OK" button. The Binding Window will close, you'll see the Path displayed in the Edit Window, and the "Text" field will change to "--". The -- is a placeholder for where the actual data will appear.
 9. Change the "Text" field to "Battery -- %". As you type, the text will appear on the View itself, because Designer is a real-time WYSIWYG editor as much as possible.
+10. Click on File _ Save, then "OK", to save this new View to disk.
 
 You should now have a View that looks like this:
 ![image](https://user-images.githubusercontent.com/15186790/139965546-6f5a00e8-9575-406f-9fc3-2823593d010b.png)
@@ -56,5 +57,19 @@ When loaded onto your watch (in a process described later), you'll have a single
 
 ### Watch Bettery Status Only - Version 2.0
 (BAS: do it again, with a label, a binding, and a label this time. Or a label and a binding, but with --% in the Text of the Binding.)
+Obviously, we haven't used very much of the screen for this one, so now we'll do another one that uses much more of the screen to display the same information.
+1. Select Edit _ New view from the menu and you'll see a new, blank View. The Edit Window on the right side will have the new View displayed. You can see its name, "New view", at the bottom of the View itself, and in the "Name" field of the Edit Window.
+3. Change the "Name" field to "Watch Battery 2".
+4. In the "Layout" field, select "row_mid".
+5. Click on the white square to the right of "Background", and the Color Window will pop up.
+6. Click in the "Pick color" field, select Aqua, then click on "OK".
+7. Click on the "New label" button at the bottom of the Edit Window.
+8. Change the "Text" field to "Watch Battery". Notice that the text is too big to fit in the View that's being built as you go.
+9. Change the "Font" field to "montserrat32" to make it fit.
+10. Click on the ... by the the "Binding" field, then the Signal K icon, then select "TWatchSK.battery", then click OK.
+11. Click "OK" to close the Binding Window.
+12. 
+13. 
+14. 
 
 [![.NET](https://github.com/JohnySeven/TWatchSKDesigner/actions/workflows/dotnet.yml/badge.svg)](https://github.com/JohnySeven/TWatchSKDesigner/actions/workflows/dotnet.yml)
