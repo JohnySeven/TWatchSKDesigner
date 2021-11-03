@@ -8,9 +8,17 @@ BAS: write this after Jan gets the first version ready to release.
 
 ## Installing TWatchSK
 After you install Designer, the first thing you'll want to use it for is to install TWatchSK onto your T-WATCH-2020. (If you think you'd like to contribute to the development of TWatchSK, [click here] BAS: link to the document that tells, briefly, how to fork and clone the project.) The following steps will guide you through the process.
-1. Do the first step.
-2. Do the second step.
-3. Finish the last step.
+
+NOTE: You must be connected to the Internet for this to work, as everything that's installed is coming from somewhere online, not from your computer.
+
+1. Start Designer. You don't need to login to the SK Server.
+2. Connect your T-WATCH-2020 to your computer with the USB cable that came with the watch.
+3. In Designer, select Firmware _ Update from the main menu. You should see something like this:  
+![image](https://user-images.githubusercontent.com/15186790/140220269-4b245355-5df9-414a-816b-585a63f2d34e.png)
+
+4. You should see the port that the watch is plugged into in the "Upload port" field. If you don't, disconnect and re-connect both ends of the USB cable, then click the "refresh" icon to the right of the field.
+5. If you have previously installed anything on this watch, and you want it to be COMPLETELY erased, check the box by "Reset ALL settings to defaults". WARNING: this will erase everything that has been loaded onto this watch since you took it out of its original packaging. If you have previously installed TWatchSK on this watch, EVERYTHING you may have configured will be reset to the program defaults: the watch name, the date and time, the wifi credentials, the SK server address and port, and all the settings for the display, and for waking up, and everything else. (It will erase any DynamicViews you have installed, but those are easily restored with Designer.)
+6. Click "Upload". If this is the first time you've done this, some tools will first be downloaded that enable your computer to communicate with the watch. Then the latest release version of the TWatchSK firmware will be downloaded from the [TWatchSK Github repository](https://github.com/JohnySeven/TWatchSK/releases), and it will be copied to your watch.
 
 Your T-WATCH-2020 now has TWatchSK installed, and whenever it's turned on, it will be running TWatchSK. (That's the only program that it will run, unless you install some other program, which will overwrite TWatchSK. That is, you can install and run only one program on T-WATCH-2020 at any time.) [Click here](https://github.com/JohnySeven/TWatchSK#readme) to see everything that TWatchSK can do, and to learn how to use it.
 
