@@ -39,6 +39,7 @@ As soon as you install Designer and connect it to your Signal K Server ("Server"
 
 ### 1. Watch Battery Status Only
 This will be about as simple as a DynamicView can be: just one data field with a single label, using the default colors for everything.
+
 1. Start Designer and connect to your Server.
 2. Select Edit _ New view from the menu and you'll see a new, blank View. You'll also see the Edit Window on the right side, with the View displayed. You can see its name, "New view", at the bottom of the View itself, and in the "Name" field of the Edit Window.
 3. Change the "Name" field to "Watch Battery". Notice as you type the new name, it appears at the bottom of the View itself.
@@ -56,8 +57,9 @@ You should now have a View that looks like this:
 
 When loaded onto your watch (in a process described later), you'll have a single DynamicView that will look just like the body of the image above, but with the current value of the watch's battery percentage displayed instead of the "--".
 
-### Watch Battery Status Only - Version 2.0
+### 2. Watch Battery Status Only - Version 2.0
 Obviously, we didn't use very much of the screen for the first one, so now we'll do another one that uses much more of the screen to display the same information. We'll have three labels on this screen: "Watch Battery" at the top, then the battery percentage in the middle, then the word "Percent" at the bottom. We'll also introduce different colors and fonts in this example.
+
 1. Select Edit _ New view from the menu and you'll see a new, blank View.
 3. Change the "Name" field to "Watch Battery 2".
 4. In the "Layout" field, select "column_mid".
@@ -77,8 +79,37 @@ Obviously, we didn't use very much of the screen for the first one, so now we'll
 18. To make it consistent with the text at the top of the screen, change the "Font" to "montserrat32".
 19. Click on File _ Save, then "OK", to save this new View to disk.
 
-You should now have a View that looks like this:
+You should now have a second View that looks like this:
 ![image](https://user-images.githubusercontent.com/15186790/140144567-fbcb512c-f7c0-4b8c-b771-e66a13ace3fd.png)
+
+### Editing Existing DynamicViews
+At this point, you have two Views. If you evern want to edit an existing View, the first thing you have to do is click on the little pencil icon in the lower left corner of the View you want to edit. That will open the Edit Window if it's not already open, or it will populate the already-open Edit Window with the data for the View whose pencil icon you clicked. The drop-down list at the top of the Edit Window always shows what you're editing - the View itself, or one of its labels.
+
+Be sure to select the correct View, and then the correct label, before you make any changes. And when you're finished, always remember to File _ Save.
+
+### 3. Three Values on One View
+Our first example did not result in a very attractive screen - just one line at the top - and you would probably never want to use a screen like that. You might want to use a layout like our second example, if you don't have very many DynamicViews, especially for data that's very important. This example will demonstrate a more commonly used layout - one that will more efficiently use the screen by displaying three different Paths: TWatchSK.battery, TWatchSK.temperature, and TWatchSK.uptime (the number of seconds since the watch was last rebooted). Each of them will be displayed slightly differently.
+
+1. Select Edit _ New view from the menu and you'll see a new, blank View.
+3. Change the "Name" field to "All Watch Info".
+4. In the "Layout" field, select "column_mid".
+5. Click on the white square to the right of "Background", and the Color Window will pop up.
+6. Move the Red, Green, and Blue sliders around until you get a color like shown below, then click on "OK".
+
+![image](https://user-images.githubusercontent.com/15186790/140180604-21432b42-8658-46f0-b718-3142b0a35c41.png)
+
+7. Click on the "New label" button at the bottom of the Edit Window.
+8. Change the "Text" to "Watch Stats".
+9. Change the "Font" to "montserrat28".
+10. Change the "Color" to "DarkOrange".
+11. Create a new label and set these fields: Text = 10 asterisks; Font = montserrat28; Color = DarkGreen.
+12. Create a new label and set these fields: Font = montserrat28; Color = Aqua; Binding = TWatchSK.battery (with Format = "Battery: $$%").
+13. Create a new label and set these fields: Font = montserrat28; Color = Crimson; Binding = TWatchSK.temperature (with Format = "CPU temp: $$")
+14. Create a new label and set these fields: Font = montserrat28; Color = Blue; Binding = TWatchSK.uptime (with Format = "$$")
+
+## About Colors
+While the rest of the TWatchSK screens have different Day and Night modes, the DynamicView screens do not. So when choosing colors, consider how those colors will look in low light, when the screen's display brightness is very low, and also in daylight, when the brightness is high. The colors used 
+
 
 
 [![.NET](https://github.com/JohnySeven/TWatchSKDesigner/actions/workflows/dotnet.yml/badge.svg)](https://github.com/JohnySeven/TWatchSKDesigner/actions/workflows/dotnet.yml)
