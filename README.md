@@ -7,7 +7,7 @@ Watch screen designer and utility program for TWatchSK project.
 BAS: write this after Jan gets the first version ready to release.
 
 ## Installing TWatchSK
-After you install Designer, the first thing you'll want to use it for is to install TWatchSK onto your T-WATCH-2020. (If you think you'd like to contribute to the development of TWatchSK, [click here] BAS: link to the document that tells, briefly, how to fork and clone the project.) The following steps will guide you through the process.
+After you install Designer, the first thing you'll want to use it for is to install TWatchSK onto your T-WATCH-2020. The following steps will guide you through the process.
 
 NOTE: You must be connected to the Internet for this to work, as everything that's installed is coming from somewhere online, not from your computer.
 
