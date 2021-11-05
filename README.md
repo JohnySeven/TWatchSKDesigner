@@ -145,8 +145,15 @@ There will be more examples of more complex DynamicViews below, but now is a goo
 That's it! Now, from the home screen, swipe left to see the first DynamicView, swipe again to see the second, and so on. (BAS: hopefully this will be true.) After the last DynamicView, one more swipe left will return to the home screen. Similarly, you can swipe right from the home screen to go through the DynamicViews in reverse order.
 
 ## Changing the Order of DynamicViews
-Once you have more than one View, you may want to re-order them. Here's how.
+If you have more than one View, the order of them may become important to you. For example, you might want to have the View that displays four main engine parameters be the first one you see when you swipe from the watch home screen, while the View showing less-important environmental data can be the last one you see when swiping. By default, Views will appear on the watch in the same order in which you created them. However, you can easily rearrange Views in Designer, which puts them into the same order on the watch. Here's how to re-order them.
 
-1. BAS: finish this
+If you still have the three Views that you created in the first three examples, above, you'll have Watch Battery, Watch Battery 2, and All Watch Info, so that's what we'll work with here. But you can work with any two or more views for this exercise.
+
+1. We're going to move the All Watch Info View into the first position, before the Watch Batery View. Click on the icon on the bottom of the All Watch Info View that's the square and two arrows. That will open a thin vertical panel on the right side of all of the Views.
+![image](https://user-images.githubusercontent.com/15186790/140533448-ee7cbe61-b641-4011-bd75-6d32de8a1e02.png)
+*Showing the "Move view" icon at the bottom, and the new panel on the right side*
+2. To move this View so that it's the first View - to the left of the Watch Battery View - simply click on the thin vertical panel on the right side of the Watch Battery View.
+3. The Views are re-ordered and the thin right vertical panels all go away. Repeat the above steps to move any other Views.
+4. Select File _ Save to save your changes.
 
 [![.NET](https://github.com/JohnySeven/TWatchSKDesigner/actions/workflows/dotnet.yml/badge.svg)](https://github.com/JohnySeven/TWatchSKDesigner/actions/workflows/dotnet.yml)
