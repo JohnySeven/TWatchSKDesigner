@@ -153,7 +153,7 @@ If you still have the three Views that you created in the first three examples, 
 ![image](https://user-images.githubusercontent.com/15186790/140533448-ee7cbe61-b641-4011-bd75-6d32de8a1e02.png)
 *Showing the "Move view" icon at the bottom, and the new panel on the right side*
 2. To move this View so that it's the first View - to the left of the Watch Battery View - simply click on the thin vertical panel on the right side of the Watch Battery View.
-3. The Views are re-ordered and the thin right vertical panels all go away. Repeat the above steps to move any other Views.
+3. The All Watch Info View is inserted to the left of the Watch Battery View and the thin right vertical panels disappear from all of the Views. Repeat the above steps to move any other Views.
 4. Select File _ Save to save your changes.
 
 [![.NET](https://github.com/JohnySeven/TWatchSKDesigner/actions/workflows/dotnet.yml/badge.svg)](https://github.com/JohnySeven/TWatchSKDesigner/actions/workflows/dotnet.yml)
