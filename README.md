@@ -163,9 +163,15 @@ The previous examples have all used the default layout **column_mid**, which arr
 2. Change the "Name" field to **All Watch Info 2**.
 3. In the "Layout" field, select "off".
 4. Click on the "New label" button at the bottom of the Edit Window.
-7. Change the "Text" to **Watch Stats**.
-8. Change the "Font" to "montserrat28".
-9. Change the "Color" to "DarkOrange".
-10. Create a new label and set these fields: Text = 10 asterisks; Font = montserrat28; Color = DarkGreen.
+5. Change the "Text" to **Watch Stats**. Notice that the text is left justified on the View.
+6. Change the "Font" to "montserrat32".
+7. Change the "Location" to **20;0**. Notice that the text "Watch Stats" is now horizontally centered on the View.
+8. Create a new label and set the "Text" to 10 asterisks. Notice that as you type, the asterisks appear to be overwriting the "Watch Stats" text. That's because the Location of this new label is still set to the default of **0;0**.
+9. Change the "Font" to montserrat28.
+10. Change the "Location" to **30;40**, and notice that the asterisks are now horizontally centered below the words "Watch Stats".
+11. Create a new label and set these fields: Text = Batt; Font = montserrat28; Location = 10;70.
+12. Create a new label and set these fields: Text = blank; Font = montserrat28; Binding = TWatchSK.battery (Format = $$%); Location = 10;105.
+13. Create a new label and set these fields: Text = CPU temp; Font = montserrat28; Location = 92;70.
+14. Create a new label and set these fields: Text = blank; Font = montserrat28; Binding = TWatchSK.temperature (Offset = -273.15; Decimals = 1; Format = $$ C); Location = 125;105.
 
 [![.NET](https://github.com/JohnySeven/TWatchSKDesigner/actions/workflows/dotnet.yml/badge.svg)](https://github.com/JohnySeven/TWatchSKDesigner/actions/workflows/dotnet.yml)
