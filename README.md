@@ -178,6 +178,7 @@ The previous examples have all used the default layout **column_mid**, which arr
 17. Create a new label and set these fields: Text = blank; Font = montserrat28; Color = Green; Binding = TWatchSK.uptime (Format = $$); Location = 70;165.
 
 ![image](https://user-images.githubusercontent.com/15186790/140786698-c6939f73-4929-42d2-8dc5-71d6aafc1570.png) ![image](https://user-images.githubusercontent.com/15186790/140789761-97ee13f6-3feb-4521-9606-0127ba0ffb9a.png)
+
 *The View in Designer, and on the watch: not exactly WYSIWYG, but close!*
 
 [![.NET](https://github.com/JohnySeven/TWatchSKDesigner/actions/workflows/dotnet.yml/badge.svg)](https://github.com/JohnySeven/TWatchSKDesigner/actions/workflows/dotnet.yml)
