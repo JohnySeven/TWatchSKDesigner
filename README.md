@@ -156,4 +156,16 @@ If you still have the three Views that you created in the first three examples, 
 3. The All Watch Info View is inserted to the left of the Watch Battery View and the thin right vertical panels disappear from all of the Views. Repeat the above steps to move any other Views.
 4. Select File _ Save to save your changes.
 
+## Example 4. Manually Positioning Labels on the View
+The previous examples have all used the default layout **column_mid**, which arranges all labels in a single column, and centers each one in the middle of the screen horizontally. But by choosing the layout called **off**, each label will get a "Location" field, which defines the X and Y coordinates for that label. In this example, we'll arrange our three bits of watch data using this approach.
+
+1. Select Edit _ New view from the menu and you'll see a new, blank View.
+2. Change the "Name" field to **All Watch Info 2**.
+3. In the "Layout" field, select "off".
+4. Click on the "New label" button at the bottom of the Edit Window.
+7. Change the "Text" to **Watch Stats**.
+8. Change the "Font" to "montserrat28".
+9. Change the "Color" to "DarkOrange".
+10. Create a new label and set these fields: Text = 10 asterisks; Font = montserrat28; Color = DarkGreen.
+
 [![.NET](https://github.com/JohnySeven/TWatchSKDesigner/actions/workflows/dotnet.yml/badge.svg)](https://github.com/JohnySeven/TWatchSKDesigner/actions/workflows/dotnet.yml)
