@@ -56,8 +56,8 @@ This will be about as simple as a DynamicView can be: just one data field with a
 6. Click on the "..." by the the "Binding" field, and the Binding Window will open.
 7. Click on the Signal K icon in the upper right of the Binding Window and a list of all Paths on your Server will pop up.
 8. Click on "TWatchSK.battery" in the scrollable list and click OK. The pop-up list will close and the Path will be displayed in the Binding Window.
-9. We could change any of the other fields that define how the data from this Path will be displayed, but for this example, we're going to change only the "Format" field, which determines how the values from the Binding will be displayed. Type **Battery: $$%** in that field. The "$$" represents the value that will come from the specified Path for this Binding (TWatchSK.battery), and the "Battery:" and "%" are just text that will display around the value. So the actual output will look like this: **Battery: 88%** (NOTE: If all you want to output is the value, with no other text, enter **$$** in the "Format" field.)
-10. Click on the "OK" button. The Binding Window will close, you'll see the Path displayed in the Edit Window, and the "Text" field will change to "Battery: --%". The "--" is a placeholder for where the actual data will appear.
+9. Change the "Format" field (which determines how the values from the Binding will be displayed) to **Battery: $$%**. The "$$" represents the value that will come from the specified Path for this Binding (TWatchSK.battery), and the "Battery:" and "%" are text that will display around the value. So the actual output will look like this: **Battery: 88%**.
+10. Click on the "OK" button. The Binding Window will close, you'll see the Path displayed in the Edit Window, and the "Text" field will change to "Battery: --%". The "--" represents the "$$" that you entered in the "Format" field.
 11. Click on File _ Save, then "OK", to save this new View to disk.
 
 You should now have a View that looks like this:
@@ -69,22 +69,22 @@ When loaded onto your watch (in a process described later), you'll have a single
 Obviously, we didn't use very much of the screen for the first one, so now we'll do another one that uses much more of the screen to display the same information. We'll have three labels on this screen: "Watch Battery" at the top, then the battery percentage in the middle, then the word "Percent" at the bottom. We'll also introduce different colors and fonts in this example.
 
 1. Select Edit _ New view from the menu and you'll see a new, blank View.
-3. Change the "Name" field to "Watch Battery 2".
+3. Change the "Name" field to **Watch Battery 2**.
 4. In the "Layout" field, select "column_mid".
 5. Click on the white square to the right of "Background", and the Color Window will pop up.
 6. Click in the "Pick color" field, select Aqua, then click on "OK".
 7. Click on the "New label" button at the bottom of the Edit Window.
 8. Change the "Text" field to **Watch Battery**. Notice that the text is too big to fit in the View that's being built as you go.
-9. Change the "Font" field to "montserrat32" to make it fit.
+9. Change the "Font" field to **montserrat32** to make it fit.
 10. Click on the "New label" button at the bottom of the Edit Window.
 11. Leave the "Text" field blank - it will come from the "Format" field on the Binding Window, below.
-12. This label is going to display only a number - an integer from 1 to 100 - so we can make it really large. Select "roboto80" in the "Font" field.
+12. This label is going to display only a number - an integer from 1 to 100 - so we can make it really large. Select **roboto80** in the "Font" field.
 13. Click on the "..." by the the "Binding" field, then the Signal K icon, then select "TWatchSK.battery", then click OK.
-14. Since this label is going to display only the value from this Binding, you don't need to specify a "Format", or you can put **$$** into the "Format" field.
+14. Since this label is going to display only the value from this Binding, put only **$$** into the "Format" field.
 15. Click "OK" to close the Binding Window.
 16. Click on the "New label" button at the bottom of the Edit Window.
 17. Change the "Text" field to **Percent**. 
-18. To make it consistent with the text at the top of the screen, change the "Font" to "montserrat32".
+18. To make it consistent with the text at the top of the screen, change the "Font" to **montserrat32**.
 19. Click on File _ Save, then "OK", to save this new View to disk.
 
 You should now have a second View that looks like this:
@@ -100,7 +100,7 @@ Our first example did not result in a very attractive screen - just one line at 
 
 1. Select Edit _ New view from the menu and you'll see a new, blank View.
 2. Change the "Name" field to **All Watch Info**.
-3. In the "Layout" field, select "column_mid".
+3. In the "Layout" field, select **column_mid**.
 4. Click on the white square to the right of "Background", and the Color Window will pop up.
 5. Move the Red, Green, and Blue sliders around until you get a color like shown below, then click on "OK".
 
@@ -108,12 +108,12 @@ Our first example did not result in a very attractive screen - just one line at 
 
 6. Click on the "New label" button at the bottom of the Edit Window.
 7. Change the "Text" to **Watch Stats**.
-8. Change the "Font" to "montserrat28".
-9. Change the "Color" to "DarkOrange".
-10. Create a new label and set these fields: Text = 10 asterisks; Font = montserrat28; Color = DarkGreen.
-11. Create a new label and set these fields: Font = montserrat28; Color = Aqua; Binding = TWatchSK.battery (with Format = **Battery: $$%**).
-12. Create a new label and set these fields: Font = montserrat28; Color = Crimson; Binding = TWatchSK.temperature (with Format = **CPU temp: $$**)
-13. Create a new label and set these fields: Font = montserrat28; Color = Blue; Binding = TWatchSK.uptime (with Format = **$$**)
+8. Change the "Font" to **montserrat28**.
+9. Change the "Color" to **DarkOrange**.
+10. Create a new label and set these fields: Text = 10 asterisks; Font = **montserrat28**; Color = **DarkGreen**.
+11. Create a new label and set these fields: Font = **montserrat28**; Color = **Aqua**; Binding = **TWatchSK.battery** (with Format = **Battery: $$%**).
+12. Create a new label and set these fields: Font = **montserrat28**; Color = **Crimson**; Binding = **TWatchSK.temperature** (with Format = **CPU temp: $$**)
+13. Create a new label and set these fields: Font = **montserrat28**; Color = **Blue**; Binding = **TWatchSK.uptime** (with Format = **$$**)
 
 You should now have a new View that looks like this: ![image](https://user-images.githubusercontent.com/15186790/140182214-c72724a2-1002-4ef8-b07a-abd29499e779.png)
 
@@ -161,21 +161,21 @@ The previous examples have all used the default layout **column_mid**, which arr
 
 1. Select Edit _ New view from the menu and you'll see a new, blank View.
 2. Change the "Name" field to **All Watch Info 2**.
-3. In the "Layout" field, select "off".
-4. Change the "Background" to "AntiqueWhite".
+3. In the "Layout" field, select **off**.
+4. Change the "Background" to **AntiqueWhite**.
 5. Click on the "New label" button at the bottom of the Edit Window.
 6. Change the "Text" to **Watch Stats**. Notice that the text is left justified on the View.
-7. Change the "Font" to "montserrat32".
+7. Change the "Font" to **montserrat32**.
 8. Change the "Location" to **20;0**. Notice that the text "Watch Stats" is now horizontally centered on the View.
-9. Create a new label and set the "Text" to 10 asterisks. Notice that as you type, the asterisks appear to be overwriting the "Watch Stats" text. That's because the Location of this new label is still set to the default of **0;0**.
-10. Change the "Font" to montserrat28 and the "Color" to "Blue".
+9. Create a new label and set the "Text" to 12 asterisks. Notice that as you type, the asterisks appear to be overwriting the "Watch Stats" text. That's because the Location of this new label is still set to the default of 0;0.
+10. Change the "Font" to **montserrat28** and the "Color" to **Blue**.
 11. Change the "Location" to **30;40**, and notice that the asterisks are now horizontally centered below the words "Watch Stats".
-12. Create a new label and set these fields: Text = Batt; Font = montserrat28; Color = Red; Location = 10;68.
-13. Create a new label and set these fields: Text = blank; Font = montserrat28; Color = Red; Binding = TWatchSK.battery (Format = $$%); Location = 10;105.
-14. Create a new label and set these fields: Text = CPU temp; Font = montserrat28; Color = Gold; Location = 89;70.
-15. Create a new label and set these fields: Text = blank; Font = montserrat28; Color = Gold; Binding = TWatchSK.temperature (Offset = -273.15; Decimals = 1; Format = $$ C); Location = 125;105.
-16. Create a new label and set these fields: Text = TWatchSK Uptime; Font = montserrat14; Color = Green; Location = 50;145.
-17. Create a new label and set these fields: Text = blank; Font = montserrat28; Color = Green; Binding = TWatchSK.uptime (Format = $$); Location = 70;165.
+12. Create a new label and set these fields: Text = **Batt**; Font = **montserrat28**; Color = **Red**; Location = **10;68**.
+13. Create a new label and set these fields: Text = leave it blank; Font = **montserrat28**; Color = **Red**; Binding = **TWatchSK.battery** (Format = **$$%**); Location = **10;105**.
+14. Create a new label and set these fields: Text = **CPU temp**; Font = **montserrat28**; Color = **Gold**; Location = **89;70**.
+15. Create a new label and set these fields: Text = leave it blank; Font = **montserrat28**; Color = **Gold**; Binding = **TWatchSK.temperature** (Offset = **-273.15**; Decimals = **1**; Format = **$$ C**); Location = **125;105**.
+16. Create a new label and set these fields: Text = **TWatchSK Uptime**; Font = **montserrat14**; Color = **Green**; Location = **50;145**.
+17. Create a new label and set these fields: Text = blank; Font = **montserrat28**; Color = **Green**; Binding = **TWatchSK.uptime** (Format = **$$**); Location = **70;165**.
 
 ![image](https://user-images.githubusercontent.com/15186790/140786698-c6939f73-4929-42d2-8dc5-71d6aafc1570.png) ![image](https://user-images.githubusercontent.com/15186790/140789761-97ee13f6-3feb-4521-9606-0127ba0ffb9a.png)
 
