@@ -140,9 +140,9 @@ There will be more examples of more complex DynamicViews below, but now is a goo
 1. Connect your watch to your computer with the USB cable that came with the watch.
 2. On the watch, from the home screen (the screen that shows date and time), touch the four squares icon to bring up the menu.
 3. Select the "Display" menu.
-4. Tap the "Download DynamicViews" button.
+4. Tap the "Download DynamicViews" button. The Views you've defined with Designer will be downloaded from your Server to your watch, and TWatchSK will reboot.
 
-That's it! Now, from the home screen, swipe left to see the first DynamicView, swipe again to see the second, and so on. (BAS: hopefully this will be true.) After the last DynamicView, one more swipe left will return to the home screen. Similarly, you can swipe right from the home screen to go through the DynamicViews in reverse order.
+That's it! Now, from the home screen, swipe left to see the first DynamicView, swipe again to see the second, and so on. (BAS: hopefully this next sentence will be true.) After the last DynamicView, one more swipe left will return to the home screen. Similarly, you can swipe right from the home screen to go through the DynamicViews in reverse order.
 
 ## Changing the Order of DynamicViews
 If you have more than one View, the order of them may become important to you. For example, you might want to have the View that displays four main engine parameters be the first one you see when you swipe from the watch home screen, while the View showing less-important environmental data can be the last one you see when swiping. By default, Views will appear on the watch in the same order in which you created them. However, you can easily rearrange Views in Designer, which puts them into the same order on the watch. Here's how to re-order them.
