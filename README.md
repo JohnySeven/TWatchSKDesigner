@@ -27,9 +27,9 @@ Periodically, new versions of TWatchSK will be released. You can check for the l
 ## DynamicViews - Custom Screens for Displaying Signal K Data
 Out of the box, the only information from Signal K that TWatchSK displays is any Notifications* sent by Signal K. However, the DynamicViews feature of TWatchSK allows you to define additional screens for the watch, each of which can display the data from one to six Signal K Paths, giving you real-time data for these Paths wherever you happen to be on your boat!
 
-![image](https://user-images.githubusercontent.com/15186790/139879628-1e463149-4694-4368-9102-70d2bc9fd57e.png)
+![image](https://user-images.githubusercontent.com/15186790/139879628-1e463149-4694-4368-9102-70d2bc9fd57e.png) ![image](https://user-images.githubusercontent.com/15186790/140789761-97ee13f6-3feb-4521-9606-0127ba0ffb9a.png)
 
-*A DynamicView screen showing vessel speed, outside temperature, and barometric pressure* (BAS: Show a couple more, with color, and labels, etc.)
+*A basic DynamicView showing vessel speed, outside temperature, and barometric pressure, and a more advanced View showing information about the watch itself* 
 
 DynamicViews are defined with JSON, so it would not be practical to create them through a user interface on the watch itself. Designer was created to allow you to easily define DynamicViews on your computer, which can then be installed onto the watch.
 
@@ -142,7 +142,7 @@ There will be more examples of more complex DynamicViews below, but now is a goo
 3. Select the "Display" menu.
 4. Tap the "Download DynamicViews" button. The Views you've defined with Designer will be downloaded from your Server to your watch, and TWatchSK will reboot.
 
-That's it! Now, from the home screen, swipe left to see the first DynamicView, swipe again to see the second, and so on. (BAS: hopefully this next sentence will be true.) After the last DynamicView, one more swipe left will return to the home screen. Similarly, you can swipe right from the home screen to go through the DynamicViews in reverse order.
+That's it! Now, from the home screen, swipe left to see the first DynamicView, swipe again to see the second, and so on.
 
 ## Changing the Order of DynamicViews
 If you have more than one View, the order of them may become important to you. For example, you might want to have the View that displays four main engine parameters be the first one you see when you swipe from the watch home screen, while the View showing less-important environmental data can be the last one you see when swiping. By default, Views will appear on the watch in the same order in which you created them. However, you can easily rearrange Views in Designer, which puts them into the same order on the watch. Here's how to re-order them.
@@ -180,5 +180,7 @@ The previous examples have all used the default layout **column_mid**, which arr
 ![image](https://user-images.githubusercontent.com/15186790/140786698-c6939f73-4929-42d2-8dc5-71d6aafc1570.png) ![image](https://user-images.githubusercontent.com/15186790/140789761-97ee13f6-3feb-4521-9606-0127ba0ffb9a.png)
 
 *The View in Designer, and on the watch: not exactly WYSIWYG, but close!*
+
+You'll notice that not every label looks exactly the same on the watch as it does in Designer - the row of asterisks, for example. So get your View looking the way you want in Designer, then upload to TWatchSK, and see how it looks. Then make changes, upload, and check your results until you get it the way you want it.
 
 [![.NET](https://github.com/JohnySeven/TWatchSKDesigner/actions/workflows/dotnet.yml/badge.svg)](https://github.com/JohnySeven/TWatchSKDesigner/actions/workflows/dotnet.yml)
