@@ -177,6 +177,10 @@ The previous examples have all used the default layout **column_mid**, which arr
 15. Create a new label and set these fields: Text = leave it blank; Font = **montserrat28**; Color = **Gold**; Binding = **TWatchSK.temperature** (Offset = **-273.15**; Decimals = **1**; Format = **$$ C**); Location = **125;105**.
 16. Create a new label and set these fields: Text = **TWatchSK Uptime**; Font = **montserrat14**; Color = **Green**; Location = **50;145**.
 17. Create a new label and set these fields: Text = blank; Font = **montserrat28**; Color = **Green**; Binding = **TWatchSK.uptime** (Format = **$$**); Location = **70;165**.
+18. If you want, follow the steps earlier in this document to move this new View into the very first position.
+19. File _ Save to save the new View.
+
+Following the steps earlier in this document, download the DynamicViews to your watch. When the watch reboots, make sure it connects to wifi and Signal K (look at the icons on the top-line status bar). Push the external button to turn off the screen, or just let it turn off at the normal screen time-out time, and let it stay off for at least a full minute. (Watch data is sent to the Server only when the screen is off, and only once every minute.) Now, wake-up the watch and swipe to the left to see your DynamicViews. The one you just created should look like the one below.
 
 ![image](https://user-images.githubusercontent.com/15186790/140786698-c6939f73-4929-42d2-8dc5-71d6aafc1570.png) ![image](https://user-images.githubusercontent.com/15186790/140789761-97ee13f6-3feb-4521-9606-0127ba0ffb9a.png)
 
