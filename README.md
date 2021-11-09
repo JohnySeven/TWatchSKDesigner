@@ -41,6 +41,7 @@ Here's a simple example: set up a Notification* in Signal K for engine oil press
 
 ## Creating Your First DynamicView
 As soon as you install Designer and connect it to your Signal K Server ("Server" from now on), it will have access to every active Signal K Path on the Server. As soon as you install TWatchSK on your watch and connect it to your Server, it will start sending data to three Paths: TWatchSK.battery, TWatchSK.temperature, and TWatchSK.uptime. NOTE: These three bits of watch data are sent only when the watch is in low power mode (the screen is off), and even then, it's only every 10 seconds.) (If you have given your watch a name other than "TWatchSK" while setting it up, your watch's name will replace "TWatchSK" in these three Paths.) So even if you have no other data being sent to the Server, you will have these three Paths, so that's what we're going to use for all of the DynamicViews in this tutorial. The steps will be identical when creating DynamicViews for your real boat data.
+
 ![image](https://user-images.githubusercontent.com/15186790/139891245-1c3758b2-373c-4f1e-ab57-99f8db7bc135.png)
 
 *The three Paths sent to the Signal K Server by every TWatchSK*
