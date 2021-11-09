@@ -2,15 +2,14 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" x:Name="Window" Tag="Fatal error!"
+        mc:Ignorable="d" MaxWidth="600" x:Name="Window" Tag="This is some very long text. b This is some very long text. This is some very long text. This is some very long text. This is some very long text. This is some very long text. This is some very long text. This is some very long text. This is some very long text."
         x:Class="TWatchSKDesigner.Modals.ConfirmBox" WindowStartupLocation="CenterOwner"
         Title="MessageBox" MinWidth="300" SystemDecorations="BorderOnly" SizeToContent="WidthAndHeight" ShowInTaskbar="False">
   <StackPanel Spacing="10" Margin="10">
-    <Label Content="{Binding #Window.Tag}" />
-    <StackPanel Orientation="Horizontal">
+    <TextBlock TextWrapping="Wrap" Text="{Binding #Window.Tag}" HorizontalAlignment="Stretch" />
+    <StackPanel Orientation="Horizontal" Spacing="6" Margin="10">
       <Button HorizontalAlignment="Center" Click="OnOkClick" IsDefault="True" Content="OK" Width="100" HorizontalContentAlignment="Center" />
       <Button HorizontalAlignment="Center" Click="OnCancelClick" IsDefault="True" Content="Cancel" Width="100" HorizontalContentAlignment="Center" />
-      
     </StackPanel>
   </StackPanel>
 </Window>

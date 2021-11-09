@@ -1,8 +1,10 @@
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.ReactiveUI;
+using Splat;
 using System;
 using System.IO;
+using TWatchSKDesigner.Services;
 
 namespace TWatchSKDesigner
 {
@@ -14,8 +16,14 @@ namespace TWatchSKDesigner
         public static void Main(string[] args)
         {
             AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
+            RegisterServices();
             BuildAvaloniaApp()
-            .StartWithClassicDesktopLifetime(args);
+                .StartWithClassicDesktopLifetime(args);
+        }
+
+        private static void RegisterServices()
+        {
+            Bootstrap.RegisterAll(Locator.CurrentMutable);
         }
 
         private static string CrashLogPath => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "TWatchSK.Designer.log");
