@@ -127,7 +127,7 @@ If you installed the DynamicViews that we've created so far, the third example w
 1. Click on the pencil icon in the lower left corner of the "All Watch Info" view. If it's not already open, the Edit Window will open with that View.
 2. Using the drop-down list at the top, select the "CPU temp" label - it should be the 4th label from the top.
 3. Click on "..." beside "Binding" to open the Binding Window.
-4. In the "Offset" field, enter **-273.15**. That's how you get from Kelvin to Celsius - you subtract 273.15. (Whatever you put in the "Offset" field will be ADDED to the raw value, which is why you need the minus sign.)
+4. In the "Offset" field, enter **-273.15**. That's how you convert from Kelvin to Celsius - you subtract 273.15. (Whatever you put in the "Offset" field will be ADDED to the raw value, which is why you need the minus sign.)
 5. In the "Decimals" field, enter **1**, which will give you 1 decimal point of precision in the output. This isn't necessary - that fraction of a degree probably doesn't really matter - but it's a good time to illustrate this field.
 6. Click "OK" to close the Binding Window.
 
