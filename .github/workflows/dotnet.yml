@@ -34,7 +34,6 @@ jobs:
       with:
         name: TWatchDesigner-Linux64-Deb
         path: /home/runner/work/TWatchSKDesigner/TWatchSKDesigner/bin/Release/net5.0/linux-x64/TWatchSKDesigner.1.0.0.linux-x64.deb
-      uses: actions/upload-artifact@v2
     - name: Upload Linux-64 Rpm artifact
       uses: actions/upload-artifact@v2
       with:
