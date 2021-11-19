@@ -22,7 +22,7 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
-      run: dotnet build --no-restore
+      run: dotnet build --no-restore --runtime linux-x64
     - name: Publish Linux Deb package
       run: dotnet publish /t:CreateDeb /p:TargetFramework=net5.0 /p:RuntimeIdentifier=linux-x64 /p:Configuration=Release /p:PublishSingleFile= --self-contained true
     - name: Upload Linux-64 Deb Artifact
