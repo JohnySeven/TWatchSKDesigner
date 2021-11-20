@@ -2,8 +2,7 @@
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>net5.0</TargetFramework>
-    <Nullable>enable</Nullable>
-    <PublishSingleFile>true</PublishSingleFile>
+    <!--<Nullable>enable</Nullable>-->
   </PropertyGroup>
   <ItemGroup>
     <AvaloniaResource Include="Assets\**" />
