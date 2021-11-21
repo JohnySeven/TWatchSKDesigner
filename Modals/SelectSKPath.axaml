@@ -7,28 +7,30 @@
         mc:Ignorable="d" SizeToContent="WidthAndHeight"
         x:Class="TWatchSKDesigner.Modals.SelectSKPath"
         Title="Select SignalK path" x:CompileBindings="True" x:DataType="model:SelectSKPathModel" x:Name="Window" WindowStartupLocation="CenterOwner" ShowInTaskbar="False" SystemDecorations="BorderOnly">
-  <DockPanel>
-    <StackPanel Margin="10" DockPanel.Dock="Bottom" Spacing="10" HorizontalAlignment="Center" Orientation="Horizontal" Grid.Row="1">
-      <Button Click="OnOkClick" HorizontalContentAlignment="Center" IsDefault="True" Width="100" Content="OK" />
-      <Button Click="OnCancelClick" HorizontalContentAlignment="Center" IsCancel="True" Width="100" Content="Cancel" />
-    </StackPanel>
-    <StackPanel DockPanel.Dock="Right" Width="200" Spacing="10" Margin="3">
-      <TextBlock FontWeight="Bold" Text="Units" />
-      <TextBlock Text="{Binding SelectedPath.Units, Mode=OneWay, FallbackValue=...}" />
-      <TextBlock FontWeight="Bold" Text="Description" />
-      <TextBlock TextWrapping="Wrap" Text="{Binding SelectedPath.Description, Mode=OneWay, FallbackValue=...}"  />
-      <TextBlock FontWeight="Bold" Text="Value (sample)" />
-      <TextBlock TextWrapping="Wrap" Text="{Binding SelectedPath.Value, Mode=OneWay, FallbackValue=...}" />
-    </StackPanel>
-    <ListBox Height="300" Width="300" Margin="3" SelectedItem="{Binding SelectedPath, Mode=TwoWay}" Items="{Binding Paths}">
-      <ListBox.ItemTemplate>
-        <DataTemplate x:DataType="sk:SKPath">
-          <StackPanel Orientation="Horizontal">
-            <Image Margin="3,0" Source="/Assets/SignalK.png" DockPanel.Dock="Left" Width="16" Height="16" />
-            <TextBlock Text="{Binding Path}" FontWeight="Bold" />
-          </StackPanel>
-        </DataTemplate>
-      </ListBox.ItemTemplate>
-    </ListBox>
-  </DockPanel>
+  <Border Classes="WindowBorder">
+    <DockPanel>
+      <StackPanel Margin="10" DockPanel.Dock="Bottom" Spacing="10" HorizontalAlignment="Center" Orientation="Horizontal" Grid.Row="1">
+        <Button Click="OnOkClick" HorizontalContentAlignment="Center" IsDefault="True" Width="100" Content="OK" />
+        <Button Click="OnCancelClick" HorizontalContentAlignment="Center" IsCancel="True" Width="100" Content="Cancel" />
+      </StackPanel>
+      <StackPanel DockPanel.Dock="Right" Width="200" Spacing="10" Margin="3">
+        <TextBlock FontWeight="Bold" Text="Units" />
+        <TextBlock Text="{Binding SelectedPath.Units, Mode=OneWay, FallbackValue=...}" />
+        <TextBlock FontWeight="Bold" Text="Description" />
+        <TextBlock TextWrapping="Wrap" Text="{Binding SelectedPath.Description, Mode=OneWay, FallbackValue=...}"  />
+        <TextBlock FontWeight="Bold" Text="Value (sample)" />
+        <TextBlock TextWrapping="Wrap" Text="{Binding SelectedPath.Value, Mode=OneWay, FallbackValue=...}" />
+      </StackPanel>
+      <ListBox Height="300" Width="300" Margin="3" SelectedItem="{Binding SelectedPath, Mode=TwoWay}" Items="{Binding Paths}">
+        <ListBox.ItemTemplate>
+          <DataTemplate x:DataType="sk:SKPath">
+            <StackPanel Orientation="Horizontal">
+              <Image Margin="3,0" Source="/Assets/SignalK.png" DockPanel.Dock="Left" Width="16" Height="16" />
+              <TextBlock Text="{Binding Path}" FontWeight="Bold" />
+            </StackPanel>
+          </DataTemplate>
+        </ListBox.ItemTemplate>
+      </ListBox>
+    </DockPanel>
+  </Border>
 </Window>

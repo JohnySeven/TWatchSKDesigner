@@ -1,13 +1,18 @@
 <Application xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="using:TWatchSKDesigner"
+             xmlns:themes="using:Material.Styles.Themes;assembly=Material.Styles"
              x:Class="TWatchSKDesigner.App">
     <Application.DataTemplates>
         <local:ViewLocator/>
     </Application.DataTemplates>
-
     <Application.Styles>
-        <FluentTheme Mode="Light"/>
-        <StyleInclude Source="avares://MaterialDesign.Avalonia.PackIcon/Assets/Generic.xaml" />
+      <FluentTheme Mode="Light" />
+      <StyleInclude Source="avares://Avalonia.Controls.DataGrid/Themes/Fluent.xaml"/>
+      <StyleInclude Source="avares://MaterialDesign.Avalonia.PackIcon/Assets/Generic.xaml" />
+      <Style Selector="Border.WindowBorder">
+        <Setter Property="BorderThickness" Value="2" />
+        <Setter Property="BorderBrush" Value="LightBlue" />
+      </Style>
     </Application.Styles>
 </Application>

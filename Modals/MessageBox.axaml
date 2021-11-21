@@ -5,9 +5,11 @@
         mc:Ignorable="d" x:Name="Window" Tag="Fatal error! This is long text! This is long text! This is long text! This is long text! This is long text! This is long text! This is long text! This is long text! This is long text!"
         x:Class="TWatchSKDesigner.Modals.MessageBox" WindowStartupLocation="CenterOwner"
         Title="MessageBox" MinWidth="300" MaxWidth="600" SystemDecorations="BorderOnly" SizeToContent="WidthAndHeight" ShowInTaskbar="False">
-  <StackPanel Spacing="10" Margin="10">
-    <TextBlock Text="{Binding #Window.Tag}" TextWrapping="Wrap" HorizontalAlignment="Stretch" />
-    
-    <Button HorizontalAlignment="Center" Margin="10" Click="OnOkClick" IsDefault="True" Content="OK" Width="100" HorizontalContentAlignment="Center" />
-  </StackPanel>
+  <Border Classes="WindowBorder">
+    <StackPanel Spacing="10" Margin="10">
+      <TextBlock Text="{Binding #Window.Tag}" TextWrapping="Wrap" HorizontalAlignment="Stretch" />
+
+      <Button HorizontalAlignment="Center" Margin="10" Click="OnOkClick" IsDefault="True" Content="OK" Width="100" HorizontalContentAlignment="Center" />
+    </StackPanel>
+  </Border>
 </Window>
