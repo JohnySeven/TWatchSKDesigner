@@ -5,8 +5,10 @@
         mc:Ignorable="d" MinWidth="300" MaxWidth="600" Name="Window" SizeToContent="WidthAndHeight"
         x:Class="TWatchSKDesigner.Modals.ProgressWindow" WindowStartupLocation="CenterOwner"
         Tag="Working...  This is long text! This is long text!  This is long text! This is long text! This is long text!  This is long text!  This is long text!" SystemDecorations="BorderOnly" ShowInTaskbar="False">
-  <Grid RowDefinitions="Auto Auto">
-    <TextBlock HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="10" Text="{Binding #Window.Tag}" TextWrapping="Wrap" />
-    <ProgressBar Margin="10" IsIndeterminate="True" Grid.Row="1" />
-  </Grid>
+  <Border Classes="WindowBorder">
+    <Grid RowDefinitions="Auto Auto">
+      <TextBlock HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="10" Text="{Binding #Window.Tag}" TextWrapping="Wrap" />
+      <ProgressBar Margin="10" IsIndeterminate="True" Grid.Row="1" />
+    </Grid>
+  </Border>
 </Window>

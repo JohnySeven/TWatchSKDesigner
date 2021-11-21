@@ -43,7 +43,7 @@
           <DockPanel DockPanel.Dock="Right" IsVisible="{Binding ShowProperties, Mode=OneWay}">
             <WrapPanel DockPanel.Dock="Bottom">
               <Button Margin="3" Click="NewLabel_Clicked" ToolTip.Tip="Add new Label">
-                <material:PackIcon Kind="Label" />
+                <material:PackIcon Foreground="Black" Kind="Label" />
               </Button>
               <!--<Button Margin="3" ToolTip.Tip="Add new button">
                 <material:PackIcon Kind="Button" />
@@ -74,18 +74,18 @@
                         <local:ViewPreview />
                         <StackPanel Margin="6" Orientation="Horizontal" Grid.Row="1">
                           <Button ToolTip.Tip="Edit view" Command="{Binding #Window.DataContext.StartEditingView}" CommandParameter="{Binding .}">
-                            <material:PackIcon Kind="Pencil" />
+                            <material:PackIcon Foreground="Black" Kind="Pencil" />
                           </Button>
                           <Button ToolTip.Tip="Delete view" Command="{Binding #Window.DataContext.DeleteView}" CommandParameter="{Binding .}">
-                            <material:PackIcon Kind="Delete" />
+                            <material:PackIcon Foreground="Black" Kind="Delete" />
                           </Button>
                           <Button ToolTip.Tip="Move view" CommandParameter="{Binding .}" Command="{Binding #Window.DataContext.MoveCommand}">
-                            <material:PackIcon Kind="MoveResizeVariant" />
+                            <material:PackIcon Foreground="Black" Kind="MoveResizeVariant" />
                           </Button>
                           <Label Margin="6,0,0,0" VerticalContentAlignment="Center" Content="{Binding Name}" FontWeight="Bold" />
                         </StackPanel>
                         <Button CommandParameter="{Binding .}" Command="{Binding #Window.DataContext.MoveViewAtPlaceCommand}" Grid.Column="1" ToolTip.Tip="Place selected view here" IsVisible="{Binding #Window.DataContext.ShowMovingPlacers}"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-                          <material:PackIcon Kind="SelectPlace" VerticalAlignment="Center" />
+                          <material:PackIcon Foreground="Black" Kind="SelectPlace" VerticalAlignment="Center" />
                         </Button>
                       </Grid>
                     </Border>
