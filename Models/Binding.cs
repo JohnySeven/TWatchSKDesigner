@@ -41,5 +41,10 @@ namespace TWatchSKDesigner.Models
                 Decimals = Decimals
             };
         }
+
+        public override string ToString()
+        {
+            return $"Binding {Path},{Multiply},{Period},{OffSet},{Format},{Decimals}";
+        }
     }
 }

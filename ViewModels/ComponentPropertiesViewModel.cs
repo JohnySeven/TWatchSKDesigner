@@ -19,9 +19,9 @@ namespace TWatchSKDesigner.ViewModels
             
         }
 
-        private WatchView? _view;
+        private WatchView _view;
 
-        public WatchView? View
+        public WatchView View
         {
             get { return _view; }
             set { this.RaiseAndSetIfChanged(ref _view, value); }
@@ -45,7 +45,7 @@ namespace TWatchSKDesigner.ViewModels
             RefreshComponents(view);
         }
 
-        private void RefreshComponents(WatchView? view)
+        private void RefreshComponents(WatchView view)
         {
             if (view?.Components != null)
             {
@@ -64,7 +64,7 @@ namespace TWatchSKDesigner.ViewModels
             }
         }
 
-        private void LoadedComponents_CollectionChanged(object? sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        private void LoadedComponents_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
             RefreshComponents(View);
             if(e.NewItems?.Count > 0)
@@ -74,7 +74,7 @@ namespace TWatchSKDesigner.ViewModels
             }
         }
 
-        private void SelectComponent(ComponentDef? component)
+        private void SelectComponent(ComponentDef component)
         {
             if (component != null)
             {
@@ -107,12 +107,17 @@ namespace TWatchSKDesigner.ViewModels
 
         private void ClearProperties()
         {
+            foreach(var property in ComponentProperties)
+            {
+                property.OnChanged = null;
+            }
+
             ComponentProperties.Clear();
         }
 
-        private ComponentDef? _selectedComponent;
+        private ComponentDef _selectedComponent;
 
-        public ComponentDef? SelectedComponent
+        public ComponentDef SelectedComponent
         {
             get { return _selectedComponent; }
             set

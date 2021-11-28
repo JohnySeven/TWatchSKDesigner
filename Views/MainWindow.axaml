@@ -49,6 +49,7 @@
                 <material:PackIcon Kind="Button" />
               </Button>-->
             </WrapPanel>
+            <Label Content="Toolbox" DockPanel.Dock="Bottom" />
             <local:ComponentProperties DataContext="{Binding PropertiesViewModel, Mode=OneWay}" />
           </DockPanel>
           <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">

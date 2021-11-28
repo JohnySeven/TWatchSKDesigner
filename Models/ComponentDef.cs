@@ -27,6 +27,15 @@ namespace TWatchSKDesigner.Models
             set { _Location = value; OnPropertyChanged(nameof(Location)); }
         }
 
+        private string _PreviewText;
+
+        [JsonIgnore]
+        public string PreviewText
+        {
+            get { return _PreviewText; }
+            set { _PreviewText = value; OnPropertyChanged(nameof(PreviewText)); }
+        }
+
         /*
         private int[]? _Size;
 

@@ -18,7 +18,8 @@
         <DataTemplate DataType="def:ComponentDef">
           <StackPanel Orientation="Horizontal">
             <material:PackIcon Foreground="Black" VerticalAlignment="Center" Kind="{Binding Icon}" />
-            <Label Content="{Binding Type}" />
+            <Label Content="{Binding Type}" FontWeight="Bold" />
+            <Label Content="{Binding PreviewText}" />
           </StackPanel>
         </DataTemplate>
       </ComboBox.ItemTemplate>

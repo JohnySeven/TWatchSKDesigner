@@ -12,11 +12,11 @@ namespace TWatchSKDesigner.Models
 {
     public class ComponentProperty : ViewModelBase
     {
-        public string? Name { get; set; }
+        public string Name { get; set; }
 
-        private object? _Value;
+        private object _Value;
 
-        public object? Value
+        public object Value
         {
             get { return _Value; }
             set
@@ -24,19 +24,18 @@ namespace TWatchSKDesigner.Models
                 _Value = value;
                 OnPropertyChanged(nameof(Value));
                 Property?.SetValue(Parent, value);
-                if(OnChanged != null && OnChanged.TryGetTarget(out Action<ComponentProperty> callback))
-                {
-                    callback(this);
-                }
+                OnChanged?.Invoke(this);
             }
         }
 
-        public PropertyInfo? Property { get; set; }
-        public object? Parent { get; set; }
-        public Type? EditorType { get; set; }
-        public WeakReference<Action<ComponentProperty>>? OnChanged { get; private set; }
+        public PropertyInfo Property { get; set; }
+        public object Parent { get; set; }
+        public Type EditorType { get; set; }
+        public Action<ComponentProperty> OnChanged { get; set; }
         public ViewLayout VisibleOnLayout { get; private set; }
         public bool UpdateViewLayoutOnChange { get; private set; }
+
+
 
         private static bool IsVisibleInLayout(WatchView view, ComponentProperty componentPropertyAttribute)
         {
@@ -70,7 +69,7 @@ namespace TWatchSKDesigner.Models
                     Value = p.GetValue(instance),
                     EditorType = p.GetCustomAttributes(true).OfType<ComponentPropertyAttribute>().First().EditorType,
                     VisibleOnLayout = p.GetCustomAttributes(true).OfType<ComponentPropertyAttribute>().First().VisibleOnLayout,
-                    OnChanged = new WeakReference<Action<ComponentProperty>>(onChanged),
+                    OnChanged = onChanged,
                     UpdateViewLayoutOnChange = p.GetCustomAttributes(true).OfType<ComponentPropertyAttribute>().First().UpdateLayoutOnChange
                 })
                 .Where(p => IsVisibleInLayout(view, p))

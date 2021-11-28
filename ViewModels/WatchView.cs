@@ -24,7 +24,12 @@ namespace TWatchSKDesigner.ViewModels
         public string? Name
         {
             get { return _Name; }
-            set { _Name = value; this.RaisePropertyChanged(nameof(Name)); }
+            set
+            {
+                _Name = value; 
+                this.RaisePropertyChanged(nameof(Name));
+                PreviewText = value;
+            }
         }
 
         private string? _Layout;
