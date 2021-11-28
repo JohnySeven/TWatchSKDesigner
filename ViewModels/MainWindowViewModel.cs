@@ -131,8 +131,10 @@ namespace TWatchSKDesigner.ViewModels
                 {
                     var placeIndex = Views.IndexOf(v);
                     Views.Remove(_movingView);
-
+                    
                     Views.Insert(placeIndex, _movingView);
+                    //Update view order in JSON
+                    UI.Views = Views.ToList();
                     _movingView = null;
                 }
 

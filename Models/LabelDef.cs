@@ -67,7 +67,6 @@ namespace TWatchSKDesigner.Models
                 _Binding = value; 
                 this.RaisePropertyChanged(nameof(Binding));
 
-                System.Diagnostics.Debug.WriteLine($"Label binding changed to {value?.ToString()}");
                 if(value != null)
                 {
                     Text = value?.Format?.Replace("$$", "--") ?? "--";
