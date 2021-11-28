@@ -456,6 +456,8 @@ namespace TWatchSKDesigner.ViewModels
                     });
 
                     NoViews = Views.Count == 0;
+                    SelectedView = null;
+                    ShowProperties = false;
 
                     ret = true;
                 }
