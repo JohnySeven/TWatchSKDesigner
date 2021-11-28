@@ -32,7 +32,7 @@ namespace TWatchSKDesigner.Modals
             Close(false);
         }        
 
-        public static Task<bool?> Show(string message)
+        public static Task<bool> Show(string message)
         {
             var confirmBox = new ConfirmBox()
             {
@@ -40,7 +40,7 @@ namespace TWatchSKDesigner.Modals
                 Tag = message
             };
 
-            return confirmBox.ShowDialog<bool?>(MainWindow.Instance);
+            return confirmBox.ShowDialog<bool>(MainWindow.Instance);
         }
     }
 }
