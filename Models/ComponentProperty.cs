@@ -37,15 +37,15 @@ namespace TWatchSKDesigner.Models
 
 
 
-        private static bool IsVisibleInLayout(WatchView view, ComponentProperty componentPropertyAttribute)
+        private static bool IsVisibleInLayout(WatchView view, object instance, ComponentProperty componentPropertyAttribute)
         {
-            if(componentPropertyAttribute.VisibleOnLayout == ViewLayout.none)
+            if (componentPropertyAttribute.VisibleOnLayout == ViewLayout.none)
             {
                 return true;
             }
-            else
+            else if (instance is not WatchView)
             {
-                if(Enum.TryParse(view.Layout, out ViewLayout layout))
+                if (Enum.TryParse(view.Layout, out ViewLayout layout))
                 {
                     return componentPropertyAttribute.VisibleOnLayout == layout;
                 }
@@ -53,6 +53,10 @@ namespace TWatchSKDesigner.Models
                 {
                     return false;
                 }
+            }
+            else
+            {
+                return false;
             }
         }
 
@@ -72,7 +76,7 @@ namespace TWatchSKDesigner.Models
                     OnChanged = onChanged,
                     UpdateViewLayoutOnChange = p.GetCustomAttributes(true).OfType<ComponentPropertyAttribute>().First().UpdateLayoutOnChange
                 })
-                .Where(p => IsVisibleInLayout(view, p))
+                .Where(p => IsVisibleInLayout(view, instance, p))
                 .ToArray();
 
             return properties;
