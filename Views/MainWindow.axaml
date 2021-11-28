@@ -62,7 +62,7 @@
                 </ItemsControl.ItemsPanel>
                 <ItemsControl.ItemTemplate>
                   <DataTemplate DataType="model:WatchView">
-                    <Border Margin="20" Padding="2" Background="{Binding IsSelected, Mode=OneWay, Converter={StaticResource BrushIsSelected}}">
+                    <Border Margin="20" Padding="2" BorderThickness="3" BorderBrush="{Binding IsSelected, Mode=OneWay, Converter={StaticResource BrushIsSelected}}">
                       <Grid>
                         <Grid.RowDefinitions>
                           <RowDefinition Height="Auto" />

@@ -11,7 +11,7 @@ namespace TWatchSKDesigner.Converters
 {
     public class SelectionBrushConverter : IValueConverter
     {
-        public ISolidColorBrush SelectedColor { get; set; } = Brushes.LightBlue;
+        public ISolidColorBrush SelectedColor { get; set; } = Brushes.CornflowerBlue;
         public ISolidColorBrush UnselectedColor { get; set; } = Brushes.LightGray;
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
