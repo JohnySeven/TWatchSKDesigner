@@ -8,7 +8,7 @@
   <Border Classes="WindowBorder">
     <StackPanel Spacing="10" Margin="10">
       <TextBlock TextWrapping="Wrap" Text="{Binding #Window.Tag}" HorizontalAlignment="Stretch" />
-      <StackPanel Orientation="Horizontal" Spacing="6" Margin="10">
+      <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Spacing="6" Margin="10">
         <Button HorizontalAlignment="Center" Click="OnOkClick" IsDefault="True" Content="OK" Width="100" HorizontalContentAlignment="Center" />
         <Button HorizontalAlignment="Center" Click="OnCancelClick" IsDefault="True" Content="Cancel" Width="100" HorizontalContentAlignment="Center" />
       </StackPanel>

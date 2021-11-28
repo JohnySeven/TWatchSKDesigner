@@ -61,16 +61,6 @@ namespace TWatchSKDesigner.ViewModels
         [JsonIgnore]
         public new string Type { get; private set; } = "View";
 
-        
-        private bool _isSelected;
-
-        [JsonIgnore]
-        public bool IsSelected
-        {
-            get { return _isSelected; }
-            set { _isSelected = value; OnPropertyChanged(nameof(IsSelected)); }
-        }
-
         private string? _Background;
         [JsonProperty("background")]
         [ComponentProperty(typeof(ColorPickerEditor))]
@@ -83,6 +73,7 @@ namespace TWatchSKDesigner.ViewModels
 
         public void LoadAllComponents()
         {
+            IsRemovable = false;
             if (Components != null && !_loadedComponents)
             {
                 foreach (var component in Components)

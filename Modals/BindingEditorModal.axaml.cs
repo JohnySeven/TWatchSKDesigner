@@ -25,6 +25,16 @@ namespace TWatchSKDesigner.Modals
         {
             var ret = true;
 
+            if(Model.OffSet == null)
+            {
+                Model.OffSet = 0.0f;
+            }
+
+            if(Model.Multiply == null)
+            {
+                Model.Multiply = 1.0f;
+            }
+
             if (!string.IsNullOrEmpty(Model?.Format) && Model?.Format.Contains("$$") == false)
             {
                 ret = false;

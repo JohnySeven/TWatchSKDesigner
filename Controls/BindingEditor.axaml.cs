@@ -25,6 +25,14 @@ namespace TWatchSKDesigner.Controls
 
         private ComponentProperty? Property => (ComponentProperty?)DataContext;
 
+        private async void OnDeleteClick(object sender, RoutedEventArgs e)
+        {
+            if(await ConfirmBox.Show("Doing this you will remove binding, are you sure?"))
+            {
+                Property.Value = null;
+            }
+        }
+
         private async void OnButtonClick(object sender, RoutedEventArgs e)
         {
             Binding? binding = (Property?.Value as Binding)?.Copy() ?? new Binding() { Multiply = 1.0f, Period = 1000 };

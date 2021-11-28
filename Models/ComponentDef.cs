@@ -36,6 +36,8 @@ namespace TWatchSKDesigner.Models
             set { _PreviewText = value; OnPropertyChanged(nameof(PreviewText)); }
         }
 
+        [JsonIgnore]
+        public bool IsRemovable { get; protected set; } = true;
         /*
         private int[]? _Size;
 

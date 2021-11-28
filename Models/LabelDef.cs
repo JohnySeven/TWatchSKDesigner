@@ -72,6 +72,10 @@ namespace TWatchSKDesigner.Models
                     Text = value?.Format?.Replace("$$", "--") ?? "--";
                     PreviewText = value?.Path;
                 }
+                else
+                {
+                    PreviewText = Text;
+                }
             }
         }
 

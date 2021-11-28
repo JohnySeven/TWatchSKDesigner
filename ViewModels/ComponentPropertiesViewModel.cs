@@ -5,9 +5,11 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Reactive;
 using System.Text;
 using System.Threading.Tasks;
 using TWatchSKDesigner.Converters;
+using TWatchSKDesigner.Modals;
 using TWatchSKDesigner.Models;
 
 namespace TWatchSKDesigner.ViewModels
@@ -16,7 +18,7 @@ namespace TWatchSKDesigner.ViewModels
     {
         public ComponentPropertiesViewModel()
         {
-            
+            RemoveComponent = ReactiveCommand.Create<ComponentDef>(OnRemoveComponent);
         }
 
         private WatchView _view;
@@ -30,6 +32,8 @@ namespace TWatchSKDesigner.ViewModels
         public ObservableCollection<ComponentDef> Components { get; } = new ObservableCollection<ComponentDef>();
 
         public ObservableCollection<ComponentProperty> ComponentProperties { get; private set; } = new ObservableCollection<ComponentProperty>();
+
+        public IReactiveCommand RemoveComponent { get; set; }
 
         internal void LoadViewObjects(WatchView view)
         {
@@ -128,6 +132,15 @@ namespace TWatchSKDesigner.ViewModels
                 }
                 this.RaiseAndSetIfChanged(ref _selectedComponent, value);
                 SelectComponent(value); 
+            }
+        }
+
+        private async void OnRemoveComponent(ComponentDef component)
+        {
+            if(await ConfirmBox.Show($"This will remove component {component.PreviewText} from view, are you sure?"))
+            {
+                View.LoadedComponents.Remove(component);
+                View.SynchronizeJson();
             }
         }
     }

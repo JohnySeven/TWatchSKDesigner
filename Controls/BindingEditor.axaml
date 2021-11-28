@@ -3,11 +3,15 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:local="using:TWatchSKDesigner.Models"
+             xmlns:material="clr-namespace:MaterialDesign.Avalonia.PackIcon;assembly=MaterialDesign.Avalonia.PackIcon"
              mc:Ignorable="d" d:DesignWidth="200"
              x:Class="TWatchSKDesigner.Controls.BindingEditor"
              x:DataType="local:ComponentProperty">
-  <Grid ColumnDefinitions="1* Auto" Margin="3">
+  <Grid ColumnDefinitions="1* Auto Auto" Margin="3">
     <TextBlock x:Name="SKPath" TextTrimming="CharacterEllipsis" VerticalAlignment="Center" ToolTip.Tip="{Binding Path=Value.Path, FallbackValue=none, Mode=TwoWay}" Text="{Binding Path=Value.Path, FallbackValue=none}" />
     <Button Click="OnButtonClick" Grid.Column="1" Content="..." Margin="2" />
+    <Button Click="OnDeleteClick" Grid.Column="2">
+      <material:PackIcon Kind="Delete" Foreground="Red" />
+    </Button>
   </Grid>
 </UserControl>

@@ -8,6 +8,7 @@
              xmlns:def="using:TWatchSKDesigner.Models"
              x:DataType="model:ComponentPropertiesViewModel" Width="250"
              mc:Ignorable="d" d:DesignWidth="250" d:DesignHeight="450"
+             x:Name="Properties"
              x:Class="TWatchSKDesigner.Views.ComponentProperties">
   <UserControl.Resources>
     <conv:PropertyEditorConverter x:Key="PropertyDataTemplate" />
@@ -16,11 +17,14 @@
     <ComboBox DockPanel.Dock="Top" SelectedItem="{Binding SelectedComponent, Mode=TwoWay}" HorizontalAlignment="Stretch" Items="{CompiledBinding Components}">
       <ComboBox.ItemTemplate>
         <DataTemplate DataType="def:ComponentDef">
-          <StackPanel Orientation="Horizontal">
+          <Grid ColumnDefinitions="Auto Auto Auto 1*">
             <material:PackIcon Foreground="Black" VerticalAlignment="Center" Kind="{Binding Icon}" />
-            <Label Content="{Binding Type}" FontWeight="Bold" />
-            <Label Content="{Binding PreviewText}" />
-          </StackPanel>
+            <Label VerticalAlignment="Center" Grid.Column="1" Content="{Binding Type}" FontWeight="Bold" />
+            <Label VerticalAlignment="Center" Grid.Column="2" Content="{Binding PreviewText}" />
+            <Button CommandParameter="{Binding .}" Command="{Binding #Properties.DataContext.RemoveComponent}" HorizontalAlignment="Right" Grid.Column="3" Background="Transparent" IsVisible="{Binding IsRemovable}">
+              <material:PackIcon Foreground="Red" Kind="Delete" />
+            </Button>
+          </Grid>
         </DataTemplate>
       </ComboBox.ItemTemplate>
     </ComboBox>

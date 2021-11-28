@@ -10,7 +10,7 @@ namespace TWatchSKDesigner.Views
 {
     public class ComponentProperties : UserControl
     {
-        private ComponentPropertiesViewModel? Model => DataContext as ComponentPropertiesViewModel;
+        private ComponentPropertiesViewModel Model => DataContext as ComponentPropertiesViewModel;
 
         public ComponentProperties()
         {

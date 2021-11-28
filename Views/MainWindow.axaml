@@ -29,8 +29,6 @@
       </MenuItem>
       <MenuItem Header="_Edit" IsEnabled="{Binding ViewLoaded}">
         <MenuItem Header="_New view" Click="NewView_Clicked" />
-        <!--<MenuItem Header="Copy"/>
-        <MenuItem Header="Paste"/>-->
       </MenuItem>
       <MenuItem Header="Firmware">
         <MenuItem Header="Update" Click="UploadFirmware_Cliked"  />
@@ -45,9 +43,6 @@
               <Button Margin="3" Click="NewLabel_Clicked" ToolTip.Tip="Add new Label">
                 <material:PackIcon Foreground="Black" Kind="Label" />
               </Button>
-              <!--<Button Margin="3" ToolTip.Tip="Add new button">
-                <material:PackIcon Kind="Button" />
-              </Button>-->
             </WrapPanel>
             <Label Content="Toolbox" DockPanel.Dock="Bottom" />
             <local:ComponentProperties DataContext="{Binding PropertiesViewModel, Mode=OneWay}" />
