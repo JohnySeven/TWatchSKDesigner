@@ -39,13 +39,25 @@
       <TabItem Header="Designer">
         <DockPanel>
           <DockPanel DockPanel.Dock="Right" IsVisible="{Binding ShowProperties, Mode=OneWay}">
-            <WrapPanel DockPanel.Dock="Bottom">
-              <Button Margin="3" Click="NewLabel_Clicked" ToolTip.Tip="Add new Label">
-                <material:PackIcon Foreground="Black" Kind="Label" />
-              </Button>
-            </WrapPanel>
-            <Label Content="Toolbox" DockPanel.Dock="Bottom" />
-            <local:ComponentProperties DataContext="{Binding PropertiesViewModel, Mode=OneWay}" />
+            <Border BorderThickness="1,0,1,1" BorderBrush="LightGray" Padding="2" DockPanel.Dock="Bottom">
+              <Grid RowDefinitions="Auto Auto">
+                <Label Content="Toolbox" DockPanel.Dock="Bottom" />
+                <WrapPanel DockPanel.Dock="Bottom" Grid.Row="1">
+                  <Button Margin="3" Click="NewLabel_Clicked" ToolTip.Tip="Add new Label">
+                    <material:PackIcon Foreground="Black" Kind="Label" />
+                  </Button>
+                </WrapPanel>
+              </Grid>
+            </Border>
+            <Border BorderThickness="1" BorderBrush="LightGray" Padding="2">
+              <Grid ColumnDefinitions="1* Auto" RowDefinitions="Auto 1*">
+                <Label Margin="6,0,0,2" Content="Components" VerticalAlignment="Center" />
+                <Button Command="{Binding CloseComponentsPanel}" Grid.Column="1" Background="Transparent" ToolTip.Tip="Close components panel">
+                  <material:PackIcon Kind="Close" Foreground="Black" />
+                </Button>
+                <local:ComponentProperties Grid.Row="1" Grid.ColumnSpan="2" DataContext="{Binding PropertiesViewModel, Mode=OneWay}" />
+              </Grid>
+            </Border>
           </DockPanel>
           <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
             <Grid>

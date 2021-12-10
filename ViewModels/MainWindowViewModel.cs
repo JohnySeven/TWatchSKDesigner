@@ -23,8 +23,9 @@ namespace TWatchSKDesigner.ViewModels
     public class MainWindowViewModel : ViewModelBase
     {
         public AvaloniaList<WatchView> Views { get; private set; } = new AvaloniaList<WatchView>();
-        private WatchDynamicUI? _UI;
-        public WatchDynamicUI? UI
+
+        private WatchDynamicUI _UI;
+        public WatchDynamicUI UI
         {
             get { return _UI; }
             set { _UI = value; this.RaiseAndSetIfChanged(ref _UI, value); }
@@ -55,20 +56,22 @@ namespace TWatchSKDesigner.ViewModels
             set { this.RaiseAndSetIfChanged(ref _ShowMovingPlacers, value); }
         }
 
-        private WatchView? _movingView;
+        private WatchView _movingView;
 
-        public ICommand? StartEditingView { get; private set; }
-        public ICommand? ExitCommand { get; set; }
+        public ICommand StartEditingView { get; private set; }
+        public ICommand ExitCommand { get; set; }
 
-        public ICommand? MoveCommand { get; set; }
+        public ICommand CloseComponentsPanel { get; set; }
 
-        public ICommand? MoveViewAtPlaceCommand { get; set; }
+        public ICommand MoveCommand { get; set; }
+
+        public ICommand MoveViewAtPlaceCommand { get; set; }
 
         public SignalKManager SignalKManager { get; private set; }
 
-        private WatchView? _SelectedView;
+        private WatchView _SelectedView;
 
-        public WatchView? SelectedView
+        public WatchView SelectedView
         {
             get { return _SelectedView; }
             set { _SelectedView = value; OnPropertyChanged(nameof(SelectedView)); }
@@ -141,60 +144,15 @@ namespace TWatchSKDesigner.ViewModels
                 ShowMovingPlacers = false;
             });
 
+            CloseComponentsPanel = ReactiveCommand.Create(() =>
+            {
+                ShowProperties = false;
+            });
+
             SignalKManager = new SignalKManager();
             _Json = "";
             _JsonError = "";
         }
-
-        /*
-        public async Task<Result> FlashTWatch()
-        {
-            var ret = new Result();
-            var taskMonitor = new ProgressWindowTaskMonitor();
-            await taskMonitor.Run(async () =>
-            {
-                var esp32svc = Locator.Current.GetService<IEsp32ToolService>();
-                var initResult = await esp32svc.Initialize(taskMonitor);
-
-                if(initResult.IsSuccess)
-                {
-                    var downloadResult = await esp32svc.DownloadLatestFirmware(taskMonitor);
-
-                    if(downloadResult.IsSuccess && downloadResult.Data != null)
-                    {
-                        var availablePorts = await esp32svc.GetAvailableSerialPorts();
-                        string? selectedPort = null;
-
-                        if (availablePorts.Count == 0)
-                        {
-                            ret.OnError("NOPORT", "Please connect your TWatch 2020 into USB port!");
-                        }
-                        else if (availablePorts.Count == 1)
-                        {
-                            selectedPort = availablePorts.First();
-                        }
-                        else
-                        {
-                            //pick from UI
-                            var dialogService = Locator.Current.GetService<IUIDialogService>();
-                            selectedPort = await dialogService.ShowPortSelectionDialog(availablePorts);
-                        }
-
-                        if(selectedPort != null)
-                        {
-                            ret = await esp32svc.FlashFirmware(selectedPort, downloadResult.Data.FullName, taskMonitor);
-                        }
-                    }
-                    
-                }
-                else
-                {
-                    ret = initResult;
-                }
-            });
-
-            return ret;
-        }*/
 
         private async void DeleteView(WatchView view)
         {
@@ -221,8 +179,10 @@ namespace TWatchSKDesigner.ViewModels
 
                 if (!SignalKManager.TokenIsPresent)
                 {
+                    ShowOpenHelpText = false;
                     var result = await SignalKLogin.ShowLogin(SignalKManager);
                     canLoadView = result.IsSuccess;
+                    ShowOpenHelpText = !canLoadView;
                 }
                 else
                 {
@@ -231,7 +191,7 @@ namespace TWatchSKDesigner.ViewModels
 
                 if (canLoadView)
                 {
-                    OperationResult? loadSKPathsResult = null;
+                    OperationResult loadSKPathsResult = null;
 
                     await ProgressWindow.ShowProgress("Loading Signal K paths...", async () =>
                     {
@@ -436,7 +396,7 @@ namespace TWatchSKDesigner.ViewModels
             }
         }
 
-        public async Task<bool> LoadView(JObject? viewJson)
+        public async Task<bool> LoadView(JObject viewJson)
         {
             var ret = false;
             try
