@@ -19,7 +19,7 @@ namespace TWatchSKDesigner.Modals
 #endif
         }
 
-        public Binding? Model => (Binding?)DataContext;
+        public Binding Model => (Binding)DataContext;
 
         private bool Validate(out string errorMessage)
         {
@@ -82,7 +82,7 @@ namespace TWatchSKDesigner.Modals
 
             var skPath = MainWindow.Instance?.Model?.SignalKManager.GetSignalKPaths().Where(p => p.Path == path).FirstOrDefault();
 
-            Func<Conversion, bool>? filter = null;
+            Func<Conversion, bool> filter = null;
             if(skPath != null && skPath.Units != null)
             {
                 filter = c => c.From == skPath.Units;

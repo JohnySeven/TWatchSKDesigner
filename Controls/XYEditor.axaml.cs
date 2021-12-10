@@ -23,7 +23,7 @@ namespace TWatchSKDesigner.Controls
             AvaloniaXamlLoader.Load(this);
         }
 
-        private ComponentProperty? Property => (ComponentProperty?)DataContext;
+        private ComponentProperty Property => (ComponentProperty)DataContext;
 
         private void OnButtonClick(object sender, RoutedEventArgs e)
         {

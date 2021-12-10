@@ -39,7 +39,7 @@ namespace TWatchSKDesigner.ViewModels
             StatusCode = statusCode;
         }
 
-        public T? Data { get; set; }
+        public T Data { get; set; }
 
         public int StatusCode { get; set; }
     }

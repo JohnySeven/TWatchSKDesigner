@@ -36,8 +36,8 @@ jobs:
     - name: Upload artifacts
       uses: actions/upload-artifact@v2
       with:
-        name: TWatchDesigner-$VERSION
+        name: TWatchDesigner
         path: |
-            /home/runner/work/TWatchSKDesigner/TWatchSKDesigner/bin/Release/net5.0/linux-x64/TWatchSKDesigner.$VERSION.linux-x64.deb
-            /home/runner/work/TWatchSKDesigner/TWatchSKDesigner/bin/Release/net5.0/linux-x64/TWatchSKDesigner.$VERSION.linux-x64.rpm
+            /home/runner/work/TWatchSKDesigner/TWatchSKDesigner/bin/Release/net5.0/linux-x64/*.deb
+            /home/runner/work/TWatchSKDesigner/TWatchSKDesigner/bin/Release/net5.0/linux-x64/*.rpm
             /home/runner/work/TWatchSKDesigner/TWatchSKDesigner/bin/Release/net5.0/win-x86/publish/

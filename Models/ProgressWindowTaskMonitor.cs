@@ -10,7 +10,7 @@ namespace TWatchSKDesigner.Models
 {
     public class ProgressWindowTaskMonitor : ITaskStatusMonitor
     {
-        ProgressWindow? current = null;
+        ProgressWindow current = null;
 
         public ProgressWindowTaskMonitor()
         {

@@ -10,8 +10,8 @@ namespace TWatchSKDesigner.ViewModels
     public class WatchDynamicUI
     {
         [JsonProperty("name")]
-        public string? Name { get; set; }
+        public string Name { get; set; }
         [JsonProperty("views")]
-        public List<WatchView>? Views { get; set; }
+        public List<WatchView> Views { get; set; }
     }
 }

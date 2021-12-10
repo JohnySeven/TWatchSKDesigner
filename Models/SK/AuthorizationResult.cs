@@ -10,6 +10,6 @@ namespace TWatchSKDesigner.Models.SK
     {
         public int TimeToLive { get; set; }
 
-        public string? Token { get; set; }
+        public string Token { get; set; }
     }
 }

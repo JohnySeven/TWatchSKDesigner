@@ -18,11 +18,11 @@ namespace TWatchSKDesigner.Models
             Icon = MaterialDesign.Avalonia.PackIcon.PackIconKind.Label;
         }
 
-        private string? _Text;
+        private string _Text;
 
         [JsonProperty("text")]
         [ComponentProperty(typeof(TextBox))]
-        public string? Text
+        public string Text
         {
             get { return _Text; }
             set
@@ -34,32 +34,32 @@ namespace TWatchSKDesigner.Models
         }
 
 
-        private string? _Font;
+        private string _Font;
 
         [JsonProperty("font")]
         [ComponentProperty(typeof(EnumComboBox<ComponentFont>))]
-        public string? Font
+        public string Font
         {
             get { return _Font; }
             set { _Font = value; this.RaisePropertyChanged(nameof(Font)); }
         }
 
 
-        private string? _Color;
+        private string _Color;
 
         [ComponentProperty(typeof(ColorPickerEditor))]
         [JsonProperty("color")]
-        public string? Color
+        public string Color
         {
             get { return _Color; }
             set { _Color = value; this.RaisePropertyChanged(nameof(Color)); }
         }
 
-        private Binding? _Binding;
+        private Binding _Binding;
 
         [JsonProperty("binding")]
         [ComponentProperty(typeof(BindingEditor))]
-        public Binding? Binding
+        public Binding Binding
         {
             get { return _Binding; }
             set

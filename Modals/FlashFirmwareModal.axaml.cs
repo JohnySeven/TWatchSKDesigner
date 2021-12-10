@@ -22,7 +22,7 @@ namespace TWatchSKDesigner.Modals
 
             Opened += FlashFirmwareModal_Opened;        }
 
-        private async void FlashFirmwareModal_Opened(object? sender, EventArgs e)
+        private async void FlashFirmwareModal_Opened(object sender, EventArgs e)
         {
             if (!Design.IsDesignMode)
             {

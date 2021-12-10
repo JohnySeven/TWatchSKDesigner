@@ -90,7 +90,7 @@ namespace TWatchSKDesigner.Services
                 var firmwareInfo = infoResult.Data;
                 var eraseCommand = $"--chip esp32 --port {portName} erase_flash";
 
-                Result? eraseResult = null;
+                Result eraseResult = null;
 
                 if (eraseFlash)
                 {
@@ -290,7 +290,7 @@ namespace TWatchSKDesigner.Services
                     {
                         statusMonitor.OnProgress($"Got esptool version {latestRelease.TagName}, about to download it.");
                         
-                        string? assetKey = null;
+                        string assetKey = null;
                         bool isUnix = true;
 
                         if (RuntimeInformation.ProcessArchitecture == Architecture.X64 || RuntimeInformation.ProcessArchitecture == Architecture.X86)

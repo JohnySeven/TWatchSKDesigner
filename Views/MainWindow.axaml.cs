@@ -17,7 +17,7 @@ namespace TWatchSKDesigner.Views
 {
     public class MainWindow : Window
     {
-        public static MainWindow? Instance { get; private set; }
+        public static MainWindow Instance { get; private set; }
 
         public MainWindow()
         {

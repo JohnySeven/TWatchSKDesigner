@@ -23,7 +23,7 @@ namespace TWatchSKDesigner.Controls
             AvaloniaXamlLoader.Load(this);
         }
 
-        private ComponentProperty? Property => (ComponentProperty?)DataContext;
+        private ComponentProperty Property => (ComponentProperty)DataContext;
 
         private async void OnDeleteClick(object sender, RoutedEventArgs e)
         {
@@ -35,7 +35,7 @@ namespace TWatchSKDesigner.Controls
 
         private async void OnButtonClick(object sender, RoutedEventArgs e)
         {
-            Binding? binding = (Property?.Value as Binding)?.Copy() ?? new Binding() { Multiply = 1.0f, Period = 1000 };
+            Binding binding = (Property?.Value as Binding)?.Copy() ?? new Binding() { Multiply = 1.0f, Period = 1000 };
 
             var modal = new BindingEditorModal()
             {

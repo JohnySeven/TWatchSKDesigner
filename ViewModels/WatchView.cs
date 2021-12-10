@@ -17,11 +17,11 @@ namespace TWatchSKDesigner.ViewModels
 {
     public class WatchView : ComponentDef
     {
-        private string? _Name;
+        private string _Name;
 
         [JsonProperty("name")]
         [ComponentProperty(typeof(TextBox))]
-        public string? Name
+        public string Name
         {
             get { return _Name; }
             set
@@ -32,11 +32,11 @@ namespace TWatchSKDesigner.ViewModels
             }
         }
 
-        private string? _Layout;
+        private string _Layout;
 
         [JsonProperty("layout")]
         [ComponentProperty(typeof(EnumComboBox<ViewLayout>))]
-        public string? Layout
+        public string Layout
         {
             get { return _Layout; }
             set { _Layout = value; this.RaisePropertyChanged(nameof(Layout)); }
@@ -48,7 +48,7 @@ namespace TWatchSKDesigner.ViewModels
         }
 
         [JsonProperty("components")]
-        public JArray? Components { get; set; }
+        public JArray Components { get; set; }
 
         private bool _loadedComponents = false;
         [JsonIgnore]
@@ -56,21 +56,19 @@ namespace TWatchSKDesigner.ViewModels
 
         [ComponentProperty(typeof(EnumComboBox<ViewType>))]
         [JsonProperty("type")]
-        public string? ViewType { get; set; }
+        public string ViewType { get; set; }
 
         [JsonIgnore]
         public new string Type { get; private set; } = "View";
 
-        private string? _Background;
+        private string _Background;
         [JsonProperty("background")]
         [ComponentProperty(typeof(ColorPickerEditor))]
-        public string? Background
+        public string Background
         {
             get { return _Background; }
             set { _Background = value; this.RaisePropertyChanged(nameof(Background)); }
         }
-
-
         public void LoadAllComponents()
         {
             IsRemovable = false;

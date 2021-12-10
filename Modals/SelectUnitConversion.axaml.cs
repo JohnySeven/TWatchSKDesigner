@@ -21,7 +21,7 @@ namespace TWatchSKDesigner.Modals
         }
 
 
-        public SelectUnitConversion(Func<Conversion, bool>? filter)
+        public SelectUnitConversion(Func<Conversion, bool> filter)
         {
             Conversions = LoadConversions(filter);
             InitializeComponent();
@@ -30,7 +30,7 @@ namespace TWatchSKDesigner.Modals
 #endif
         }
 
-        private Conversion[] LoadConversions(Func<Conversion, bool>? filter)
+        private Conversion[] LoadConversions(Func<Conversion, bool> filter)
         {
             var ret = new List<Conversion>();
             var conversions = JObject.Parse(Properties.Resources.Conversions);
@@ -64,7 +64,7 @@ namespace TWatchSKDesigner.Modals
 
         public Conversion[] Conversions { get; set; }
 
-        public Conversion? SelectedConversion { get; set; }
+        public Conversion SelectedConversion { get; set; }
 
         private void InitializeComponent()
         {

@@ -14,17 +14,17 @@ namespace TWatchSKDesigner.ViewModels
 {
     public class FirmwareUploadViewModel : ViewModelBase
     {
-        private string? _SelectedPort;
+        private string _SelectedPort;
 
-        public string? SelectedPort
+        public string SelectedPort
         {
             get { return _SelectedPort; }
             set { _SelectedPort = value; OnPropertyChanged(nameof(SelectedPort)); }
         }
 
-        private string[]? _AvailablePorts;
+        private string[] _AvailablePorts;
 
-        public string[]? AvailablePorts
+        public string[] AvailablePorts
         {
             get { return _AvailablePorts; }
             set { _AvailablePorts = value; OnPropertyChanged(nameof(AvailablePorts)); }
@@ -50,9 +50,9 @@ namespace TWatchSKDesigner.ViewModels
         public ICommand RefreshPortsCommand { get; }
         public ICommand UploadFirmwareCommand { get; }
 
-        public ICommand? CancelCommand { get; set; }
+        public ICommand CancelCommand { get; set; }
 
-        private IEsp32ToolService? _esp32svc = null;
+        private IEsp32ToolService _esp32svc = null;
 
         public FirmwareUploadViewModel()
         {

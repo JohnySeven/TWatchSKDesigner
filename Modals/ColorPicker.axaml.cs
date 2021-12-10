@@ -24,7 +24,7 @@ namespace TWatchSKDesigner.Modals
 #endif
         }
 
-        public ColorPickerModel? Model => DataContext as ColorPickerModel;
+        public ColorPickerModel Model => DataContext as ColorPickerModel;
 
 
         private void InitializeComponent()

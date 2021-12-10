@@ -21,7 +21,7 @@ namespace TWatchSKDesigner.Modals
 #endif
         }
 
-        public SelectSKPathModel? Model => DataContext as SelectSKPathModel;
+        public SelectSKPathModel Model => DataContext as SelectSKPathModel;
 
         private void InitializeComponent()
         {

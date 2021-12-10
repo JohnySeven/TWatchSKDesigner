@@ -17,11 +17,11 @@ namespace TWatchSKDesigner.Models
 {
     public class ComponentDef : ViewModelBase
     {
-        private int[]? _Location;
+        private int[] _Location;
 
         [JsonProperty("location")]
         [ComponentProperty(typeof(XYEditor), ViewLayout.off, true)]
-        public int[]? Location
+        public int[] Location
         {
             get { return _Location; }
             set { _Location = value; OnPropertyChanged(nameof(Location)); }
@@ -38,21 +38,10 @@ namespace TWatchSKDesigner.Models
 
         [JsonIgnore]
         public bool IsRemovable { get; protected set; } = true;
-        /*
-        private int[]? _Size;
-
-        [JsonProperty("size")]
-        [ComponentProperty(typeof(XYEditor), ViewLayout.off)]
-        public int[]? Size
-        {
-            get { return _Size; }
-            set { _Size = value; OnPropertyChanged(nameof(Size)); }
-        }*/
-
 
         [JsonProperty("type")]
         [ComponentProperty(typeof(EnumComboBox<ComponentType>))]
-        public string? Type { get; set; }
+        public string Type { get; set; }
 
         private bool _IsSelected;
 

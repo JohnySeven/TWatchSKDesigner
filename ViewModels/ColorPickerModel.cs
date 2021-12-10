@@ -40,7 +40,7 @@ namespace TWatchSKDesigner.ViewModels
             Color = Color.FromRgb((byte)_R, (byte)_G, (byte)_B);
         }
 
-        public void FromText(string? text)
+        public void FromText(string text)
         {
             var conv = new BrushFromTextConverter();
 

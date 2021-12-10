@@ -21,7 +21,7 @@ namespace TWatchSKDesigner.Helpers
         /// <param name="repository">Name of repository.</param>
         /// <param name="whereFunc">If null it will return latest release, if specified it will select first match.</param>
         /// <returns>Release instance or null</returns>
-        public static async Task<Release?> GetRelease(string owner, string repository, Func<Release, bool> whereFunc = null)
+        public static async Task<Release> GetRelease(string owner, string repository, Func<Release, bool> whereFunc = null)
         {
             var releases = await GetReleases(owner, repository);
 

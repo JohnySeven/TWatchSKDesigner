@@ -9,8 +9,8 @@ namespace TWatchSKDesigner.Models
     public class Result
     {
         public bool IsSuccess { get; set; }
-        public string? Code { get; set; }
-        public string? ErrorMessage { get; set; }
+        public string Code { get; set; }
+        public string ErrorMessage { get; set; }
 
         public void OnException(Exception ex)
         {
@@ -38,7 +38,7 @@ namespace TWatchSKDesigner.Models
 
     public class Result<T> : Result
     {
-        public T? Data { get; set; }
+        public T Data { get; set; }
 
         private new void OnSuccess() { }
 

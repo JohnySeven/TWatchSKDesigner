@@ -20,25 +20,25 @@ namespace TWatchSKDesigner.ViewModels
             LoadSettings();
         }
 
-        private string? _Address;
+        private string _Address;
 
-        public string? Address
+        public string Address
         {
             get { return _Address; }
             set { _Address = value; OnPropertyChanged(nameof(Address)); UpdateValid(); }
         }
 
-        private string? _User;
+        private string _User;
 
-        public string? User
+        public string User
         {
             get { return _User; }
             set { _User = value; OnPropertyChanged(nameof(User)); UpdateValid(); }
         }
 
-        private string? _Password;
+        private string _Password;
 
-        public string? Password
+        public string Password
         {
             get { return _Password; }
             set { _Password = value; OnPropertyChanged(nameof(Password)); UpdateValid(); }

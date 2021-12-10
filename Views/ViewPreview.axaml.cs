@@ -17,7 +17,7 @@ namespace TWatchSKDesigner.Views
 {
     public class ViewPreview : UserControl
     {
-        private WatchView? _attached;
+        private WatchView _attached;
 
         private Dictionary<ComponentDef, Control> _controlToComponent = new Dictionary<ComponentDef, Control>();
 
@@ -64,7 +64,7 @@ namespace TWatchSKDesigner.Views
             }
         }
 
-        private void Component_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
+        private void Component_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             if(Root.Child is Canvas && sender is ComponentDef component)
             {
@@ -72,7 +72,7 @@ namespace TWatchSKDesigner.Views
             }
         }
 
-        private void View_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
+        private void View_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             if(e.PropertyName == nameof(WatchView.Layout) && _attached != null)
             {
@@ -104,7 +104,7 @@ namespace TWatchSKDesigner.Views
             view.LoadedComponents.CollectionChanged += LoadedComponents_CollectionChanged;
         }
 
-        private void LoadedComponents_CollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
+        private void LoadedComponents_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             _attached?.SynchronizeJson();
             if (e.NewItems != null)
@@ -129,7 +129,7 @@ namespace TWatchSKDesigner.Views
         {
             foreach (var component in view.LoadedComponents)
             {
-                Control? renderedComponent = null;
+                Control renderedComponent = null;
 
                 if (component is LabelDef label)
                 {
@@ -199,7 +199,7 @@ namespace TWatchSKDesigner.Views
             }*/
         }
 
-        private void LoadLayout(string? layout)
+        private void LoadLayout(string layout)
         {
             if (!string.IsNullOrEmpty(layout))
             {

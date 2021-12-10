@@ -10,7 +10,7 @@ namespace TWatchSKDesigner.Models
     public class Binding
     {
         [JsonProperty("path")]
-        public string? Path { get; set; }
+        public string Path { get; set; }
 
         [JsonProperty("multiply")]
         public float? Multiply { get; set; }
@@ -22,7 +22,7 @@ namespace TWatchSKDesigner.Models
         public int Decimals { get; set; }
 
         [JsonProperty("format")]
-        public string? Format { get; set; }
+        public string Format { get; set; }
 
         [JsonProperty("period")]
         public int Period { get; set; }

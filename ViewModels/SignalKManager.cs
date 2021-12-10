@@ -15,13 +15,13 @@ namespace TWatchSKDesigner.ViewModels
 {
     public class SignalKManager : ViewModelBase
     {
-        private string? _token = "";
+        private string _token = "";
 
         public bool TokenIsPresent => !string.IsNullOrEmpty(_token);
 
-        private string? _ServerAddress;
+        private string _ServerAddress;
 
-        public string? ServerAddress
+        public string ServerAddress
         {
             get { return _ServerAddress; }
             set { _ServerAddress = value; OnPropertyChanged(nameof(ServerAddress)); }

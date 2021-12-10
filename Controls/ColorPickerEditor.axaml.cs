@@ -15,7 +15,7 @@ namespace TWatchSKDesigner.Controls
             InitializeComponent();
         }
 
-        private ComponentProperty? Property => (ComponentProperty?)DataContext;
+        private ComponentProperty Property => (ComponentProperty)DataContext;
 
 
         private void InitializeComponent()

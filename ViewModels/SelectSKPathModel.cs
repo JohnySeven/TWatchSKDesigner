@@ -35,9 +35,9 @@ namespace TWatchSKDesigner.ViewModels
             set { _Paths = value; OnPropertyChanged(nameof(Paths)); }
         }
 
-        private SKPath? _SelectedPath;
+        private SKPath _SelectedPath;
 
-        public SKPath? SelectedPath
+        public SKPath SelectedPath
         {
             get { return _SelectedPath; }
             set { _SelectedPath = value; OnPropertyChanged(nameof(SelectedPath)); }

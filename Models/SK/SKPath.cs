@@ -14,10 +14,10 @@ namespace TWatchSKDesigner.Models.SK
             Path = path;
         }
         public string Path { get; set; }
-        public string? Source { get; set; }
-        public string? Value { get; set; }
-        public string? Units { get; set; }
-        public string? Description { get; set; }
+        public string Source { get; set; }
+        public string Value { get; set; }
+        public string Units { get; set; }
+        public string Description { get; set; }
 
         public override string ToString()
         {

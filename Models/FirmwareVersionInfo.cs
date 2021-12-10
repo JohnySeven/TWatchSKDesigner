@@ -19,15 +19,15 @@ namespace TWatchSKDesigner.Models
 }*/
     public class FirmwareVersionInfo
     {
-        public string? Version { get; set; }
-        public string? Arguments { get; set; }
+        public string Version { get; set; }
+        public string Arguments { get; set; }
 
-        public FirmwareFileInfo[]? Files { get; set; }
+        public FirmwareFileInfo[] Files { get; set; }
     }
 
     public class FirmwareFileInfo
     {
-        public string? Address { get; set; }
-        public string? File { get; set; }
+        public string Address { get; set; }
+        public string File { get; set; }
     }
 }
