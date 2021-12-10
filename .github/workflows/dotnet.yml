@@ -24,17 +24,17 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore
     - name: Set version
-      run: echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
+      env:
+        VERSION: 0.9
     - name: Print version
       run: |
-          echo $RELEASE_VERSION
-          echo ${{ env.RELEASE_VERSION }}
+          echo $VERSION
     - name: Create .deb package
-      run: dotnet publish /t:CreateDeb /p:TargetFramework=net5.0 /p:RuntimeIdentifier=linux-x64 /p:Configuration=Release -p:PublishSingleFile=true --self-contained true -p:Version=$RELEASE_VERSION
+      run: dotnet publish /t:CreateDeb /p:TargetFramework=net5.0 /p:RuntimeIdentifier=linux-x64 /p:Configuration=Release -p:PublishSingleFile=true --self-contained true -p:Version=$VERSION
     - name: Create .rpm package
-      run: dotnet publish /t:CreateRpm /p:TargetFramework=net5.0 /p:RuntimeIdentifier=linux-x64 /p:Configuration=Release -p:PublishSingleFile=true --self-contained true -p:Version=$RELEASE_VERSION
+      run: dotnet publish /t:CreateRpm /p:TargetFramework=net5.0 /p:RuntimeIdentifier=linux-x64 /p:Configuration=Release -p:PublishSingleFile=true --self-contained true -p:Version=$VERSION
     - name: Create .zip Win package
-      run: dotnet publish /p:TargetFramework=net5.0 /p:RuntimeIdentifier=win-x86 /p:Configuration=Release -p:PublishSingleFile=true --self-contained true -p:Version=$RELEASE_VERSION
+      run: dotnet publish /p:TargetFramework=net5.0 /p:RuntimeIdentifier=win-x86 /p:Configuration=Release -p:PublishSingleFile=true --self-contained true -p:Version=$VERSION
     - name: Upload Linux-64 Deb artifact
       uses: actions/upload-artifact@v2
       with:
