@@ -4,8 +4,14 @@ Watch screen designer and utility program for TWatchSK project.
 [TWatchSK](https://github.com/JohnySeven/TWatchSK#readme) is a program that displays data and notifications from [Signal K](https://signalk.org/) on the [LILYGO T-WATCH-2020  wristwatch](http://www.lilygo.cn/prod_view.aspx?Id=1290). TWatchSKDesigner (called simply "Designer" throughout this document) is a program that runs on your personal computer that makes it easy to install TWatchSK on the watch, and to design and install the customizable Signal K data screens for TWatchSK. It runs on Windows, Mac, and Linux.
 
 ## Installing Designer
-BAS: write this after Jan gets the first version ready to release.
-### Windows installation
+B
+### Linux Installation
+-download the .deb file (or .rpm?)
+-run the .deb (rpm?) filed
+-in (which directory?): sudo apt-get install ./TWatchSKDesigner.1.0.0.linux-x64.deb
+-to run it: in same directory: TWatchSKDesigner
+
+### Windows Installation
 Download current TWatchDesignerSetup.msi from [Releases](https://github.com/JohnySeven/TWatchSKDesigner/releases/) into your computer. When download is complete, double click on downloaded file and run installation on your computer. When installation is finished open Start menu and type "twatchskdesigner" it should popup as found applications, hit enter and you're ready to go.
 
 ## Installing TWatchSK
