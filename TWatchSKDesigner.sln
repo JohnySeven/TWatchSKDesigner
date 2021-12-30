@@ -10,16 +10,40 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.github\workflows\dotnet.yml = .github\workflows\dotnet.yml
 	EndProjectSection
 EndProject
+Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "TWatchDesignerWinSetup", "TWatchDesignerWinSetup\TWatchDesignerWinSetup.wixproj", "{19686052-EE3B-4E22-A6E7-531EB22630BA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		Debug|x86 = Debug|x86
 		Release|Any CPU = Release|Any CPU
+		Release|x86 = Release|x86
+		Setup|Any CPU = Setup|Any CPU
+		Setup|x86 = Setup|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{8AFDD105-E2CF-4621-BEA1-8B6A76B97E65}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8AFDD105-E2CF-4621-BEA1-8B6A76B97E65}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8AFDD105-E2CF-4621-BEA1-8B6A76B97E65}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{8AFDD105-E2CF-4621-BEA1-8B6A76B97E65}.Debug|x86.Build.0 = Debug|Any CPU
 		{8AFDD105-E2CF-4621-BEA1-8B6A76B97E65}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8AFDD105-E2CF-4621-BEA1-8B6A76B97E65}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8AFDD105-E2CF-4621-BEA1-8B6A76B97E65}.Release|x86.ActiveCfg = Release|Any CPU
+		{8AFDD105-E2CF-4621-BEA1-8B6A76B97E65}.Release|x86.Build.0 = Release|Any CPU
+		{8AFDD105-E2CF-4621-BEA1-8B6A76B97E65}.Setup|Any CPU.ActiveCfg = Release|Any CPU
+		{8AFDD105-E2CF-4621-BEA1-8B6A76B97E65}.Setup|Any CPU.Build.0 = Release|Any CPU
+		{8AFDD105-E2CF-4621-BEA1-8B6A76B97E65}.Setup|x86.ActiveCfg = Setup|Any CPU
+		{8AFDD105-E2CF-4621-BEA1-8B6A76B97E65}.Setup|x86.Build.0 = Setup|Any CPU
+		{19686052-EE3B-4E22-A6E7-531EB22630BA}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{19686052-EE3B-4E22-A6E7-531EB22630BA}.Debug|x86.ActiveCfg = Debug|x86
+		{19686052-EE3B-4E22-A6E7-531EB22630BA}.Debug|x86.Build.0 = Debug|x86
+		{19686052-EE3B-4E22-A6E7-531EB22630BA}.Release|Any CPU.ActiveCfg = Release|x86
+		{19686052-EE3B-4E22-A6E7-531EB22630BA}.Release|x86.ActiveCfg = Release|x86
+		{19686052-EE3B-4E22-A6E7-531EB22630BA}.Release|x86.Build.0 = Release|x86
+		{19686052-EE3B-4E22-A6E7-531EB22630BA}.Setup|Any CPU.ActiveCfg = Release|x86
+		{19686052-EE3B-4E22-A6E7-531EB22630BA}.Setup|Any CPU.Build.0 = Release|x86
+		{19686052-EE3B-4E22-A6E7-531EB22630BA}.Setup|x86.ActiveCfg = Debug|x86
+		{19686052-EE3B-4E22-A6E7-531EB22630BA}.Setup|x86.Build.0 = Debug|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
