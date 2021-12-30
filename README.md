@@ -5,6 +5,8 @@ Watch screen designer and utility program for TWatchSK project.
 
 ## Installing Designer
 BAS: write this after Jan gets the first version ready to release.
+### Windows installation
+Download current TWatchDesignerSetup.msi from [Releases](https://github.com/JohnySeven/TWatchSKDesigner/releases/) into your computer. When download is complete, double click on downloaded file and run installation on your computer. When installation is finished open Start menu and type "twatchskdesigner" it should popup as found applications, hit enter and you're ready to go.
 
 ## Installing TWatchSK
 After you install Designer, the first thing you'll want to use it for is to install TWatchSK onto your T-WATCH-2020. The following steps will guide you through the process.
