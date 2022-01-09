@@ -37,6 +37,8 @@ jobs:
       run: dotnet restore -r osx-x64
     - name: MacOS build package
       run: dotnet msbuild -t:BundleApp -p:RuntimeIdentifier=osx-x64 -property:Configuration=Release -p:UseAppHost=true -p:CFBundleVersion=$VERSION -p:CFBundleShortVersionString=$VERSION
+    - name: Fix MacOS host permissions
+      run: chmod +x /home/runner/work/TWatchSKDesigner/TWatchSKDesigner/bin/Release/net5.0/osx-x64/publish/TWatchSK\ Designer.app/Contents/MacOS/TWatchSKDesigner
     - name: Upload artifacts
       uses: actions/upload-artifact@v2
       with:
