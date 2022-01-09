@@ -33,6 +33,10 @@ jobs:
       run: dotnet publish /t:CreateRpm /p:TargetFramework=net5.0 /p:RuntimeIdentifier=linux-x64 /p:Configuration=Release -p:PublishSingleFile=true --self-contained true -p:Version=$VERSION
     - name: Create .zip Win package
       run: dotnet publish /p:TargetFramework=net5.0 /p:RuntimeIdentifier=win-x86 /p:Configuration=Release -p:PublishSingleFile=true --self-contained true -p:Version=$VERSION
+    - name: Create MacOS restore
+      run: dotnet restore -r osx-x64
+    - name: MacOS build package
+      run: dotnet msbuild -t:BundleApp -p:RuntimeIdentifier=osx-x64 -property:Configuration=Release -p:UseAppHost=true -p:CFBundleVersion=$VERSION -p:CFBundleShortVersionString=$VERSION
     - name: Upload artifacts
       uses: actions/upload-artifact@v2
       with:
