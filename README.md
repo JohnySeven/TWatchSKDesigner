@@ -4,7 +4,16 @@ Watch screen designer and utility program for TWatchSK project.
 [TWatchSK](https://github.com/JohnySeven/TWatchSK#readme) is a program that displays data and notifications from [Signal K](https://signalk.org/) on the [LILYGO T-WATCH-2020  wristwatch](http://www.lilygo.cn/prod_view.aspx?Id=1290). TWatchSKDesigner (called simply "Designer" throughout this document) is a program that runs on your personal computer that makes it easy to install TWatchSK on the watch, and to design and install the customizable Signal K data screens for TWatchSK. It runs on Windows, Mac, and Linux.
 
 ## Installing Designer
-BAS: write this after Jan gets the first version ready to release.
+
+### Linux Installation
+1. Download the latest TWatchSKDesigner.x.x.linux-x64.deb (or .rpm) from [Releases](https://github.com/JohnySeven/TWatchSKDesigner/releases/).
+2. When the download is complete, double-click on the downloaded file to run the installation. 
+3. When the installation is finished, open a terminal window and run `TWatchSKDesigner`.
+
+### Windows Installation
+1. Download the latest TWatchDesignerSetup.msi from [Releases](https://github.com/JohnySeven/TWatchSKDesigner/releases/).
+2. When the download is complete, double-click on the downloaded file to run the installation. 
+3. When the installation is finished, open Windows Start menu and type "twatchskdesigner" - it should appear as a found application - hit the "Enter" key to start it.
 
 ## Installing TWatchSK
 After you install Designer, the first thing you'll want to use it for is to install TWatchSK onto your T-WATCH-2020. The following steps will guide you through the process.
@@ -25,7 +34,7 @@ Your T-WATCH-2020 now has TWatchSK installed, and whenever it's turned on, it wi
 Periodically, new versions of TWatchSK will be released. You can check for the lastest release version [here](https://github.com/JohnySeven/TWatchSK/releases), and you can check the version that's on your watch from the TWatchSK *Watch Info* menu. It is also briefly displayed whenever TWatchSK is started, on the startup screen. If there is a newer version, just follow the steps in the "Installing TWatchSK" section above - an update is the same as the initial installation.
 
 ## DynamicViews - Custom Screens for Displaying Signal K Data
-Out of the box, the only information from Signal K that TWatchSK displays is any Notifications* sent by Signal K. However, the DynamicViews feature of TWatchSK allows you to define additional screens for the watch, each of which can display the data from one to six Signal K Paths, giving you real-time data for these Paths wherever you happen to be on your boat!
+Out of the box, the only information from Signal K that TWatchSK displays is any Notifications* sent by Signal K. However, the DynamicViews feature of TWatchSK allows you to define additional screens for the watch, each of which can display the data from one to six Signal K Paths, giving you real-time data for these Paths wherever you are on your boat!
 
 ![image](https://user-images.githubusercontent.com/15186790/139879628-1e463149-4694-4368-9102-70d2bc9fd57e.png) ![image](https://user-images.githubusercontent.com/15186790/140789761-97ee13f6-3feb-4521-9606-0127ba0ffb9a.png)
 
