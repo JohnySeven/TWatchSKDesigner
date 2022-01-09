@@ -45,3 +45,4 @@ jobs:
             /home/runner/work/TWatchSKDesigner/TWatchSKDesigner/bin/Release/net5.0/linux-x64/*.deb
             /home/runner/work/TWatchSKDesigner/TWatchSKDesigner/bin/Release/net5.0/linux-x64/*.rpm
             /home/runner/work/TWatchSKDesigner/TWatchSKDesigner/bin/Release/net5.0/win-x86/publish/
+            /home/runner/work/TWatchSKDesigner/TWatchSKDesigner/bin/Release/net5.0/osx-x64/publish/*.app
