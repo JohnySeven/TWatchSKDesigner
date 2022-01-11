@@ -15,6 +15,18 @@ Watch screen designer and utility program for TWatchSK project.
 2. When the download is complete, double-click on the downloaded file to run the installation. 
 3. When the installation is finished, open Windows Start menu and type "twatchskdesigner" - it should appear as a found application - hit the "Enter" key to start it.
 
+### MacOS installation
+1. Download the latest TWatchSKDesignerMacOS.zip [Releases](https://github.com/JohnySeven/TWatchSKDesigner/releases/).
+2. When the download is complete, double-click on the downloaded file to extract application from zip file.
+3. At download directory level new application "TWatchSK Designer" should appear.
+4. Drag and drop "TWatch Designer" applications to "Applications" in Finder to move designer into your applications
+5. Go to launch pad and click on "TWatch Designer" app
+6. MacOS will show you "“TWatchSK Designer” cannot be opened because the developer cannot be verified." message. Click "Cancel".
+7. Open "System Preferences" by clicking on Apple logo (upper left), go into "Security & Privacy".
+8. Click on "Click the lock to make changes" and switch to "General" tab
+9. In section "Allow apps downloaded from" click on "Open anyway" next to text "TWatchDesigner" was blocked...
+10. Confirm message "macOS cannot verify the developer of “TWatchSK Designer”. Are you sure you want to open it?" by clicking on Open and you're good to go.
+
 ## Installing TWatchSK
 After you install Designer, the first thing you'll want to use it for is to install TWatchSK onto your T-WATCH-2020. The following steps will guide you through the process.
 
