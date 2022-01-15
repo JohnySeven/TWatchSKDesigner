@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using TWatchSKDesigner.Models;
 
@@ -14,5 +15,6 @@ namespace TWatchSKDesigner.Intefaces
         Task<Result> Initialize(ITaskStatusMonitor statusMonitor);
         Task<Result> FlashFirmware(string portName, string firmwareFile, bool eraseFlash, ITaskStatusMonitor statusMonitor);
         Task<Result<FileInfo>> DownloadLatestFirmware(ITaskStatusMonitor taskMonitor);
+        Task ConnectToConsole(string portName, ITextView textView, CancellationToken token);
     }
 }

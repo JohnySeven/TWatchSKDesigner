@@ -32,6 +32,7 @@
       </MenuItem>
       <MenuItem Header="Firmware">
         <MenuItem Header="Update" Click="UploadFirmware_Cliked"  />
+        <MenuItem Header="Console" Click="Console_Cliked"  />
       </MenuItem>
     </Menu>
 

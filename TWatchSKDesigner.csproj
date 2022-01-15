@@ -10,6 +10,12 @@
     <AvaloniaResource Include="Assets\**" />
   </ItemGroup>
   <ItemGroup>
+    <AvaloniaXaml Remove="TWatchDesignerWinSetup\**" />
+    <Compile Remove="TWatchDesignerWinSetup\**" />
+    <EmbeddedResource Remove="TWatchDesignerWinSetup\**" />
+    <None Remove="TWatchDesignerWinSetup\**" />
+  </ItemGroup>
+  <ItemGroup>
     <None Remove="Assets\SignalK.png" />
   </ItemGroup>
   <ItemGroup>

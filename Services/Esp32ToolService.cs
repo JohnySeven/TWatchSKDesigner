@@ -8,6 +8,7 @@ using System.IO.Ports;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using TWatchSKDesigner.Helpers;
 using TWatchSKDesigner.Intefaces;
@@ -385,6 +386,71 @@ namespace TWatchSKDesigner.Services
         Task<List<string>> IEsp32ToolService.GetAvailableSerialPorts()
         {
             return Task.FromResult(SerialPort.GetPortNames().ToList());
+        }
+
+        public string FilterLine(string line)
+        {
+            if (line != null && line.Length > 0)
+            {
+                var sb = new StringBuilder(line.Length);
+                var inEscape = false;
+                for (int i = 0; i < line.Length; i++)
+                {
+                    if(line[i] == 27)
+                    {
+                        inEscape = true; continue;
+                    }
+                    else if(inEscape && line[i] == ' ')
+                    {
+                        inEscape = false; continue;
+                    }
+                    else if(inEscape && (line[i] == '\r' || line[i] == '\n'))
+                    {
+                        inEscape = false;
+                    }
+
+                    if (!inEscape)
+                    {
+                        sb.Append(line[i]);
+                    }
+                }
+
+                return sb.ToString();
+            }
+            else
+            {
+                return line;
+            }
+        }
+
+        public async Task ConnectToConsole(string portName, ITextView textView, CancellationToken token)
+        {
+            using(var port = new SerialPort(portName, 115200))
+            {
+                textView.AppendLine($"Opening to port {portName}..." + Environment.NewLine);
+
+                await Task.Run(() => port.Open())
+                    .ConfigureAwait(false);
+
+                token.Register(() => port.Close());
+
+                try
+                {
+                    while (textView.IsOpen)
+                    {
+                        token.ThrowIfCancellationRequested();
+                        var line = await Task.Run(() => FilterLine(port.ReadLine()), token);
+
+                        textView.AppendLine(line);
+                    }
+                }
+                catch (OperationCanceledException)
+                {
+
+                }
+
+                textView.AppendLine("Console closed." + Environment.NewLine);
+            }
         }
     }
 }
