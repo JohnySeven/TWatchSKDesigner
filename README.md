@@ -159,10 +159,9 @@ The only other field on the Binding Window that we haven't touched on yet is "Pe
 ## Downloading DynamicView Into TWatchSK
 There will be more examples of more complex DynamicViews below, but now is a good time to show you how to get your DynamicViews from your computer to your watch. It's simple!
 
-1. Connect your watch to your computer with the USB cable that came with the watch.
-2. On the watch, from the home screen (the screen that shows date and time), touch the four squares icon to bring up the menu.
-3. Select the "Display" menu.
-4. Tap the "Download DynamicViews" button. The Views you've defined with Designer will be downloaded from your Server to your watch, and TWatchSK will reboot.
+1. On the watch, from the home screen (the screen that shows date and time), touch the four squares icon to bring up the menu.
+2. Select the "Display" menu.
+3. Tap the "Download DynamicViews" button. The Views you've defined with Designer will be downloaded from your Server to your watch, and TWatchSK will reboot.
 
 That's it! Now, from the home screen, swipe left to see the first DynamicView, swipe again to see the second, and so on. (The watch must be connected to your wifi network, and your Server must be on, or you won't see any values in your DynamicViews.)
 
