@@ -64,23 +64,21 @@ namespace TWatchSKDesigner.Views
             });
         }
 
+
+
+        private async void Console_Cliked(object sender, RoutedEventArgs eventArgs)
+        {
+            var consoleWindow = new ConsoleWindow();
+
+            await consoleWindow.ShowDialog(this);
+        }
+
+
         private async void UploadFirmware_Cliked(object sender, RoutedEventArgs eventArgs)
         {
             var firmwareDialog = new FlashFirmwareModal();
 
             await firmwareDialog.ShowDialog(this);
-
-            //var model = Model ?? throw new InvalidOperationException("Model isn't set!");
-            //var result = await model.FlashTWatch();
-
-            //if(result.IsSuccess)
-            //{
-            //    await MessageBox.Show("TWatch SK firmware upload has been succesful!");
-            //}
-            //else
-            //{
-            //    await MessageBox.Show($"{result.Code}: {result.ErrorMessage}");
-            //}
         }
 
         private void NewView_Clicked(object sender, RoutedEventArgs eventArgs)
