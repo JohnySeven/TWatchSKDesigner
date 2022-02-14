@@ -14,13 +14,19 @@ namespace TWatchSKDesigner.Modals
     public partial class ConsoleWindow : Window, ITextView
     {
         private readonly TextBox _console;
-
+        private string _openComPort = null;
         public ConsoleWindowModel Model => DataContext as ConsoleWindowModel;
 
         public bool IsOpen { get; set; }
 
-        public ConsoleWindow()
+        public ConsoleWindow() : this(null)
         {
+
+        }
+
+        public ConsoleWindow(string openComPort)
+        {
+            _openComPort = openComPort;
             InitializeComponent();
 #if DEBUG
             this.AttachDevTools();
@@ -63,7 +69,12 @@ namespace TWatchSKDesigner.Modals
 
         private async void OnLoaded()
         {
-            await Model.Load();
+            await Model.Load(_openComPort);
+
+            if(_openComPort != null)
+            {
+                Connect();
+            }
         }
 
         private async void Connect()

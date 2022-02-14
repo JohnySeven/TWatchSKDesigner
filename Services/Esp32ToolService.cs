@@ -176,7 +176,7 @@ namespace TWatchSKDesigner.Services
             }
         }
 
-        private static async Task<Result<FirmwareVersionInfo>> LoadFirmwareInfo(string firmwareFile)
+        public async Task<Result<FirmwareVersionInfo>> LoadFirmwareInfo(string firmwareFile)
         {
             var ret = new Result<FirmwareVersionInfo>();
 
