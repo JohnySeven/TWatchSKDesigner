@@ -16,5 +16,6 @@ namespace TWatchSKDesigner.Intefaces
         Task<Result> FlashFirmware(string portName, string firmwareFile, bool eraseFlash, ITaskStatusMonitor statusMonitor);
         Task<Result<FileInfo>> DownloadLatestFirmware(ITaskStatusMonitor taskMonitor);
         Task ConnectToConsole(string portName, ITextView textView, CancellationToken token);
+        Task<Result<FirmwareVersionInfo>> LoadFirmwareInfo(string firmwareFile);
     }
 }

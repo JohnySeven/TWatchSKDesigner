@@ -70,10 +70,12 @@ namespace TWatchSKDesigner.ViewModels
             CloseCommand = ReactiveCommand.Create(Close);
         }
 
-        public async Task Load()
+        public async Task Load(string _openComPort)
         {
             _esp32svc = Locator.Current.GetService<IEsp32ToolService>();
             await RefreshPorts();
+
+            SelectedPort = _openComPort;
         }
 
         private IEsp32ToolService Service => _esp32svc ?? throw new InvalidOperationException();
