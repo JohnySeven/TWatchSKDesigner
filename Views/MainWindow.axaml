@@ -31,8 +31,8 @@
         <MenuItem Header="_New view" Click="NewView_Clicked" />
       </MenuItem>
       <MenuItem Header="Firmware">
-        <MenuItem Header="Update" Click="UploadFirmware_Cliked"  />
-        <MenuItem Header="Console" Click="Console_Cliked"  />
+        <MenuItem Header="Update" Click="UploadFirmware_Clicked"  />
+        <MenuItem Header="Console" Click="Console_Clicked"  />
       </MenuItem>
     </Menu>
 

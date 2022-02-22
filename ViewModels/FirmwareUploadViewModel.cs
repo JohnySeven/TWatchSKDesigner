@@ -46,6 +46,13 @@ namespace TWatchSKDesigner.ViewModels
             set { _FlashButtonEnabled = value; OnPropertyChanged(nameof(FlashButtonEnabled)); }
         }
 
+        private bool _ShowConsoleAfterFlashing = true;
+
+        public bool ShowConsoleAfterFlashing
+        {
+            get { return _ShowConsoleAfterFlashing; }
+            set { _ShowConsoleAfterFlashing = value; OnPropertyChanged(nameof(ShowConsoleAfterFlashing)); }
+        }
 
         public ICommand RefreshPortsCommand { get; }
         public ICommand UploadFirmwareCommand { get; }
@@ -101,11 +108,33 @@ namespace TWatchSKDesigner.ViewModels
 
                         if (downloadResult.IsSuccess)
                         {
-                            var flashResult = await Service.FlashFirmware(SelectedPort,  downloadResult.Data.FullName, _ClearFlash, monitor);
+                            var firmwareInfo = await Service.LoadFirmwareInfo(downloadResult.Data.FullName);
 
-                            if (flashResult.IsSuccess)
+                            if (firmwareInfo.IsSuccess)
                             {
-                                await MessageBox.Show($"TWatch 2020 firmware upload succesful!");
+                                var flashResult = await Service.FlashFirmware(SelectedPort, downloadResult.Data.FullName, _ClearFlash, monitor);
+
+                                if (flashResult.IsSuccess)
+                                {
+                                    if (ShowConsoleAfterFlashing)
+                                    {
+                                        var consoleWindow = new ConsoleWindow(SelectedPort);
+
+                                        await consoleWindow.ShowDialog(Views.MainWindow.Instance);
+                                    }
+                                    else
+                                    {
+                                        await MessageBox.Show($"TWatch 2020 firmware {firmwareInfo.Data.Version} upload succesful!");
+                                    }
+                                }
+                                else
+                                {
+                                    await MessageBox.Show($"Firmware update failed with error: {flashResult.ErrorMessage}");
+                                }
+                            }
+                            else
+                            {
+                                await MessageBox.Show($"Unable to load firmware info file at {downloadResult.Data.FullName}!");
                             }
                         }
                     }

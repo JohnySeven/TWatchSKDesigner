@@ -66,7 +66,7 @@ namespace TWatchSKDesigner.Views
 
 
 
-        private async void Console_Cliked(object sender, RoutedEventArgs eventArgs)
+        private async void Console_Clicked(object sender, RoutedEventArgs eventArgs)
         {
             var consoleWindow = new ConsoleWindow();
 
@@ -74,7 +74,7 @@ namespace TWatchSKDesigner.Views
         }
 
 
-        private async void UploadFirmware_Cliked(object sender, RoutedEventArgs eventArgs)
+        private async void UploadFirmware_Clicked(object sender, RoutedEventArgs eventArgs)
         {
             var firmwareDialog = new FlashFirmwareModal();
 

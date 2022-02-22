@@ -30,6 +30,7 @@
         
       <StackPanel Grid.Row="2" Margin="10" Spacing="10">
         <CheckBox IsChecked="{Binding ClearFlash, Mode=TwoWay}" Content="Clear device flash prior upload" />
+        <CheckBox IsChecked="{Binding ShowConsoleAfterFlashing, Mode=TwoWay}" Content="Show console after flashing" />
       </StackPanel>
 
       <StackPanel Spacing="10" Margin="10" Orientation="Horizontal" Grid.Row="3">
