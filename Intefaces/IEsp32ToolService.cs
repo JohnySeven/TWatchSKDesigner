@@ -14,7 +14,9 @@ namespace TWatchSKDesigner.Intefaces
         Task<List<string>> GetAvailableSerialPorts();
         Task<Result> Initialize(ITaskStatusMonitor statusMonitor);
         Task<Result> FlashFirmware(string portName, string firmwareFile, bool eraseFlash, ITaskStatusMonitor statusMonitor);
-        Task<Result<FileInfo>> DownloadLatestFirmware(ITaskStatusMonitor taskMonitor);
+        Task<Result<FileInfo>> DownloadLatestFirmware(FirmwareLink firmwareLink, ITaskStatusMonitor taskMonitor);
         Task ConnectToConsole(string portName, ITextView textView, CancellationToken token);
+        Task<Result<FirmwareVersionInfo>> LoadFirmwareInfo(string firmwareFile);
+        Task<Result<FirmwareList>> DownloadFirmwareList();
     }
 }

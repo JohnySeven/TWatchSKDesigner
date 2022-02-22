@@ -6,17 +6,6 @@ using System.Threading.Tasks;
 
 namespace TWatchSKDesigner.Models
 {
-    /*{
-    "version" : "0.3",
-    "files":
-    [
-        { "address": "0x1000", "file": "bootloader.bin"},
-        { "address": "0x8000", "file": "partitions.bin"},
-        { "address": "0xe000", "file": "ota_data_initial.bin"},
-        { "address": "0x10000", "file": "firmware.bin"}
-    ],
-    "arguments" : "--baud 800000 --before default_reset --after hard_reset write_flash -z --flash_mode dio --flash_freq 40m --flash_size detect"
-}*/
     public class FirmwareVersionInfo
     {
         public string Version { get; set; }
@@ -29,5 +18,17 @@ namespace TWatchSKDesigner.Models
     {
         public string Address { get; set; }
         public string File { get; set; }
+    }
+
+    public class FirmwareList
+    {
+        public FirmwareLink[] Links { get; set; }
+    }
+
+    public class FirmwareLink
+    {
+        public string Name { get; set; }
+        public string Url { get; set; }
+        public string Hardware { get; set; }
     }
 }

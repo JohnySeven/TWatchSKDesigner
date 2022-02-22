@@ -19,17 +19,17 @@ namespace TWatchSKDesigner.Services
     //https://github.com/espressif/esptool/releases/tag/v3.1
     public class Esp32ToolService : IEsp32ToolService
     {
-        private const string FirmwareUrl = @"https://dev.dytrych.cloud/twatchsk.zip";
+        private const string FirmwareUrl = @"https://dev.dytrych.cloud/index.json";
         private string EspToolDirectory => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "TWatchDesigner", "Esptool");
         private string EspToolAppPath => Path.Combine(EspToolDirectory, RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "esptool.exe" : "esptool");
         private string FirmwareDirectory => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "TWatchDesigner", "Firmware");
         private string FirmwareArchivePath => Path.Combine(FirmwareDirectory, "twatchsk.zip");
         private string FirmwareInfoPath => Path.Combine(FirmwareDirectory, "firmware.json");
 
-        public async Task<Result<FileInfo>> DownloadLatestFirmware(ITaskStatusMonitor taskMonitor)
+        public async Task<Result<FileInfo>> DownloadLatestFirmware(FirmwareLink firmwareLink, ITaskStatusMonitor taskMonitor)
         {
             var ret = new Result<FileInfo>();
-            taskMonitor.OnProgress("Downloading firmware from " + FirmwareUrl);
+            taskMonitor.OnProgress("Downloading firmware from " + firmwareLink.Url);
 
             try
             {
@@ -43,7 +43,7 @@ namespace TWatchSKDesigner.Services
                     File.Delete(FirmwareArchivePath);
                 }
 
-                var result = await GithubHelper.DownloadFile(FirmwareUrl, FirmwareArchivePath, taskMonitor);
+                var result = await GithubHelper.DownloadFile(firmwareLink.Url, FirmwareArchivePath, taskMonitor);
 
                 if (result)
                 {
@@ -451,6 +451,11 @@ namespace TWatchSKDesigner.Services
 
                 textView.AppendLine("Console closed." + Environment.NewLine);
             }
+        }
+
+        public Task<Result<FirmwareList>> DownloadFirmwareList()
+        {
+            throw new NotImplementedException();
         }
     }
 }
