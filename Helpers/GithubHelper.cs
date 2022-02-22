@@ -1,4 +1,5 @@
-﻿using Octokit;
+﻿using Newtonsoft.Json;
+using Octokit;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -7,6 +8,7 @@ using System.Linq.Expressions;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using TWatchSKDesigner.Models;
 
 namespace TWatchSKDesigner.Helpers
 {
@@ -73,6 +75,23 @@ namespace TWatchSKDesigner.Helpers
             var client = Client.Value;
 
             return client.Repository.Release.GetAll(owner, repository);
+        }
+
+        public static async Task<Result<T>> DownloadJson<T>(string url) where T:class
+        {
+            var ret = new Result<T>();
+            try
+            {
+                var json = await Http.Value.GetStringAsync(url);
+
+                ret.OnSuccess(JsonConvert.DeserializeObject<T>(json));
+            }
+            catch (Exception ex)
+            {
+                ret.OnError("ERROR", ex.Message);
+            }
+
+            return ret;
         }
 
         internal static async Task<bool> DownloadAsset(ReleaseAsset asset, Intefaces.ITaskStatusMonitor statusMonitor, string path)

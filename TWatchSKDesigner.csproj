@@ -63,8 +63,8 @@
     <!-- Also defines .app file name -->
     <CFBundleDisplayName>TWatchSK Designer</CFBundleDisplayName>
     <CFBundleIdentifier>eu.jandytrych.twatchskdesigner</CFBundleIdentifier>
-    <CFBundleVersion>1.0.0</CFBundleVersion>
-    <CFBundleShortVersionString>1.0</CFBundleShortVersionString>
+    <CFBundleVersion>1.1.0</CFBundleVersion>
+    <CFBundleShortVersionString>1.1</CFBundleShortVersionString>
     <CFBundlePackageType>APPL</CFBundlePackageType>
     <CFBundleSignature>????</CFBundleSignature>
     <CFBundleExecutable>TWatchSKDesigner</CFBundleExecutable>

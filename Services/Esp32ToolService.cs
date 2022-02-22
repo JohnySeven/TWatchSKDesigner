@@ -19,7 +19,7 @@ namespace TWatchSKDesigner.Services
     //https://github.com/espressif/esptool/releases/tag/v3.1
     public class Esp32ToolService : IEsp32ToolService
     {
-        private const string FirmwareUrl = @"https://dev.dytrych.cloud/index.json";
+        private const string FirmwareUrl = @"https://dev.dytrych.cloud/twatchsk.json";
         private string EspToolDirectory => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "TWatchDesigner", "Esptool");
         private string EspToolAppPath => Path.Combine(EspToolDirectory, RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "esptool.exe" : "esptool");
         private string FirmwareDirectory => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "TWatchDesigner", "Firmware");
@@ -455,7 +455,7 @@ namespace TWatchSKDesigner.Services
 
         public Task<Result<FirmwareList>> DownloadFirmwareList()
         {
-            throw new NotImplementedException();
+            return GithubHelper.DownloadJson<FirmwareList>(FirmwareUrl);
         }
     }
 }

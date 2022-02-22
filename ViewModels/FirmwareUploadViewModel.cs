@@ -19,7 +19,12 @@ namespace TWatchSKDesigner.ViewModels
         public string SelectedPort
         {
             get { return _SelectedPort; }
-            set { _SelectedPort = value; OnPropertyChanged(nameof(SelectedPort)); }
+            set
+            {
+                _SelectedPort = value; 
+                OnPropertyChanged(nameof(SelectedPort)); 
+                UpdateFlashButtonEnabled();
+            }
         }
 
         private string[] _AvailablePorts;
@@ -29,6 +34,36 @@ namespace TWatchSKDesigner.ViewModels
             get { return _AvailablePorts; }
             set { _AvailablePorts = value; OnPropertyChanged(nameof(AvailablePorts)); }
         }
+
+        private FirmwareLink[] _FirmwareList;
+
+        public FirmwareLink[] FirmwareList
+        {
+            get { return _FirmwareList; }
+            set { _FirmwareList = value; OnPropertyChanged(nameof(FirmwareList)); }
+        }
+
+        private FirmwareLink _SelectedFirmware;
+
+        public FirmwareLink SelectedFirmware
+        {
+            get { return _SelectedFirmware; }
+            set
+            {
+                _SelectedFirmware = value; 
+                OnPropertyChanged(nameof(SelectedFirmware));
+                UpdateFlashButtonEnabled();
+            }
+        }
+
+        private string _FirmwareVersion = "Loading...";
+
+        public string FirmwareVersion
+        {
+            get { return _FirmwareVersion; }
+            set { _FirmwareVersion = value; OnPropertyChanged(nameof(FirmwareVersion)); }
+        }
+
 
         private bool _ClearFlash;
 
@@ -46,6 +81,11 @@ namespace TWatchSKDesigner.ViewModels
             set { _FlashButtonEnabled = value; OnPropertyChanged(nameof(FlashButtonEnabled)); }
         }
 
+        private void UpdateFlashButtonEnabled()
+        {
+            FlashButtonEnabled = AvailablePorts.Length > 0 && FirmwareList?.Length > 0;
+        }
+
         private bool _ShowConsoleAfterFlashing = true;
 
         public bool ShowConsoleAfterFlashing
@@ -56,7 +96,6 @@ namespace TWatchSKDesigner.ViewModels
 
         public ICommand RefreshPortsCommand { get; }
         public ICommand UploadFirmwareCommand { get; }
-
         public ICommand CancelCommand { get; set; }
 
         private IEsp32ToolService _esp32svc = null;
@@ -71,6 +110,23 @@ namespace TWatchSKDesigner.ViewModels
         {
             _esp32svc = Locator.Current.GetService<IEsp32ToolService>();
             await RefreshPorts();
+            await LoadFirmwareList();
+        }
+
+        private async Task LoadFirmwareList()
+        {
+            var result = await Service.DownloadFirmwareList();
+
+            if (result.IsSuccess)
+            {
+                FirmwareList = result.Data.Links;
+                FirmwareVersion = result.Data.Version;
+            }
+            else
+            {
+                FirmwareList = Array.Empty<FirmwareLink>();
+                await MessageBox.Show("Firmware list download failed: " + result.ErrorMessage);
+            }
         }
 
         private IEsp32ToolService Service => _esp32svc ?? throw new InvalidOperationException();
@@ -89,13 +145,11 @@ namespace TWatchSKDesigner.ViewModels
             {
                 SelectedPort = AvailablePorts.FirstOrDefault();
             }
-
-            FlashButtonEnabled = ports.Count > 0;
         }
 
         private async Task UploadFirmware()
         {
-            if (SelectedPort != null)
+            if (SelectedPort != null && SelectedFirmware != null)
             {
                 var monitor = new ProgressWindowTaskMonitor();
                 await monitor.Run(async () =>
@@ -104,7 +158,7 @@ namespace TWatchSKDesigner.ViewModels
 
                     if (initResult.IsSuccess)
                     {
-                        var downloadResult = await Service.DownloadLatestFirmware(monitor);
+                        var downloadResult = await Service.DownloadLatestFirmware(_SelectedFirmware, monitor);
 
                         if (downloadResult.IsSuccess)
                         {
@@ -124,7 +178,7 @@ namespace TWatchSKDesigner.ViewModels
                                     }
                                     else
                                     {
-                                        await MessageBox.Show($"TWatch 2020 firmware {firmwareInfo.Data.Version} upload succesful!");
+                                        await MessageBox.Show($"TWatch 2020 firmware {SelectedFirmware.Hardware} {firmwareInfo.Data.Version} upload succesful!");
                                     }
                                 }
                                 else

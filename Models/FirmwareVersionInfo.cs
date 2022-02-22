@@ -22,6 +22,7 @@ namespace TWatchSKDesigner.Models
 
     public class FirmwareList
     {
+        public string Version { get; set; }
         public FirmwareLink[] Links { get; set; }
     }
 
@@ -30,5 +31,10 @@ namespace TWatchSKDesigner.Models
         public string Name { get; set; }
         public string Url { get; set; }
         public string Hardware { get; set; }
+
+        public override string ToString()
+        {
+            return Name;
+        }
     }
 }
