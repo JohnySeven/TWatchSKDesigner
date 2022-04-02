@@ -249,6 +249,14 @@ namespace TWatchSKDesigner.ViewModels
             }
         }
 
+        internal void AddNewGauge()
+        {
+            if (SelectedView != null)
+            {
+                SelectedView.LoadedComponents.Add(new GaugeDef() { Type = "gauge", Size = new[] { 200, 200 } });
+            }
+        }
+
         internal void CreateNewView()
         {
             var newView = new WatchView()

@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
+using TWatchSKDesigner.Controls;
 using TWatchSKDesigner.Converters;
 using TWatchSKDesigner.Helpers;
 using TWatchSKDesigner.Models;
@@ -101,6 +102,7 @@ namespace TWatchSKDesigner.Views
             {
                 component.PropertyChanged += Component_PropertyChanged;
             }
+
             view.LoadedComponents.CollectionChanged += LoadedComponents_CollectionChanged;
         }
 
@@ -135,6 +137,10 @@ namespace TWatchSKDesigner.Views
                 {
                     renderedComponent = LoadLabel(label);
                 }
+                else if(component is GaugeDef gauge)
+                {
+                    renderedComponent = LoadGauge(gauge);
+                }
 
                 if (renderedComponent != null)
                 {
@@ -146,6 +152,42 @@ namespace TWatchSKDesigner.Views
                     ((Panel)Root.Child).Children.Add(renderedComponent);
                 }
             }
+        }
+
+        private Gauge LoadGauge(GaugeDef gaugeDef)
+        {
+            return new Gauge()
+            {
+                DataContext = gaugeDef,
+                [!Gauge.WidthProperty] = new Avalonia.Data.Binding("Size", Avalonia.Data.BindingMode.OneWay)
+                {
+                    Converter = new DoubleFromIntArray() { Index = 0 }
+                },
+                [!Gauge.HeightProperty] = new Avalonia.Data.Binding("Size", Avalonia.Data.BindingMode.OneWay)
+                {
+                    Converter = new DoubleFromIntArray() { Index = 1 }
+                },
+                [!Gauge.ColorProperty] = new Avalonia.Data.Binding("Color", Avalonia.Data.BindingMode.OneWay)
+                {
+                    Converter = new ColorFromTextConverter()
+                },
+                [!Gauge.ValueFormatProperty] = new Avalonia.Data.Binding("Binding", Avalonia.Data.BindingMode.OneWay)
+                {
+                    Converter = new BindingToValueFormat() { Value = 0.0f }
+                },
+                [!Gauge.BackgroundProperty] = new Avalonia.Data.Binding("IsSelected", Avalonia.Data.BindingMode.OneWay)
+                {
+                    Converter = new SelectionBrushConverter()
+                    {
+                        SelectedColor = new SolidColorBrush(Colors.LightBlue),
+                        UnselectedColor = Brushes.Transparent
+                    }
+                },
+                [!Gauge.TextColorProperty] = new Avalonia.Data.Binding("Color", Avalonia.Data.BindingMode.OneWay)
+                {
+                    Converter = new ColorFromTextConverter()
+                }
+            };
         }
 
         private Label LoadLabel(LabelDef labelDef)

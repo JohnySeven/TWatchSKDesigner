@@ -76,11 +76,11 @@ namespace TWatchSKDesigner.ViewModels
             {
                 foreach (var component in Components)
                 {
-                    switch (component["type"]?.ToString())
+                    var componentObj = ComponentHelpers.LoadComponent(component);
+
+                    if (componentObj != null)
                     {
-                        case "label":
-                            LoadedComponents.Add(LabelHelpers.Load(component));
-                            break;
+                        LoadedComponents.Add(componentObj);
                     }
                 }
             }

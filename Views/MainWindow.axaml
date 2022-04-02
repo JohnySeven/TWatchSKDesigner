@@ -7,6 +7,7 @@
         xmlns:material="clr-namespace:MaterialDesign.Avalonia.PackIcon;assembly=MaterialDesign.Avalonia.PackIcon"
         xmlns:conv="using:TWatchSKDesigner.Converters"
         xmlns:local="using:TWatchSKDesigner.Views"
+        xmlns:ui="using:TWatchSKDesigner.Controls"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="TWatchSKDesigner.Views.MainWindow"
         Icon="/Assets/avalonia-logo.ico" x:Name="Window"
@@ -14,11 +15,9 @@
   <Window.Resources>
     <conv:SelectionBrushConverter x:Key="BrushIsSelected" />
   </Window.Resources>
-
   <Design.DataContext>
     <vm:MainWindowViewModel/>
   </Design.DataContext>
-
   <DockPanel LastChildFill="True">
     <Menu DockPanel.Dock="Top">
       <MenuItem Header="_File">
@@ -46,6 +45,9 @@
                 <WrapPanel DockPanel.Dock="Bottom" Grid.Row="1">
                   <Button Margin="3" Click="NewLabel_Clicked" ToolTip.Tip="Add new Label">
                     <material:PackIcon Foreground="Black" Kind="Label" />
+                  </Button>
+                  <Button Margin="3" Click="NewGauge_Clicked" ToolTip.Tip="Add new Label">
+                    <material:PackIcon Foreground="Black" Kind="Gauge" />
                   </Button>
                 </WrapPanel>
               </Grid>
@@ -118,7 +120,5 @@
         </DockPanel>
       </TabItem>
     </TabControl>
-
   </DockPanel>
-
 </Window>

@@ -90,5 +90,10 @@ namespace TWatchSKDesigner.Views
         {
             Model?.AddNewLabel();
         }
+
+        private void NewGauge_Clicked(object sender, RoutedEventArgs eventArgs)
+        {
+            Model?.AddNewGauge();
+        }
     }
 }

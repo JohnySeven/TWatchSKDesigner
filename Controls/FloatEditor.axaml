@@ -1,0 +1,16 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:local="using:TWatchSKDesigner.Models"
+             mc:Ignorable="d" d:DesignWidth="200"
+             xmlns:conv="using:TWatchSKDesigner.Converters"
+             x:Class="TWatchSKDesigner.Controls.FloatEditor"
+             x:DataType="local:ComponentProperty">
+  <UserControl.Resources>
+    <conv:FloatConverter x:Key="FloatConverter" />
+  </UserControl.Resources>
+  <Grid ColumnDefinitions="1* Auto" Margin="3">
+    <TextBox VerticalAlignment="Center" Text="{Binding Path=Value, Converter={StaticResource FloatConverter}}" />
+  </Grid>
+</UserControl>

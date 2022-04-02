@@ -105,6 +105,14 @@ namespace TWatchSKDesigner.Converters
                         DataContext = v
                     };
                 }));
+
+                EditorTemplates.Add(typeof(FloatEditor), new FuncDataTemplate<object>((v, s) =>
+                {
+                    return new FloatEditor()
+                    {
+                        DataContext = v
+                    };
+                }));
             }
         }
 
