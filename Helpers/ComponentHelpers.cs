@@ -14,7 +14,8 @@ namespace TWatchSKDesigner.Helpers
         public static readonly Dictionary<string, Type> ComponentFactory = new()
         {
             { "label", typeof(LabelDef) },
-            { "gauge", typeof(GaugeDef) }
+            { "gauge", typeof(GaugeDef) },
+            { "switch", typeof(SwitchDef) }
         };
 
         internal static ComponentDef LoadComponent(JToken component)

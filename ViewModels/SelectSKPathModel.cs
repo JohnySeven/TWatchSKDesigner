@@ -6,11 +6,11 @@ namespace TWatchSKDesigner.ViewModels
 {
     public class SelectSKPathModel : ViewModelBase
     {
-        public SelectSKPathModel()
+        public SelectSKPathModel(Func<SKPath, bool> filter)
         {
             if (MainWindow.Instance?.Model?.SignalKManager != null)
             {
-                _Paths = MainWindow.Instance?.Model.SignalKManager.GetSignalKPaths();
+                _Paths = MainWindow.Instance?.Model.SignalKManager.GetSignalKPaths(filter);
             }
             else
             {

@@ -95,5 +95,11 @@ namespace TWatchSKDesigner.Views
         {
             Model?.AddNewGauge();
         }
+
+        private void NewSwitch_Clicked(object sender, RoutedEventArgs eventArgs)
+        {
+            Model?.AddNewSwitch();
+        }
+        
     }
 }

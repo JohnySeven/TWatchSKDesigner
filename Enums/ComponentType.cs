@@ -9,6 +9,7 @@ namespace TWatchSKDesigner.Enums
     public enum ComponentType
     {
         Label,
-        Gauge
+        Gauge,
+        Switch
     }
 }

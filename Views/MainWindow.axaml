@@ -46,8 +46,11 @@
                   <Button Margin="3" Click="NewLabel_Clicked" ToolTip.Tip="Add new Label">
                     <material:PackIcon Foreground="Black" Kind="Label" />
                   </Button>
-                  <Button Margin="3" Click="NewGauge_Clicked" ToolTip.Tip="Add new Label">
+                  <Button Margin="3" Click="NewGauge_Clicked" ToolTip.Tip="Add new Gauge">
                     <material:PackIcon Foreground="Black" Kind="Gauge" />
+                  </Button>
+                  <Button Margin="3" Click="NewSwitch_Clicked" ToolTip.Tip="Add new Switch">
+                    <material:PackIcon Foreground="Black" Kind="ToggleSwitch" />
                   </Button>
                 </WrapPanel>
               </Grid>

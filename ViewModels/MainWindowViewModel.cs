@@ -97,6 +97,14 @@ namespace TWatchSKDesigner.ViewModels
 
         private bool _NoViews;
 
+        internal void AddNewSwitch()
+        {
+            if (SelectedView != null)
+            {
+                SelectedView.LoadedComponents.Add(new SwitchDef() { Type = "switch", Size = new[] { 60, 40 } });
+            }
+        }
+
         public bool NoViews
         {
             get { return _NoViews; }

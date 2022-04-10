@@ -1,0 +1,12 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" Background="Transparent" d:DesignWidth="200" d:DesignHeight="100"
+             x:Class="TWatchSKDesigner.Controls.SwitchControl">
+  <Border x:Name="Outer" Background="#D4D7D9" BorderBrush="#74C7D1" BorderThickness="6" CornerRadius="50">
+    <Border x:Name="OnOffToggle" Background="White" Margin="6,0,0,0" HorizontalAlignment="Left" Height="80" Width="80" CornerRadius="50">
+      
+    </Border>
+  </Border>
+</UserControl>

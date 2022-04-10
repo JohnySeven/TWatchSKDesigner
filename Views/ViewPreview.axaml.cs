@@ -137,9 +137,13 @@ namespace TWatchSKDesigner.Views
                 {
                     renderedComponent = LoadLabel(label);
                 }
-                else if(component is GaugeDef gauge)
+                else if (component is GaugeDef gauge)
                 {
                     renderedComponent = LoadGauge(gauge);
+                }
+                else if (component is SwitchDef swtch)
+                {
+                    renderedComponent = LoadSwitch(swtch);
                 }
 
                 if (renderedComponent != null)
@@ -148,6 +152,7 @@ namespace TWatchSKDesigner.Views
                     {
                         _controlToComponent.Add(component, renderedComponent);
                     }
+
                     SetLayout(component, renderedComponent);
                     ((Panel)Root.Child).Children.Add(renderedComponent);
                 }
@@ -217,6 +222,24 @@ namespace TWatchSKDesigner.Views
             return ret;
         }
 
+        private SwitchControl LoadSwitch(SwitchDef switchDef)
+        {
+            var ret = new SwitchControl()
+            {
+                DataContext = switchDef,
+                [!WidthProperty] = new Avalonia.Data.Binding("Size", Avalonia.Data.BindingMode.OneWay)
+                {
+                    Converter = new DoubleFromIntArray() { Index = 0 }
+                },
+                [!HeightProperty] = new Avalonia.Data.Binding("Size", Avalonia.Data.BindingMode.OneWay)
+                {
+                    Converter = new DoubleFromIntArray() { Index = 1 }
+                },
+            };
+
+            return ret;
+        }
+
         private void SetLayout(ComponentDef componentDef, Control control)
         {
             if(Root.Child is Canvas canvas)
@@ -233,12 +256,6 @@ namespace TWatchSKDesigner.Views
                     });
                 }
             }
-
-            /*if(componentDef.Size != null && componentDef.Size.Length == 2)
-            {
-                control.SetValue(WidthProperty, (double)componentDef.Size[0]);
-                control.SetValue(HeightProperty, (double)componentDef.Size[1]);
-            }*/
         }
 
         private void LoadLayout(string layout)

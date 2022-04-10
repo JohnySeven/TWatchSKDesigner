@@ -2,6 +2,7 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
+using System;
 using System.Collections;
 using TWatchSKDesigner.Models.SK;
 using TWatchSKDesigner.ViewModels;
@@ -12,10 +13,15 @@ namespace TWatchSKDesigner.Modals
     public class SelectSKPath : Window
     {
         
-        public SelectSKPath()
+        public SelectSKPath() : this(p => true)
+        {
+
+        }
+
+        public SelectSKPath(Func<SKPath, bool> filter)
         {
             InitializeComponent();
-            DataContext = new SelectSKPathModel();
+            DataContext = new SelectSKPathModel(filter);
 #if DEBUG
             this.AttachDevTools();
 #endif

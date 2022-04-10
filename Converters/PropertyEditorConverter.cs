@@ -90,6 +90,14 @@ namespace TWatchSKDesigner.Converters
                     };
                 }));
 
+                EditorTemplates.Add(typeof(BindingEditor<Models.SwitchBindingModifier>), new FuncDataTemplate<object>((v, s) =>
+                {
+                    return new BindingEditor<Models.SwitchBindingModifier>()
+                    {
+                        DataContext = v
+                    };
+                }));
+
                 EditorTemplates.Add(typeof(ColorPickerEditor), new FuncDataTemplate<object>((v, s) =>
                 {
                     return new ColorPickerEditor()
