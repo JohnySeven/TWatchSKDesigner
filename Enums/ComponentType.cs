@@ -10,6 +10,7 @@ namespace TWatchSKDesigner.Enums
     {
         Label,
         Gauge,
-        Switch
+        Switch,
+        Button
     }
 }

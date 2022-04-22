@@ -100,6 +100,11 @@ namespace TWatchSKDesigner.Views
         {
             Model?.AddNewSwitch();
         }
+        private void NewButton_Clicked(object sender, RoutedEventArgs eventArgs)
+        {
+            Model?.AddNewButton();
+        }
         
+
     }
 }

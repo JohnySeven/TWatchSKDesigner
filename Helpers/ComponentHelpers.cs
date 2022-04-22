@@ -15,7 +15,8 @@ namespace TWatchSKDesigner.Helpers
         {
             { "label", typeof(LabelDef) },
             { "gauge", typeof(GaugeDef) },
-            { "switch", typeof(SwitchDef) }
+            { "switch", typeof(SwitchDef) },
+            { "button", typeof(ButtonDef) }
         };
 
         internal static ComponentDef LoadComponent(JToken component)

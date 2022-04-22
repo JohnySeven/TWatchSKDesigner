@@ -1,0 +1,52 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:conv="using:TWatchSKDesigner.Converters"
+        mc:Ignorable="d" SizeToContent="WidthAndHeight" d:DesignHeight="450"
+        xmlns:vm="using:TWatchSKDesigner.ViewModels"
+        x:Class="TWatchSKDesigner.Modals.PutEditorModal"
+        WindowStartupLocation="CenterOwner"
+        x:DataType="vm:BindingEditorViewModel"
+        Title="Edit binding" ShowInTaskbar="False" SystemDecorations="BorderOnly">
+  <Window.Resources>
+    <conv:NegateBoolConverter x:Key="NegateBool" />
+  </Window.Resources>
+  <Border Classes="WindowBorder">
+    <DockPanel>
+      <StackPanel DockPanel.Dock="Bottom" Margin="10" Spacing="10" HorizontalAlignment="Center" Orientation="Horizontal" Grid.Row="5" Grid.ColumnSpan="2">
+        <Button Click="OnOkClick" HorizontalContentAlignment="Center" IsDefault="True" Width="100" Content="OK" />
+        <Button Click="OnCancelClick" HorizontalContentAlignment="Center" IsCancel="True" Width="100" Content="Cancel" />
+      </StackPanel>
+      <Grid Margin="10" ColumnDefinitions="Auto 300"
+            RowDefinitions="Auto Auto Auto Auto Auto">
+        <Label Content="SK Path" VerticalContentAlignment="Center" />
+        
+        <Grid ColumnDefinitions="1* Auto" Margin="3" Grid.Column="1" HorizontalAlignment="Stretch">
+          <TextBox x:Name="SKPath" Text="{Binding Put.Path, Mode=TwoWay}" />
+          <Button Click="PickSKPath" Grid.Column="1" DockPanel.Dock="Right" BorderBrush="Black" Margin="4,0,0,0" Background="Transparent">
+            <Image Source="/Assets/SignalK.png" Width="24" Height="24" />
+          </Button>
+        </Grid>
+
+        <Grid Grid.Row="1" RowDefinitions="Auto Auto" Grid.ColumnSpan="2">
+          <RadioButton GroupName="PushValue" Content="Push string value" IsChecked="{Binding IsStringValue}" />
+          <TextBox Grid.Row="1" HorizontalAlignment="Stretch" Text="{Binding StringValue, Mode=TwoWay}" IsVisible="{Binding IsStringValue}" />
+        </Grid>
+
+        <Grid Grid.Row="2" RowDefinitions="Auto Auto" Grid.ColumnSpan="2">
+          <RadioButton GroupName="PushValue" Content="Push number value" IsChecked="{Binding IsFloatValue}" />
+          <TextBox Grid.Row="1" Text="{Binding FloatValue, Mode=TwoWay}" HorizontalAlignment="Stretch" IsVisible="{Binding IsFloatValue}" />
+        </Grid>
+
+        <Grid Grid.Row="3" RowDefinitions="Auto Auto" Grid.ColumnSpan="2">
+          <RadioButton GroupName="PushValue" Content="Push boolean value" IsChecked="{Binding IsBooleanValue}" />
+          <StackPanel Spacing="10" Margin="4,0,0,0" Orientation="Horizontal" Grid.Row="1" IsVisible="{Binding IsBooleanValue}">
+            <RadioButton Content="True" GroupName="Boolean" IsChecked="{Binding BooleanValue, Mode=TwoWay}" />
+            <RadioButton Content="False" GroupName="Boolean" IsChecked="{Binding BooleanValue, Mode=TwoWay, Converter={StaticResource NegateBool}}" />
+          </StackPanel>
+        </Grid>
+      </Grid>
+    </DockPanel>
+  </Border>
+</Window>

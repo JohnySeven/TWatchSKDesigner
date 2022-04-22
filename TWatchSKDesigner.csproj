@@ -34,11 +34,20 @@
     <Compile Update="Controls\FloatEditor.axaml.cs">
       <DependentUpon>FloatEditor.axaml</DependentUpon>
     </Compile>
+    <Compile Update="Controls\ButtonControl.axaml.cs">
+      <DependentUpon>ButtonControl.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="Controls\PutEditor.axaml.cs">
+      <DependentUpon>PutEditor.axaml</DependentUpon>
+    </Compile>
     <Compile Update="Controls\XYEditor.axaml.cs">
       <DependentUpon>XYEditor.axaml</DependentUpon>
     </Compile>
     <Compile Update="Controls\ColorPickerEditor.axaml.cs">
       <DependentUpon>ColorPickerEditor.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="Modals\PutEditorModal.axaml.cs">
+      <DependentUpon>PutEditorModal.axaml</DependentUpon>
     </Compile>
     <Compile Update="Modals\ConfirmBox.axaml.cs">
       <DependentUpon>ConfirmBox.axaml</DependentUpon>

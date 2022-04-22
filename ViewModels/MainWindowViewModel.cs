@@ -105,6 +105,14 @@ namespace TWatchSKDesigner.ViewModels
             }
         }
 
+        internal void AddNewButton()
+        {
+            if (SelectedView != null)
+            {
+                SelectedView.LoadedComponents.Add(new ButtonDef() { Type = "button", Size = new[] { 100, 40 } });
+            }
+        }
+
         public bool NoViews
         {
             get { return _NoViews; }

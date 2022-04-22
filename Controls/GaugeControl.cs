@@ -140,7 +140,7 @@ namespace TWatchSKDesigner.Controls
             AvaloniaProperty.Register<Gauge, double>(nameof(Minimum));
 
         public static readonly StyledProperty<double> MaximumProperty =
-    AvaloniaProperty.Register<Gauge, double>(nameof(Maximum));
+            AvaloniaProperty.Register<Gauge, double>(nameof(Maximum));
 
         public static readonly StyledProperty<Color> ColorProperty =
             AvaloniaProperty.Register<Gauge, Color>(nameof(Color), Colors.Red);

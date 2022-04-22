@@ -3,10 +3,9 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" Background="Transparent" d:DesignWidth="200" d:DesignHeight="100"
-             x:Class="TWatchSKDesigner.Controls.SwitchControl">
-  <Border x:Name="Outer" Background="#D4D7D9" BorderBrush="#74C7D1" BorderThickness="3" CornerRadius="50">
-    <Border x:Name="OnOffToggle" Background="White" Margin="6,0,0,0" HorizontalAlignment="Left" Height="80" Width="80" CornerRadius="50">
-      
-    </Border>
+             x:Name="this"
+             x:Class="TWatchSKDesigner.Controls.ButtonControl">
+  <Border x:Name="Outer" Background="White" BorderBrush="#01A2B1" BorderThickness="4" CornerRadius="50">
+    <Label FontSize="{Binding FontSize, ElementName=this}" Content="{Binding Text, ElementName=this}" VerticalAlignment="Center" HorizontalAlignment="Center" />
   </Border>
 </UserControl>

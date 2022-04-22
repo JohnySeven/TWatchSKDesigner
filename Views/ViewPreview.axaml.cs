@@ -145,6 +145,10 @@ namespace TWatchSKDesigner.Views
                 {
                     renderedComponent = LoadSwitch(swtch);
                 }
+                else if(component is ButtonDef button)
+                {
+                    renderedComponent = LoadButton(button);
+                }
 
                 if (renderedComponent != null)
                 {
@@ -234,7 +238,30 @@ namespace TWatchSKDesigner.Views
                 [!HeightProperty] = new Avalonia.Data.Binding("Size", Avalonia.Data.BindingMode.OneWay)
                 {
                     Converter = new DoubleFromIntArray() { Index = 1 }
+                }
+            };
+
+            return ret;
+        }
+
+        private ButtonControl LoadButton(ButtonDef buttonDef)
+        {
+            var ret = new ButtonControl()
+            {
+                DataContext = buttonDef,
+                [!WidthProperty] = new Avalonia.Data.Binding("Size", Avalonia.Data.BindingMode.OneWay)
+                {
+                    Converter = new DoubleFromIntArray() { Index = 0 }
                 },
+                [!HeightProperty] = new Avalonia.Data.Binding("Size", Avalonia.Data.BindingMode.OneWay)
+                {
+                    Converter = new DoubleFromIntArray() { Index = 1 }
+                },
+                [!ButtonControl.TextProperty] = new Avalonia.Data.Binding("Text", Avalonia.Data.BindingMode.TwoWay),
+                [!FontSizeProperty] = new Avalonia.Data.Binding("Font", Avalonia.Data.BindingMode.OneWay)
+                {
+                    Converter = new FontSizeConverter()
+                }
             };
 
             return ret;
