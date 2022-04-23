@@ -7,7 +7,7 @@ namespace TWatchSKDesigner.ViewModels
 {
     public class ViewModelBase : ReactiveObject
     {
-        protected void OnPropertyChanged(string name)
+        protected virtual void OnPropertyChanged(string name)
         {
             this.RaisePropertyChanged(name);
         }

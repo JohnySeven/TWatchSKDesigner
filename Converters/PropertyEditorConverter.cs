@@ -1,4 +1,5 @@
-﻿using Avalonia.Controls;
+﻿using Avalonia;
+using Avalonia.Controls;
 using Avalonia.Controls.Templates;
 using Avalonia.Data;
 using Avalonia.Data.Converters;
@@ -22,7 +23,14 @@ namespace TWatchSKDesigner.Converters
         {
             if(value is Type editorType)
             {
-                return EditorTemplates[editorType];
+                if (EditorTemplates.TryGetValue(editorType, out FuncDataTemplate<object> factory))
+                {
+                    return factory;
+                }
+                else
+                {
+                    throw new ArgumentException($"Editor type {editorType} hasn't been initialized!");
+                }
             }
             else
             {
@@ -90,6 +98,14 @@ namespace TWatchSKDesigner.Converters
                     };
                 }));
 
+                EditorTemplates.Add(typeof(BindingEditor<Models.SwitchBindingModifier>), new FuncDataTemplate<object>((v, s) =>
+                {
+                    return new BindingEditor<Models.SwitchBindingModifier>()
+                    {
+                        DataContext = v
+                    };
+                }));
+
                 EditorTemplates.Add(typeof(ColorPickerEditor), new FuncDataTemplate<object>((v, s) =>
                 {
                     return new ColorPickerEditor()
@@ -101,6 +117,22 @@ namespace TWatchSKDesigner.Converters
                 EditorTemplates.Add(typeof(XYEditor), new FuncDataTemplate<object>((v, s) =>
                 {
                     return new XYEditor()
+                    {
+                        DataContext = v
+                    };
+                }));
+
+                EditorTemplates.Add(typeof(FloatEditor), new FuncDataTemplate<object>((v, s) =>
+                {
+                    return new FloatEditor()
+                    {
+                        DataContext = v
+                    };
+                }));
+
+                EditorTemplates.Add(typeof(PutEditor), new FuncDataTemplate<object>((v, s) =>
+                {
+                    return new PutEditor()
                     {
                         DataContext = v
                     };

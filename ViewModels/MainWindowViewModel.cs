@@ -97,6 +97,22 @@ namespace TWatchSKDesigner.ViewModels
 
         private bool _NoViews;
 
+        internal void AddNewSwitch()
+        {
+            if (SelectedView != null)
+            {
+                SelectedView.LoadedComponents.Add(new SwitchDef() { Type = "switch", Size = new[] { 60, 40 } });
+            }
+        }
+
+        internal void AddNewButton()
+        {
+            if (SelectedView != null)
+            {
+                SelectedView.LoadedComponents.Add(new ButtonDef() { Type = "button", Size = new[] { 100, 40 } });
+            }
+        }
+
         public bool NoViews
         {
             get { return _NoViews; }
@@ -246,6 +262,14 @@ namespace TWatchSKDesigner.ViewModels
             if (SelectedView != null)
             {
                 SelectedView.LoadedComponents.Add(new LabelDef() { Type = "label", Font = "roboto40" });
+            }
+        }
+
+        internal void AddNewGauge()
+        {
+            if (SelectedView != null)
+            {
+                SelectedView.LoadedComponents.Add(new GaugeDef() { Type = "gauge", Size = new[] { 200, 200 } });
             }
         }
 

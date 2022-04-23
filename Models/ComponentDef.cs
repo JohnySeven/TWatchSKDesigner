@@ -54,16 +54,14 @@ namespace TWatchSKDesigner.Models
         [JsonIgnore]
         public PackIconKind Icon { get; protected set; }
 
+        private int[] _Size;
 
-        public static ComponentDef GetComponent(JObject component)
+        [JsonProperty("size")]
+        [ComponentProperty(typeof(XYEditor))]
+        public int[] Size
         {
-            switch (component["type"]?.ToString())
-            {
-                case "label":
-                    return LabelHelpers.Load(component);
-                default:
-                    return JsonConvert.DeserializeObject<ComponentDef>(component.ToString());
-            }
+            get { return _Size; }
+            set { _Size = value; OnPropertyChanged(nameof(Size)); }
         }
     }
 }

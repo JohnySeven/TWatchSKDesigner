@@ -1,0 +1,11 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" Background="Transparent" d:DesignWidth="200" d:DesignHeight="100"
+             x:Name="this"
+             x:Class="TWatchSKDesigner.Controls.ButtonControl">
+  <Border x:Name="Outer" Background="White" BorderBrush="#01A2B1" BorderThickness="4" CornerRadius="50">
+    <Label FontSize="{Binding FontSize, ElementName=this}" Content="{Binding Text, ElementName=this}" VerticalAlignment="Center" HorizontalAlignment="Center" />
+  </Border>
+</UserControl>

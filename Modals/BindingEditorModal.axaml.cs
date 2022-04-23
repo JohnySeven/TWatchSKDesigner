@@ -5,42 +5,59 @@ using Avalonia.Markup.Xaml;
 using System;
 using System.Linq;
 using TWatchSKDesigner.Models;
+using TWatchSKDesigner.ViewModels;
 using TWatchSKDesigner.Views;
 
 namespace TWatchSKDesigner.Modals
 {
     public class BindingEditorModal : Window
     {
-        public BindingEditorModal()
+        /// <summary>
+        /// This ctor is just for designer preview support
+        /// </summary>
+        public BindingEditorModal() : this(new Binding() {  Path = "sample.binding.preview", Period = 1000, Decimals = 1, Format = "$$ unit", Multiply = 100.0f, OffSet = 200.0f }
+                                                            , new BindingEditorModifier())
+        {
+
+        }
+
+        public BindingEditorModal(Binding binding, BindingEditorModifier modifier)
         {
             InitializeComponent();
 #if DEBUG
             this.AttachDevTools();
 #endif
+            DataContext = new BindingEditorViewModel()
+            {
+                Binding = binding,
+                Modifier = modifier
+            };
         }
 
-        public Binding Model => (Binding)DataContext;
+        public BindingEditorViewModel Model => (BindingEditorViewModel)DataContext;
 
         private bool Validate(out string errorMessage)
         {
             var ret = true;
 
-            if(Model.OffSet == null)
+            var binding = Model.Binding;
+
+            if(binding.OffSet == null)
             {
-                Model.OffSet = 0.0f;
+                binding.OffSet = 0.0f;
             }
 
-            if(Model.Multiply == null)
+            if(binding.Multiply == null)
             {
-                Model.Multiply = 1.0f;
+                binding.Multiply = 1.0f;
             }
 
-            if (!string.IsNullOrEmpty(Model?.Format) && Model?.Format.Contains("$$") == false)
+            if (!string.IsNullOrEmpty(binding?.Format) && binding?.Format.Contains("$$") == false)
             {
                 ret = false;
                 errorMessage = "Binding format must contain $$ symbols to make replacement working!";
             }
-            else if(Model?.Period < 1000)
+            else if(binding?.Period < 1000)
             {
                 errorMessage = "Period must be at least 1000 ms!";
                 ret = false;
@@ -80,7 +97,7 @@ namespace TWatchSKDesigner.Modals
             var skPathTextBox = this.Find<TextBox>("SKPath");
             var path = skPathTextBox.Text;
 
-            var skPath = MainWindow.Instance?.Model?.SignalKManager.GetSignalKPaths().Where(p => p.Path == path).FirstOrDefault();
+            var skPath = MainWindow.Instance?.Model?.SignalKManager.GetSignalKPaths(Model.Modifier.SignalKPathFilter).Where(p => p.Path == path).FirstOrDefault();
 
             Func<Conversion, bool> filter = null;
             if(skPath != null && skPath.Units != null)
@@ -103,7 +120,7 @@ namespace TWatchSKDesigner.Modals
 
         private async void PickSKPath(object sender, RoutedEventArgs e)
         {
-            var skPathPick = new SelectSKPath();
+            var skPathPick = new SelectSKPath(Model.Modifier.SignalKPathFilter);
 
             if(await skPathPick.ShowDialog<bool>(this))
             {

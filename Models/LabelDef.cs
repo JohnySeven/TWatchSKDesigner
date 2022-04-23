@@ -33,7 +33,6 @@ namespace TWatchSKDesigner.Models
             }
         }
 
-
         private string _Font;
 
         [JsonProperty("font")]

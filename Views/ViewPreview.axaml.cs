@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
+using TWatchSKDesigner.Controls;
 using TWatchSKDesigner.Converters;
 using TWatchSKDesigner.Helpers;
 using TWatchSKDesigner.Models;
@@ -101,6 +102,7 @@ namespace TWatchSKDesigner.Views
             {
                 component.PropertyChanged += Component_PropertyChanged;
             }
+
             view.LoadedComponents.CollectionChanged += LoadedComponents_CollectionChanged;
         }
 
@@ -135,6 +137,18 @@ namespace TWatchSKDesigner.Views
                 {
                     renderedComponent = LoadLabel(label);
                 }
+                else if (component is GaugeDef gauge)
+                {
+                    renderedComponent = LoadGauge(gauge);
+                }
+                else if (component is SwitchDef swtch)
+                {
+                    renderedComponent = LoadSwitch(swtch);
+                }
+                else if(component is ButtonDef button)
+                {
+                    renderedComponent = LoadButton(button);
+                }
 
                 if (renderedComponent != null)
                 {
@@ -142,10 +156,47 @@ namespace TWatchSKDesigner.Views
                     {
                         _controlToComponent.Add(component, renderedComponent);
                     }
+
                     SetLayout(component, renderedComponent);
                     ((Panel)Root.Child).Children.Add(renderedComponent);
                 }
             }
+        }
+
+        private Gauge LoadGauge(GaugeDef gaugeDef)
+        {
+            return new Gauge()
+            {
+                DataContext = gaugeDef,
+                [!Gauge.WidthProperty] = new Avalonia.Data.Binding("Size", Avalonia.Data.BindingMode.OneWay)
+                {
+                    Converter = new DoubleFromIntArray() { Index = 0 }
+                },
+                [!Gauge.HeightProperty] = new Avalonia.Data.Binding("Size", Avalonia.Data.BindingMode.OneWay)
+                {
+                    Converter = new DoubleFromIntArray() { Index = 1 }
+                },
+                [!Gauge.ColorProperty] = new Avalonia.Data.Binding("Color", Avalonia.Data.BindingMode.OneWay)
+                {
+                    Converter = new ColorFromTextConverter()
+                },
+                [!Gauge.ValueFormatProperty] = new Avalonia.Data.Binding("Binding", Avalonia.Data.BindingMode.OneWay)
+                {
+                    Converter = new BindingToValueFormat() { Value = 0.0f }
+                },
+                [!Gauge.BackgroundProperty] = new Avalonia.Data.Binding("IsSelected", Avalonia.Data.BindingMode.OneWay)
+                {
+                    Converter = new SelectionBrushConverter()
+                    {
+                        SelectedColor = new SolidColorBrush(Colors.LightBlue),
+                        UnselectedColor = Brushes.Transparent
+                    }
+                },
+                [!Gauge.TextColorProperty] = new Avalonia.Data.Binding("Color", Avalonia.Data.BindingMode.OneWay)
+                {
+                    Converter = new ColorFromTextConverter()
+                }
+            };
         }
 
         private Label LoadLabel(LabelDef labelDef)
@@ -175,6 +226,47 @@ namespace TWatchSKDesigner.Views
             return ret;
         }
 
+        private SwitchControl LoadSwitch(SwitchDef switchDef)
+        {
+            var ret = new SwitchControl()
+            {
+                DataContext = switchDef,
+                [!WidthProperty] = new Avalonia.Data.Binding("Size", Avalonia.Data.BindingMode.OneWay)
+                {
+                    Converter = new DoubleFromIntArray() { Index = 0 }
+                },
+                [!HeightProperty] = new Avalonia.Data.Binding("Size", Avalonia.Data.BindingMode.OneWay)
+                {
+                    Converter = new DoubleFromIntArray() { Index = 1 }
+                }
+            };
+
+            return ret;
+        }
+
+        private ButtonControl LoadButton(ButtonDef buttonDef)
+        {
+            var ret = new ButtonControl()
+            {
+                DataContext = buttonDef,
+                [!WidthProperty] = new Avalonia.Data.Binding("Size", Avalonia.Data.BindingMode.OneWay)
+                {
+                    Converter = new DoubleFromIntArray() { Index = 0 }
+                },
+                [!HeightProperty] = new Avalonia.Data.Binding("Size", Avalonia.Data.BindingMode.OneWay)
+                {
+                    Converter = new DoubleFromIntArray() { Index = 1 }
+                },
+                [!ButtonControl.TextProperty] = new Avalonia.Data.Binding("Text", Avalonia.Data.BindingMode.TwoWay),
+                [!FontSizeProperty] = new Avalonia.Data.Binding("Font", Avalonia.Data.BindingMode.OneWay)
+                {
+                    Converter = new FontSizeConverter()
+                }
+            };
+
+            return ret;
+        }
+
         private void SetLayout(ComponentDef componentDef, Control control)
         {
             if(Root.Child is Canvas canvas)
@@ -191,12 +283,6 @@ namespace TWatchSKDesigner.Views
                     });
                 }
             }
-
-            /*if(componentDef.Size != null && componentDef.Size.Length == 2)
-            {
-                control.SetValue(WidthProperty, (double)componentDef.Size[0]);
-                control.SetValue(HeightProperty, (double)componentDef.Size[1]);
-            }*/
         }
 
         private void LoadLayout(string layout)

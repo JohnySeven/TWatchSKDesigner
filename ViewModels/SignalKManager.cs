@@ -29,14 +29,14 @@ namespace TWatchSKDesigner.ViewModels
 
         private List<SKPath> _skPaths = null;
 
-        public SKPath[] GetSignalKPaths()
+        public SKPath[] GetSignalKPaths(Func<SKPath, bool> filter)
         {
-            return _skPaths?.ToArray() ?? Array.Empty<SKPath>();
+            
+            return _skPaths?.Where(p => filter(p)).ToArray() ?? Array.Empty<SKPath>();
         }
 
 
         private Lazy<HttpClient> client = new Lazy<HttpClient>(InitHttpClient);
-        
 
         public async Task<OperationResult> Authorize(string server, int port, string user, string password)
         {
