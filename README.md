@@ -45,8 +45,8 @@ Your T-WATCH-2020 now has TWatchSK installed, and whenever it's turned on, it wi
 ## Updating TWatchSK
 Periodically, new versions of TWatchSK will be released. You can check for the lastest release version [here](https://github.com/JohnySeven/TWatchSK/releases), and you can check the version that's on your watch from the TWatchSK *Watch Info* menu. It is also briefly displayed whenever TWatchSK is started, on the startup screen. If there is a newer version, just follow the steps in the "Installing TWatchSK" section above - an update is the same as the initial installation.
 
-## DynamicViews - Custom Screens for Displaying Signal K Data
-Out of the box, the only information from Signal K that TWatchSK displays is any Notifications* sent by Signal K. However, the DynamicViews feature of TWatchSK allows you to define additional screens for the watch, each of which can display the data from one to six Signal K Paths, giving you real-time data for these Paths wherever you are on your boat!
+## DynamicViews - Custom Screens for Interacting with Signal K
+Out of the box, the only interaction between Signal K and TWatchSK is that TWatchSK displays any Notifications* sent by Signal K. However, the DynamicViews feature of TWatchSK allows you to define additional screens for the watch, each of which can have different ways to display data from Signal K, and send data to Signal K. A DynamicView can display the text value of a Signal K Path as text; it can display the numeric value of a Signal K Path as text or in a graphical gauge; it can toggle the value of any Boolean Signal K Path, and it can send a PUT request to Signal K (most likely to a plug-in) to do something like change the autopilot heading by 5 degrees to port.
 
 ![image](https://user-images.githubusercontent.com/15186790/139879628-1e463149-4694-4368-9102-70d2bc9fd57e.png) ![image](https://user-images.githubusercontent.com/15186790/140789761-97ee13f6-3feb-4521-9606-0127ba0ffb9a.png)
 
