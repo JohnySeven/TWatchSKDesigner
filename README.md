@@ -281,7 +281,4 @@ With a little creativity, you can make a DynamicView to give you control over yo
 ![image](https://user-images.githubusercontent.com/15186790/165354299-66805154-7958-427c-8b29-6d7b3a68bddc.png)
 
 
-TODO:
-- Add an image of a DynamicView with a graph, a switch, and a button.
-
 [![.NET](https://github.com/JohnySeven/TWatchSKDesigner/actions/workflows/dotnet.yml/badge.svg)](https://github.com/JohnySeven/TWatchSKDesigner/actions/workflows/dotnet.yml)
