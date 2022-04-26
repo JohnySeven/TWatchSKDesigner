@@ -225,7 +225,11 @@ By default, a gauge doesn't have a label, because you might want it to be on any
 8. Create a new label and set the "Text" to **Watch battery %**, the "Font" to **montserrat14** and the "Location" to **130;53**.
 9. File _ Save to save the new View.
 
-Now you have a new DynamicView with a gauge that displays the watch's battery %, in the top half of the screen. Using the "Size" and "Location" fields, you can very nicely display four gauges on a screen in a 2x2 layout. In the next two examples, we'll add a Switch and a Button to this View.
+Now you have a new DynamicView with a gauge that displays the watch's battery %, in the top half of the screen.
+
+![image](https://user-images.githubusercontent.com/15186790/165358162-52a13a96-e3af-4b7a-9527-4a6797a90035.png)
+
+Using the "Size" and "Location" fields, you can very nicely display four gauges on a screen in a 2x2 layout. In the next two examples, we'll add a Switch and a Button to this View.
 
 ## Example 6. Adding a Switch to a View
 
@@ -244,6 +248,10 @@ Now there is a switch in the middle of the View, under the graph, but it has no 
 6. Click on the "Add new Label" button on the bottom of the Edit window.
 7. Set these field values: Text = **Anchor light** ; Font = **montserrat14**; Location = **105;128**. Now we have a label for the switch.
 8. File _ Save to save the modified View.
+
+![image](https://user-images.githubusercontent.com/15186790/165358499-0238e520-b31b-4031-83b4-0d1dc4269b6a.png)
+
+
 
 By changing the Size and Location of switches and their labels, you can comfortably have 6 switches on a screen, in a 3 tall x 2 wide layout.
 
