@@ -227,4 +227,26 @@ By default, a gauge doesn't have a label, because you might want it to be on any
 
 Now you have a new DynamicView with a gauge that displays the watch's battery %, in the top half of the screen. Using the "Size" and "Location" fields, you can very nicely display four gauges on a screen in a 2x2 layout. In the next two examples, we'll add a Switch and a Button to this View.
 
+## Example 6. Adding a Switch to a View
+
+The Switch component is a simple On/Off switch. It displays the current value of the SK Path it's bound to, and when you move the switch from one side to the other, it toggles the value of that Path. So obviously, it can work only with Paths that are Booleans, such as electrical.light.anchor.state. When a DynamicView is displayed, if it contains a Switch, the Switch is set to the current value of its Path. If you tap the Switch to change its value, that also changes the value of the Path on the Server. If you have something else installed that monitors that Path, it can then change the actual status of the anchor light. "Something else" could be a [SensESP BoolSKPutRequest](https://signalk.org/SensESP/generated/docs/classsensesp_1_1_s_k_put_request_listener.html), for example.
+
+In this example, we'll add a Switch to the "Gauge" View that we created in Example #5.
+
+1. Click on the "Edit view" button in the lower left corner of the "Gauge" view.
+2. Change the "Name" field to **Gauge and Switch**.
+3. Click on the "Add new Switch" button at the bottom of the editing window.
+4. Click on the "..." next to Binding, and select a SK Path to bind to this Switch. Remember, it has to be a Path whose value is a Boolean. (If you don't have such a Path, don't worry - pick any Path - it will work for purposes of designing the DynamicView. It just won't actually work on the watch.)
+5. Set the Location to **19;120** and the Sze to **80;40**.
+
+Now there is a switch in the middle of the View, under the graph, but it has no label. By default, switches don't have a label, because you might want it to be on any side of the switch, so if you want one, you need to create it:
+
+6. Click on the "Add new Label" button on the bottom of the Edit window.
+7. Set these field values: Text = **Anchor light** ; Font = **montserrat14**; Location = **105;128**. Now we have a label for the switch.
+
+By changing the Size and Location of switches and their labels, you can comfortably have 6 switches on a screen, in a 3 tall x 2 wide layout.
+
+TODO:
+- Add an image of a DynamicView with a graph, a switch, and a button.
+
 [![.NET](https://github.com/JohnySeven/TWatchSKDesigner/actions/workflows/dotnet.yml/badge.svg)](https://github.com/JohnySeven/TWatchSKDesigner/actions/workflows/dotnet.yml)
