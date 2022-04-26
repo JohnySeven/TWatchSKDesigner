@@ -266,7 +266,7 @@ The Button component behaves similar to a physical momentary switch: tap it, and
 3. Click on the "Add new Button" button at the bottom of the editing window.
 4. Buttons get a text label, so set "Text" to **5º >>** and "Font" to **montserrat28**.
 5. Click on the "..." next to "Put", and fill out the pop-up window as follows:
-6. In the "PUT request" field, enter the PUT request that you find in the plug-in: everything except for the value you're PUTting. In our example, it's **PUT http://localhost:3000/signalk/v1/api/vessels/self/steering/autopilot/actions/adjustHeading**. Of course, you need to make sure that all aspects of the request are correct for your installation, such as the port (3000, or 80, or something else).
+6. Click on the Signal K icon and select the Path that this PUT request is going to be sent to. You'll get this from the documentation of the API for the plug-in you're using. In our example, it will be **steering.autopilot.target.headingMagnetic**. (If you don't have this Path in your system, just pick any Path. It won't work, of course, but it will let you complete the creation of the button component.)
 7. Select "Push number value" and put **5** in the value field. Pushing a value of 5 to that URL means "set the heading to 5 degrees to starboard from our current heading". If you want a turn to port, the value would be -5.
 8. Click OK to close the pop-up window.
 9. Back in the editing window, set the Location to **18;172** and the Sze to **110;44**.
