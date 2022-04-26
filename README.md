@@ -208,8 +208,6 @@ Following the steps earlier in this document, download the DynamicViews to your 
 
 You'll notice that not every label looks exactly the same on the watch as it does in Designer - the row of asterisks, for example. So get your View looking the way you want in Designer, then upload to TWatchSK, and see how it looks. Then make changes, upload, and check your results until you get it the way you want it.
 
-[![.NET](https://github.com/JohnySeven/TWatchSKDesigner/actions/workflows/dotnet.yml/badge.svg)](https://github.com/JohnySeven/TWatchSKDesigner/actions/workflows/dotnet.yml)
-
 ## Example 5. Adding a Gauge to a View
 
 In April 2022, three new components were added to DynamicViews: gauges, switches, and buttons. This example will illustrate creating a new View with a gauge, and then the next two examples will add a switch, and then a button.
@@ -228,3 +226,5 @@ By default, a gauge doesn't have a label, because you might want it to be on any
 9. File _ Save to save the new View.
 
 Now you have a new DynamicView with a gauge that displays the watch's battery %, in the top half of the screen. Using the "Size" and "Location" fields, you can very nicely display four gauges on a screen in a 2x2 layout. In the next two examples, we'll add a Switch and a Button to this View.
+
+[![.NET](https://github.com/JohnySeven/TWatchSKDesigner/actions/workflows/dotnet.yml/badge.svg)](https://github.com/JohnySeven/TWatchSKDesigner/actions/workflows/dotnet.yml)
