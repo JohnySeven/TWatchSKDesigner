@@ -52,7 +52,7 @@ Out of the box, the only interaction between Signal K and TWatchSK is that TWatc
 
 *A basic DynamicView showing vessel speed, outside temperature, and barometric pressure, and a more advanced View showing information about the watch itself* 
 
-DynamicViews are defined with JSON, so it would not be practical to create them through a user interface on the watch itself. Designer was created to allow you to easily define DynamicViews on your computer, which can then be installed onto the watch.
+DynamicViews are defined with JSON, so it would not be practical to create them through a user interface on the watch itself. Designer was created to allow you to easily define DynamicViews on your computer that can then be installed onto the watch.
 
 You probably won't want to put every Path from Signal K into a DynamicView - a typical Signal K user might have dozens of Paths, and surely not all of them are important enough to be viewable from your watch. But you can easily fit four, or even six, Paths on a single View, and there's no limit to the number of Views you can have, so if you want to have twenty or thirty Paths available on the watch, you can do it. Just remember - in order to see all this information, you have to wake up the watch, then swipe one or more times to see the View you want, then find the specific data you want on that view, and then decide if that data is within its normal range or not. So for data that's REALLY important to you, we strongly suggest you set up Notifications* in Signal K for when that data is out of normal range, so you'll get a Notification on the watch, in addition to having it in a DynamicView.
 
@@ -61,7 +61,7 @@ Here's a simple example: set up a Notification* in Signal K for engine oil press
 (* Notifications: TWatchSK will automatically display any notifications from Signal K. Signal K sends very few notifications out of the box - one example is a notification when a new version is released. But there are many Signal K plugins that send notifications, one of the simplest being the Simple Notifications Plugin, which allows you to set notification thresholds for any Signal K Path. For example, you can set up an Alert notification if your engine coolant temperature is hotter than normal, and an Alarm notification if it gets into the dangerously hot range. Both of these would automatically be displayed by TWatchSK.)
 
 ## Creating Your First DynamicView
-As soon as you install Designer and connect it to your Signal K Server ("Server" from now on), it will have access to every active Signal K Path on the Server. As soon as you install TWatchSK on your watch and connect it to your Server, it will start sending data to three Paths: TWatchSK.battery, TWatchSK.temperature, and TWatchSK.uptime. NOTE: These three bits of watch data are sent only when the watch is in low power mode (the screen is off), and even then, it's only every 10 seconds.) (If you have given your watch a name other than "TWatchSK" while setting it up, your watch's name will replace "TWatchSK" in these three Paths.) So even if you have no other data being sent to the Server, you will have these three Paths, so that's what we're going to use for all of the DynamicViews in this tutorial. The steps will be identical when creating DynamicViews for your real boat data.
+As soon as you install Designer and connect it to your Signal K Server ("Server" from now on), it will have access to every active Signal K Path on the Server. As soon as you install TWatchSK on your watch and connect it to your Server, it will start sending data to three Paths: TWatchSK.battery, TWatchSK.temperature, and TWatchSK.uptime. NOTE: These three bits of watch data are sent only when the watch is in low power mode (the screen is off), and even then, it's only every 10 seconds. (If you have given your watch a name other than "TWatchSK" while setting it up, your watch's name will replace "TWatchSK" in these three Paths.) So even if you have no other data being sent to the Server, you will have these three Paths, so that's what we're going to use for all of the DynamicViews in this tutorial. The steps will be identical when creating DynamicViews for your real boat data.
 
 ![image](https://user-images.githubusercontent.com/15186790/139891245-1c3758b2-373c-4f1e-ab57-99f8db7bc135.png)
 
@@ -73,7 +73,7 @@ This will be about as simple as a DynamicView can be: just one data field with a
 1. Start Designer and connect to your Server.
 2. Select Edit _ New view from the menu and you'll see a new, blank View. You'll also see the Edit Window on the right side, with the View displayed. You can see its name, "New view", at the bottom of the View itself, and in the "Name" field of the Edit Window.
 3. Change the "Name" field to **Watch Battery**. Notice as you type the new name, it appears at the bottom of the View itself.
-4. Click on the "New label" button at the bottom of the Edit Window. Notice that the top of the Edit Window has changed to "label" to indicate that now you're editing a label, not the View itself.
+4. Click on the "Add new label" button at the bottom of the Edit Window. Notice that the top of the Edit Window has changed to "label" to indicate that now you're editing a label, not the View itself.
 5. Leave the "Text" field blank - it will come from the "Format" field on the Binding Window, below.
 6. Click on the "..." by the the "Binding" field, and the Binding Window will open.
 7. Click on the Signal K icon in the upper right of the Binding Window and a list of all Paths on your Server will pop up.
@@ -95,16 +95,16 @@ Obviously, we didn't use very much of the screen for the first one, so now we'll
 4. In the "Layout" field, select "column_mid".
 5. Click on the white square to the right of "Background", and the Color Window will pop up.
 6. Click in the "Pick color" field, select Aqua, then click on "OK".
-7. Click on the "New label" button at the bottom of the Edit Window.
+7. Click on the "Add new label" button at the bottom of the Edit Window.
 8. Change the "Text" field to **Watch Battery**. Notice that the text is too big to fit in the View that's being built as you go.
 9. Change the "Font" field to **montserrat32** to make it fit.
-10. Click on the "New label" button at the bottom of the Edit Window.
+10. Click on the "Add new label" button at the bottom of the Edit Window.
 11. Leave the "Text" field blank - it will come from the "Format" field on the Binding Window, below.
 12. This label is going to display only a number - an integer from 1 to 100 - so we can make it really large. Select **roboto80** in the "Font" field.
 13. Click on the "..." by the the "Binding" field, then the Signal K icon, then select "TWatchSK.battery", then click OK.
 14. Since this label is going to display only the value from this Binding, put only **$$** into the "Format" field.
 15. Click "OK" to close the Binding Window.
-16. Click on the "New label" button at the bottom of the Edit Window.
+16. Click on the "Add new label" button at the bottom of the Edit Window.
 17. Change the "Text" field to **Percent**. 
 18. To make it consistent with the text at the top of the screen, change the "Font" to **montserrat32**.
 19. Click on File _ Save, then "OK", to save this new View to disk.
@@ -128,7 +128,7 @@ Our first example did not result in a very attractive screen - just one line at 
 
 ![image](https://user-images.githubusercontent.com/15186790/140180604-21432b42-8658-46f0-b718-3142b0a35c41.png)
 
-6. Click on the "New label" button at the bottom of the Edit Window.
+6. Click on the "Add new label" button at the bottom of the Edit Window.
 7. Change the "Text" to **Watch Stats**.
 8. Change the "Font" to **montserrat28**.
 9. Change the "Color" to **DarkOrange**.
@@ -184,7 +184,7 @@ The previous examples have all used the default layout **column_mid**, which arr
 2. Change the "Name" field to **All Watch Info 2**.
 3. In the "Layout" field, select **off**.
 4. Change the "Background" to **AntiqueWhite**.
-5. Click on the "New label" button at the bottom of the Edit Window.
+5. Click on the "Add new label" button at the bottom of the Edit Window.
 6. Change the "Text" to **Watch Stats**. Notice that the text is left justified on the View.
 7. Change the "Font" to **montserrat32**.
 8. Change the "Location" to **20;0**. Notice that the text "Watch Stats" is now horizontally centered on the View.
@@ -209,3 +209,22 @@ Following the steps earlier in this document, download the DynamicViews to your 
 You'll notice that not every label looks exactly the same on the watch as it does in Designer - the row of asterisks, for example. So get your View looking the way you want in Designer, then upload to TWatchSK, and see how it looks. Then make changes, upload, and check your results until you get it the way you want it.
 
 [![.NET](https://github.com/JohnySeven/TWatchSKDesigner/actions/workflows/dotnet.yml/badge.svg)](https://github.com/JohnySeven/TWatchSKDesigner/actions/workflows/dotnet.yml)
+
+## Example 5. Adding a Gauge to a View
+
+In April 2022, three new components were added to DynamicViews: gauges, switches, and buttons. This example will illustrate creating a new View with a gauge, and then the next two examples will add a switch, and then a button.
+
+1. Select Edit _ New view from the menu and you'll see a new, blank View.
+2. Change the "Name" field to **Gauge**.
+3. In the "Layout" field, select **off**. This allows you to position each component exactly where you want it.
+4. Click on the "Add new Gauge" button at the bottom of the Edit Window.
+5. Click on the "..." by the the "Binding" field, then on the Signal K icon, then select "TWatchSK.battery", then click OK, then click OK a second time to close the Binding window.
+6. Set the "Minimum" to **0** and the "Maximum" to **100**. This defines the bottom and top of the gauge's range. This is appropriate for the watch's battery percentage, but if your gauge is displaying engine oil pressure, for example, you might set the minimum and maximum to 0 and 60.
+7. Change the "Location" to **18;125** and the "Size" to **120;120**. Notice that the gauge is now smaller and positioned more in the upper left corner.
+
+By default, a gauge doesn't have a label, because you might want it to be on any side of the gauge, so if you want one, you need to create it:
+
+8. Create a new label and set the "Text" to **Watch battery %**, the "Font" to **montserrat14** and the "Location" to **130;53**.
+9. File _ Save to save the new View.
+
+Now you have a new DynamicView with a gauge that displays the watch's battery %, in the top half of the screen. Using the "Size" and "Location" fields, you can very nicely display four gauges on a screen in a 2x2 layout. In the next two examples, we'll add a Switch and a Button to this View.
