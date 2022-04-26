@@ -265,7 +265,7 @@ The Button component behaves similar to a physical momentary switch: tap it, and
 10. File _ Save to save the modified View.
 
 By changing the Size and Location of Buttons, you can make a DynamicView to give you control over your autopilot!
-
+![image](https://user-images.githubusercontent.com/15186790/165354299-66805154-7958-427c-8b29-6d7b3a68bddc.png)
 
 
 TODO:
