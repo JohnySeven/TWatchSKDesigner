@@ -229,9 +229,9 @@ Now you have a new DynamicView with a gauge that displays the watch's battery %,
 
 ## Example 6. Adding a Switch to a View
 
-The Switch component is a simple On/Off switch. It displays the current value of the SK Path it's bound to, and when you move the switch from one side to the other, it toggles the value of that Path. So obviously, it can work only with Paths that are Booleans, such as electrical.light.anchor.state. When a DynamicView is displayed, if it contains a Switch, the Switch is set to the current value of its Path. If you tap the Switch to change its value, that also changes the value of the Path on the Server. If you have something else installed that monitors that Path, it can then change the actual status of the anchor light. "Something else" could be a [SensESP BoolSKPutRequest](https://signalk.org/SensESP/generated/docs/classsensesp_1_1_s_k_put_request_listener.html), for example.
-
 In this example, we'll add a Switch to the "Gauge" View that we created in Example #5.
+
+The Switch component is a simple On/Off switch. It displays the current value of the SK Path it's bound to, and when you move the switch from one side to the other, it toggles the value of that Path. So obviously, it can work only with Paths that are Booleans, such as electrical.light.anchor.state. When a DynamicView is displayed, if it contains a Switch, the Switch is set to the current value of its Path. If you tap the Switch to change its value, that also changes the value of the Path on the Server. If you have something else installed that monitors that Path, it can then change the actual status of the anchor light. "Something else" could be a [SensESP BoolSKPutRequest](https://signalk.org/SensESP/generated/docs/classsensesp_1_1_s_k_put_request_listener.html), for example.
 
 1. Click on the "Edit view" button in the lower left corner of the "Gauge" view.
 2. Change the "Name" field to **Gauge and Switch**.
@@ -243,8 +243,30 @@ Now there is a switch in the middle of the View, under the graph, but it has no 
 
 6. Click on the "Add new Label" button on the bottom of the Edit window.
 7. Set these field values: Text = **Anchor light** ; Font = **montserrat14**; Location = **105;128**. Now we have a label for the switch.
+8. File _ Save to save the modified View.
 
 By changing the Size and Location of switches and their labels, you can comfortably have 6 switches on a screen, in a 3 tall x 2 wide layout.
+
+## Example 7. Adding a Button to a View
+
+In this example, we'll add a Button to the "Gauge and Switch" View that we created in Example #6.
+
+The Button component behaves similar to a physical momentary switch: tap it, and a single thing happens. If you want that thing to happen again, you have to tap the button again. In our example, we'll make a button that tells the autopilot to turn 5 degrees to starboard. If you want to turn 10 degrees to starboard, you have to tap the button twice. Each tap of a button sends a PUT request to the Server, so there must be something installed on the Server that knows how to respond to the PUT request. In our example, that "something" is the [signalk-autopilot plug-in](https://github.com/SignalK/signalk-autopilot).
+
+1. Click on the "Edit view" button in the lower left corner of the "Gauge and Switch" view.
+2. Change the "Name" field to **Gauge, Switch, Button**.
+3. Click on the "Add new Button" button at the bottom of the editing window.
+4. Buttons get a text label, so set "Text" to **5º >>** and "Font" to **montserrat28**.
+5. Click on the "..." next to "Put", and fill out the pop-up window as follows:
+6. In the "PUT request" field, enter the PUT request that you find in the plug-in: everything except for the value you're PUTting. In our example, it's **PUT http://localhost:3000/signalk/v1/api/vessels/self/steering/autopilot/actions/adjustHeading**. Of course, you need to make sure that all aspects of the request are correct for your installation, such as the port (3000, or 80, or something else).
+7. Select "Push number value" and put **5** in the value field. Pushing a value of 5 to that URL means "set the heading to 5 degrees to starboard from our current heading". If you want a turn to port, the value would be -5.
+8. Click OK to close the pop-up window.
+9. Back in the editing window, set the Location to **18;172** and the Sze to **110;44**.
+10. File _ Save to save the modified View.
+
+By changing the Size and Location of Buttons, you can make a DynamicView to give you control over your autopilot!
+
+
 
 TODO:
 - Add an image of a DynamicView with a graph, a switch, and a button.
