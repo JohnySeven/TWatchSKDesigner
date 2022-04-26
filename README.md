@@ -265,9 +265,11 @@ The Button component behaves similar to a physical momentary switch: tap it, and
 10. File _ Save to save the modified View.
 
 Now you have a DynamicView with a gauge, a switch, and a button that should look like this:
+
 ![image](https://user-images.githubusercontent.com/15186790/165355063-f5f903bd-f05a-408f-9126-ae26c44f9fef.png)
 
 With a little creativity, you can make a DynamicView to give you control over your autopilot!
+
 ![image](https://user-images.githubusercontent.com/15186790/165354299-66805154-7958-427c-8b29-6d7b3a68bddc.png)
 
 
