@@ -1,62 +1,54 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-	<Product Id="*" Name="TWatchSK Designer" Language="1033" Version="1.1.0.0" Manufacturer="Jan Dytrych" UpgradeCode="af48687b-a4be-412d-b1d3-a1d17b7e5faa">
-		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
+  <Product Id="*" Name="TWatchSK Designer" Language="1033" Version="1.2.0.0" Manufacturer="Jan Dytrych" UpgradeCode="af48687b-a4be-412d-b1d3-a1d17b7e5faa">
+    <Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
 
-		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+    <MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
     <Media Id="1" EmbedCab="yes" Cabinet="cab1.cab" />
 
     <Feature Id="ProductFeature" Title="TWatchDesignerWinSetup" Level="1">
-			<ComponentGroupRef Id="ProductComponents" />
-		</Feature>
-	</Product>
+      <ComponentGroupRef Id="ProductComponents" />
+      <ComponentGroupRef Id="ApplicationShortcuts" />
+    </Feature>
+    
+    <ComponentGroup Id="ApplicationShortcuts">
+      <Component Id="ApplicationProgramsShortcut" Guid="61C247CB-D582-4063-AFCA-98C2B4CCBB51" Directory="TWatchSKProgramsFolder">
+        <Shortcut Id="ApplicationStartMenuShortcut" Name="TWatchSK Designer" Description="TWatchSK designer application" Target="[INSTALLFOLDER]TWatchSKDesigner.exe" WorkingDirectory="INSTALLFOLDER" />
+        <Shortcut Id="UninstallProduct" Name="Uninstall TWatchSK Designer" Target="[SystemFolder]msiexec.exe" Arguments="/x [ProductCode]" Description="Uninstalls TWatchSK Designer" />
+        <RemoveFolder Id="RemoveProgramsFolder" On="uninstall" />
+        <RegistryValue Root="HKCU" Key="Software\Jan Dytrych\TWatchSK Designer" Name="installed" Type="integer" Value="1" KeyPath="yes" />
+      </Component>
+      <Component Id="ApplicationShortcut" Guid="6E5F08A3-14FA-46CB-AE70-2D5142F3FEA5" Directory="DesktopFolder">
+        <Shortcut Id="ApplicationDesktopShortcut" Name="TWatchSK Designer" Description="TWatch SK Designer" Target="[INSTALLFOLDER]TWatchSKDesigner.exe" WorkingDirectory="INSTALLFOLDER" />
+        <RegistryValue Root="HKCU" Key="Software\Jan Dytrych\TWatchSK Designer" Name="installed" Type="integer" Value="1" KeyPath="yes" />
+      </Component>
+    </ComponentGroup>
+  </Product>
 
 	<Fragment>
 		<Directory Id="TARGETDIR" Name="SourceDir">
 			<Directory Id="ProgramFilesFolder">
 				<Directory Id="INSTALLFOLDER" Name="TWatchDesignerWinSetup" />
 			</Directory>
+      <Directory Id="ProgramMenuFolder" Name="PMenu">
+        <Directory Id="TWatchSKProgramsFolder" Name="TWatchSK" />
+      </Directory>
+      <Directory Id="DesktopFolder" Name="Desktop" />
 		</Directory>
 	</Fragment>
 
 	<Fragment>
 		<ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
-			<!-- TODO: Remove the comments around this Component element and the ComponentRef below in order to add resources to this installer. -->
-			<!-- <Component Id="ProductComponent"> -->
-				<!-- TODO: Insert files, registry keys, and other resources here. -->
-			<!-- </Component> -->
       <Component Id="Designer" Guid="79314F07-A86D-4E5B-972C-DED45BE07613">
-        <File Id="TWATCHDESIGNEREXE" Source="..\bin\Release\net5.0\publish\TWatchSKDesigner.exe" />
-        <File Id="TWATCHDESIGNERPDB" Source="..\bin\Release\net5.0\publish\TWatchSKDesigner.pdb" />
-        <File Id="MSCORDACCOREDLL" Source="..\bin\Release\net5.0\publish\mscordaccore.dll" />
-        <File Id="LIBSKIASHARPDLL" Source="..\bin\Release\net5.0\publish\libSkiaSharp.dll" />
-        <File Id="LIBHARFBUZZSHARPDLL" Source="..\bin\Release\net5.0\publish\libHarfBuzzSharp.dll" />
-        <File Id="CORECLRDLL" Source="..\bin\Release\net5.0\publish\coreclr.dll" />
-        <File Id="CLRJITDLL" Source="..\bin\Release\net5.0\publish\clrjit.dll" />
-        <File Id="CLRCOMPRESSIONDLL" Source="..\bin\Release\net5.0\publish\clrcompression.dll" />
+        <File Id="TWATCHDESIGNEREXE" Source="..\bin\Release\net5.0\win-x86\publish\TWatchSKDesigner.exe" />
+        <File Id="TWATCHDESIGNERPDB" Source="..\bin\Release\net5.0\win-x86\publish\TWatchSKDesigner.pdb" />
+        <File Id="MSCORDACCOREDLL" Source="..\bin\Release\net5.0\win-x86\publish\mscordaccore.dll" />
+        <File Id="LIBSKIASHARPDLL" Source="..\bin\Release\net5.0\win-x86\publish\libSkiaSharp.dll" />
+        <File Id="LIBHARFBUZZSHARPDLL" Source="..\bin\Release\net5.0\win-x86\publish\libHarfBuzzSharp.dll" />
+        <File Id="CORECLRDLL" Source="..\bin\Release\net5.0\win-x86\publish\coreclr.dll" />
+        <File Id="CLRJITDLL" Source="..\bin\Release\net5.0\win-x86\publish\clrjit.dll" />
+        <File Id="CLRCOMPRESSIONDLL" Source="..\bin\Release\net5.0\win-x86\publish\clrcompression.dll" />
       </Component>
 		</ComponentGroup>
 	</Fragment>
-  <Fragment>
-    <Directory Id="TARGETDIR" Name="SourceDir">
-      <Directory Id="ProgramMenuFolder" Name="PMenu">
-        <Directory Id="TWatchSKProgramsFolder" Name="TWatchSK" />
-      </Directory>
-      <Directory Id="DesktopFolder" Name="Desktop" />
-    </Directory>
-  </Fragment>
-  <Fragment>
-    <DirectoryRef Id="TWatchSKProgramsFolder">
-      <Component Id="ApplicationProgramsShortcut" Guid="61C247CB-D582-4063-AFCA-98C2B4CCBB51">
-        <Shortcut Id="ApplicationStartMenuShortcut" Name="TWatchSK Designer" Description="!(loc.ProductDescription)" Target="[INSTALLFOLDER]TWatchSKDesigner.exe" WorkingDirectory="INSTALLFOLDER" />
-        <Shortcut Id="UninstallProduct" Name="!(loc.UninstallProduct)" Target="[SystemFolder]msiexec.exe" Arguments="/x [ProductCode]" Description="!(loc.UninstallProduct)" />
-        <RemoveFolder Id="RemoveProgramsFolder" On="uninstall" />
-      </Component>
-    </DirectoryRef>
-    <DirectoryRef Id="DesktopFolder">
-      <Component Id="ApplicationShortcut" Guid="6E5F08A3-14FA-46CB-AE70-2D5142F3FEA5">
-        <Shortcut Id="ApplicationDesktopShortcut" Name="TWatchSK Designer" Description="TWatch SK Designer" Target="[INSTALLFOLDER]TWatchSKDesigner.exe" WorkingDirectory="INSTALLFOLDER" />
-      </Component>
-    </DirectoryRef>
-  </Fragment>
 </Wix>

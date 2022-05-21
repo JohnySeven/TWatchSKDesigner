@@ -218,19 +218,29 @@ namespace TWatchSKDesigner.ViewModels
 
         private async void CheckNewVersion()
         {
-            var updateService = Locator.Current.GetService<IUpdateService>();
-
-            var result = await updateService.CheckNewVersion();
-
-            if(result.IsSuccess)
+            try
             {
-                _updateInfo = result.Data;
-                UpdateBannerText = $"New version {result.Data.Version} is available.";
-                ShowUpdateBanner = true;
+                var updateService = Locator.Current.GetService<IUpdateService>();
+
+                if (updateService != null)
+                {
+                    var result = await updateService.CheckNewVersion();
+
+                    if (result.IsSuccess)
+                    {
+                        _updateInfo = result.Data;
+                        UpdateBannerText = $"New version {result.Data.Version} is available.";
+                        ShowUpdateBanner = true;
+                    }
+                    else
+                    {
+                        ShowUpdateBanner = false;
+                    }
+                }
             }
-            else
+            catch (Exception)
             {
-                ShowUpdateBanner = false;
+
             }
         }
 
