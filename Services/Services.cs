@@ -13,6 +13,8 @@ namespace TWatchSKDesigner.Services
         internal static void RegisterAll(IMutableDependencyResolver services)
         {
             services.Register<IEsp32ToolService>(() => new Esp32ToolService());
+            services.Register<IPlatformSupport>(() => new PlatformSupport());
+            services.Register<IUpdateService>(() => new UpdateService());
         }
     }
 }

@@ -18,113 +18,129 @@
   <Design.DataContext>
     <vm:MainWindowViewModel/>
   </Design.DataContext>
-  <DockPanel LastChildFill="True">
-    <Menu DockPanel.Dock="Top">
-      <MenuItem Header="_File">
-        <MenuItem Header="_Open..." Command="{Binding OpenUIFromSK}"/>
-        <Separator/>
-        <MenuItem Header="_Save" Click="Save_Clicked" IsEnabled="{Binding ViewLoaded}" />
-        <MenuItem Header="_Exit" Click="Exit_Clicked" />
-      </MenuItem>
-      <MenuItem Header="_Edit" IsEnabled="{Binding ViewLoaded}">
-        <MenuItem Header="_New view" Click="NewView_Clicked" />
-      </MenuItem>
-      <MenuItem Header="Firmware">
-        <MenuItem Header="Update" Click="UploadFirmware_Clicked"  />
-        <MenuItem Header="Console" Click="Console_Clicked"  />
-      </MenuItem>
-    </Menu>
+  <Grid>
+    <DockPanel LastChildFill="True">
+      <Menu DockPanel.Dock="Top">
+        <MenuItem Header="_File">
+          <MenuItem Header="_Open..." Command="{Binding OpenUIFromSK}"/>
+          <Separator/>
+          <MenuItem Header="_Save" Click="Save_Clicked" IsEnabled="{Binding ViewLoaded}" />
+          <MenuItem Header="_Exit" Click="Exit_Clicked" />
+        </MenuItem>
+        <MenuItem Header="_Edit" IsEnabled="{Binding ViewLoaded}">
+          <MenuItem Header="_New view" Click="NewView_Clicked" />
+        </MenuItem>
+        <MenuItem Header="Firmware">
+          <MenuItem Header="Update" Click="UploadFirmware_Clicked"  />
+          <MenuItem Header="Console" Click="Console_Clicked"  />
+        </MenuItem>
+        <MenuItem Header="Help">
+          <MenuItem Header="Designer help" Click="OpenUrl_Clicked" Tag="https://github.com/JohnySeven/TWatchSKDesigner#readme" />
+          <MenuItem Header="TWatch help" Click="OpenUrl_Clicked" Tag="https://github.com/JohnySeven/TWatchSK#readme" />
+          <MenuItem Header="Report issue" Click="OpenUrl_Clicked" Tag="https://github.com/JohnySeven/TWatchSK/issues/new" />
+        </MenuItem>
+      </Menu>
 
-    <TabControl IsEnabled="{Binding ViewLoaded}" TabStripPlacement="Bottom" SelectedIndex="{Binding SelectedTabIndex, Mode=TwoWay}">
-      <TabItem Header="Designer">
-        <DockPanel>
-          <DockPanel DockPanel.Dock="Right" IsVisible="{Binding ShowProperties, Mode=OneWay}">
-            <Border BorderThickness="1,0,1,1" BorderBrush="LightGray" Padding="2" DockPanel.Dock="Bottom">
-              <Grid RowDefinitions="Auto Auto">
-                <Label Content="Toolbox" DockPanel.Dock="Bottom" />
-                <WrapPanel DockPanel.Dock="Bottom" Grid.Row="1">
-                  <Button Margin="3" Click="NewLabel_Clicked" ToolTip.Tip="Add new Label">
-                    <material:PackIcon Foreground="Black" Kind="Label" />
+      <TabControl IsEnabled="{Binding ViewLoaded}" TabStripPlacement="Bottom" SelectedIndex="{Binding SelectedTabIndex, Mode=TwoWay}">
+        <TabItem Header="Designer">
+          <DockPanel>
+            <DockPanel DockPanel.Dock="Right" IsVisible="{Binding ShowProperties, Mode=OneWay}">
+              <Border BorderThickness="1,0,1,1" BorderBrush="LightGray" Padding="2" DockPanel.Dock="Bottom">
+                <Grid RowDefinitions="Auto Auto">
+                  <Label Content="Toolbox" DockPanel.Dock="Bottom" />
+                  <WrapPanel DockPanel.Dock="Bottom" Grid.Row="1">
+                    <Button Margin="3" Click="NewLabel_Clicked" ToolTip.Tip="Add new Label">
+                      <material:PackIcon Foreground="Black" Kind="Label" />
+                    </Button>
+                    <Button Margin="3" Click="NewGauge_Clicked" ToolTip.Tip="Add new Gauge">
+                      <material:PackIcon Foreground="Black" Kind="Gauge" />
+                    </Button>
+                    <Button Margin="3" Click="NewSwitch_Clicked" ToolTip.Tip="Add new Switch">
+                      <material:PackIcon Foreground="Black" Kind="ToggleSwitch" />
+                    </Button>
+                    <Button Margin="3" Click="NewButton_Clicked" ToolTip.Tip="Add new Button">
+                      <material:PackIcon Foreground="Black" Kind="Button" />
+                    </Button>
+                  </WrapPanel>
+                </Grid>
+              </Border>
+              <Border BorderThickness="1" BorderBrush="LightGray" Padding="2">
+                <Grid ColumnDefinitions="1* Auto" RowDefinitions="Auto 1*">
+                  <Label Margin="6,0,0,2" Content="Components" VerticalAlignment="Center" />
+                  <Button Command="{Binding CloseComponentsPanel}" Grid.Column="1" Background="Transparent" ToolTip.Tip="Close components panel">
+                    <material:PackIcon Kind="Close" Foreground="Black" />
                   </Button>
-                  <Button Margin="3" Click="NewGauge_Clicked" ToolTip.Tip="Add new Gauge">
-                    <material:PackIcon Foreground="Black" Kind="Gauge" />
-                  </Button>
-                  <Button Margin="3" Click="NewSwitch_Clicked" ToolTip.Tip="Add new Switch">
-                    <material:PackIcon Foreground="Black" Kind="ToggleSwitch" />
-                  </Button>
-                  <Button Margin="3" Click="NewButton_Clicked" ToolTip.Tip="Add new Button">
-                    <material:PackIcon Foreground="Black" Kind="Button" />
-                  </Button>
-                </WrapPanel>
+                  <local:ComponentProperties Grid.Row="1" Grid.ColumnSpan="2" DataContext="{Binding PropertiesViewModel, Mode=OneWay}" />
+                </Grid>
+              </Border>
+            </DockPanel>
+            <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+              <Grid>
+                <ItemsControl Items="{CompiledBinding Views, Mode=OneWay}" x:DataType="model:MainWindowViewModel">
+                  <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                      <WrapPanel Orientation="Horizontal" />
+                    </ItemsPanelTemplate>
+                  </ItemsControl.ItemsPanel>
+                  <ItemsControl.ItemTemplate>
+                    <DataTemplate DataType="model:WatchView">
+                      <Border Margin="20" Padding="2" BorderThickness="3" BorderBrush="{Binding IsSelected, Mode=OneWay, Converter={StaticResource BrushIsSelected}}">
+                        <Grid>
+                          <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                          </Grid.RowDefinitions>
+                          <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                          </Grid.ColumnDefinitions>
+                          <local:ViewPreview />
+                          <StackPanel Margin="6" Orientation="Horizontal" Grid.Row="1">
+                            <Button ToolTip.Tip="Edit view" Command="{Binding #Window.DataContext.StartEditingView}" CommandParameter="{Binding .}">
+                              <material:PackIcon Foreground="Black" Kind="Pencil" />
+                            </Button>
+                            <Button ToolTip.Tip="Delete view" Command="{Binding #Window.DataContext.DeleteView}" CommandParameter="{Binding .}">
+                              <material:PackIcon Foreground="Black" Kind="Delete" />
+                            </Button>
+                            <Button ToolTip.Tip="Move view" CommandParameter="{Binding .}" Command="{Binding #Window.DataContext.MoveCommand}">
+                              <material:PackIcon Foreground="Black" Kind="MoveResizeVariant" />
+                            </Button>
+                            <Label Margin="6,0,0,0" VerticalContentAlignment="Center" Content="{Binding Name}" FontWeight="Bold" />
+                          </StackPanel>
+                          <Button CommandParameter="{Binding .}" Command="{Binding #Window.DataContext.MoveViewAtPlaceCommand}" Grid.Column="1" ToolTip.Tip="Place selected view here" IsVisible="{Binding #Window.DataContext.ShowMovingPlacers}"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                            <material:PackIcon Foreground="Black" Kind="SelectPlace" VerticalAlignment="Center" />
+                          </Button>
+                        </Grid>
+                      </Border>
+                    </DataTemplate>
+                  </ItemsControl.ItemTemplate>
+                </ItemsControl>
+                <Grid IsVisible="{Binding ShowOpenHelpText}">
+                  <Label VerticalAlignment="Center" HorizontalAlignment="Center" Content="Please open UI definition file from Signal K Server via File -> Open." />
+                </Grid>
+                <Grid IsVisible="{Binding NoViews}">
+                  <Label VerticalAlignment="Center" HorizontalAlignment="Center" Content="There is no view to display. To add new view press Edit -> New view." />
+                </Grid>
               </Grid>
-            </Border>
-            <Border BorderThickness="1" BorderBrush="LightGray" Padding="2">
-              <Grid ColumnDefinitions="1* Auto" RowDefinitions="Auto 1*">
-                <Label Margin="6,0,0,2" Content="Components" VerticalAlignment="Center" />
-                <Button Command="{Binding CloseComponentsPanel}" Grid.Column="1" Background="Transparent" ToolTip.Tip="Close components panel">
-                  <material:PackIcon Kind="Close" Foreground="Black" />
-                </Button>
-                <local:ComponentProperties Grid.Row="1" Grid.ColumnSpan="2" DataContext="{Binding PropertiesViewModel, Mode=OneWay}" />
-              </Grid>
-            </Border>
+            </ScrollViewer>
           </DockPanel>
-          <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
-            <Grid>
-              <ItemsControl Items="{CompiledBinding Views, Mode=OneWay}" x:DataType="model:MainWindowViewModel">
-                <ItemsControl.ItemsPanel>
-                  <ItemsPanelTemplate>
-                    <WrapPanel Orientation="Horizontal" />
-                  </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-                <ItemsControl.ItemTemplate>
-                  <DataTemplate DataType="model:WatchView">
-                    <Border Margin="20" Padding="2" BorderThickness="3" BorderBrush="{Binding IsSelected, Mode=OneWay, Converter={StaticResource BrushIsSelected}}">
-                      <Grid>
-                        <Grid.RowDefinitions>
-                          <RowDefinition Height="Auto" />
-                          <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                          <ColumnDefinition Width="Auto" />
-                          <ColumnDefinition Width="Auto" />
-                        </Grid.ColumnDefinitions>
-                        <local:ViewPreview />
-                        <StackPanel Margin="6" Orientation="Horizontal" Grid.Row="1">
-                          <Button ToolTip.Tip="Edit view" Command="{Binding #Window.DataContext.StartEditingView}" CommandParameter="{Binding .}">
-                            <material:PackIcon Foreground="Black" Kind="Pencil" />
-                          </Button>
-                          <Button ToolTip.Tip="Delete view" Command="{Binding #Window.DataContext.DeleteView}" CommandParameter="{Binding .}">
-                            <material:PackIcon Foreground="Black" Kind="Delete" />
-                          </Button>
-                          <Button ToolTip.Tip="Move view" CommandParameter="{Binding .}" Command="{Binding #Window.DataContext.MoveCommand}">
-                            <material:PackIcon Foreground="Black" Kind="MoveResizeVariant" />
-                          </Button>
-                          <Label Margin="6,0,0,0" VerticalContentAlignment="Center" Content="{Binding Name}" FontWeight="Bold" />
-                        </StackPanel>
-                        <Button CommandParameter="{Binding .}" Command="{Binding #Window.DataContext.MoveViewAtPlaceCommand}" Grid.Column="1" ToolTip.Tip="Place selected view here" IsVisible="{Binding #Window.DataContext.ShowMovingPlacers}"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-                          <material:PackIcon Foreground="Black" Kind="SelectPlace" VerticalAlignment="Center" />
-                        </Button>
-                      </Grid>
-                    </Border>
-                  </DataTemplate>
-                </ItemsControl.ItemTemplate>
-              </ItemsControl>
-              <Grid IsVisible="{Binding ShowOpenHelpText}">
-                <Label VerticalAlignment="Center" HorizontalAlignment="Center" Content="Please open UI definition file from Signal K Server via File -> Open." />
-              </Grid>
-              <Grid IsVisible="{Binding NoViews}">
-                <Label VerticalAlignment="Center" HorizontalAlignment="Center" Content="There is no view to display. To add new view press Edit -> New view." />
-              </Grid>
-            </Grid>
-          </ScrollViewer>
-        </DockPanel>
-      </TabItem>
-      <TabItem Header="JSON">
-        <DockPanel>
-          <Label Foreground="Red" Content="{Binding JsonError}" DockPanel.Dock="Bottom" />
-          <TextBox Text="{Binding Json, Mode=TwoWay}" AcceptsReturn="True" AcceptsTab="True" />
-        </DockPanel>
-      </TabItem>
-    </TabControl>
-  </DockPanel>
+        </TabItem>
+        <TabItem Header="JSON">
+          <DockPanel>
+            <Label Foreground="Red" Content="{Binding JsonError}" DockPanel.Dock="Bottom" />
+            <TextBox Text="{Binding Json, Mode=TwoWay}" AcceptsReturn="True" AcceptsTab="True" />
+          </DockPanel>
+        </TabItem>
+      </TabControl>
+    </DockPanel>
+    <Border IsVisible="{Binding ShowUpdateBanner}" Background="LightBlue" CornerRadius="4" Margin="10" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+      <StackPanel Margin="4" Orientation="Horizontal">
+        <Label Margin="4,0,0,0" Content="{Binding UpdateBannerText}" VerticalAlignment="Center" />
+        <Button Content="Download" Margin="10,4,4,4" Command="{Binding OpenUpdateDownloadCommand}" />
+        <Button Margin="4,4,10,4" Command="{Binding DismissUpdateCommand}">
+          <material:PackIcon Foreground="Black" Kind="Close" />
+        </Button>
+      </StackPanel>
+    </Border>
+  </Grid>
 </Window>

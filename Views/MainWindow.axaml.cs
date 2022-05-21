@@ -7,9 +7,12 @@ using Avalonia.Markup.Xaml;
 using ReactiveUI;
 using Splat;
 using System;
+using System.Diagnostics;
+using System.Reflection;
 using TWatchSKDesigner.Controls;
 using TWatchSKDesigner.Converters;
 using TWatchSKDesigner.Enums;
+using TWatchSKDesigner.Intefaces;
 using TWatchSKDesigner.Modals;
 using TWatchSKDesigner.ViewModels;
 
@@ -23,6 +26,9 @@ namespace TWatchSKDesigner.Views
         {
             Instance = this;
             InitializeComponent();
+            var version = Assembly.GetEntryAssembly().GetName().Version;
+
+            Title += $" v{version.Major}.{version.Minor}";
 #if DEBUG
             this.AttachDevTools();
 #endif
@@ -104,7 +110,22 @@ namespace TWatchSKDesigner.Views
         {
             Model?.AddNewButton();
         }
-        
 
+        private async void OpenUrl_Clicked(object sender, RoutedEventArgs eventArgs)
+        {
+            if (sender is MenuItem menu && menu.Tag is string url)
+            {
+                try
+                {
+                    var platform = Locator.Current.GetService<IPlatformSupport>();
+
+                    await platform.LaunchBrowser(new Uri(url));
+                }
+                catch (Exception ex)
+                {
+                    await MessageBox.Show("Unable to launch browser, error: " + ex.Message);
+                }
+            }
+        }
     }
 }

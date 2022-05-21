@@ -56,6 +56,24 @@ namespace TWatchSKDesigner.ViewModels
             set { this.RaiseAndSetIfChanged(ref _ShowMovingPlacers, value); }
         }
 
+        private bool _ShowUpdateBanner;
+
+        public bool ShowUpdateBanner
+        {
+            get { return _ShowUpdateBanner; }
+            set { _ShowUpdateBanner = value; OnPropertyChanged(nameof(ShowUpdateBanner)); }
+        }
+
+        private string _UpdateBannerText;
+
+        public string UpdateBannerText
+        {
+            get { return _UpdateBannerText; }
+            set { _UpdateBannerText = value; OnPropertyChanged(nameof(UpdateBannerText)); }
+        }
+
+        private UpdateInfo _updateInfo;
+
         private WatchView _movingView;
 
         public ICommand StartEditingView { get; private set; }
@@ -66,6 +84,10 @@ namespace TWatchSKDesigner.ViewModels
         public ICommand MoveCommand { get; set; }
 
         public ICommand MoveViewAtPlaceCommand { get; set; }
+
+        public ICommand OpenUpdateDownloadCommand { get; private set; }
+
+        public ICommand DismissUpdateCommand { get; private set; }
 
         public SignalKManager SignalKManager { get; private set; }
 
@@ -165,9 +187,51 @@ namespace TWatchSKDesigner.ViewModels
                 ShowProperties = false;
             });
 
+            OpenUpdateDownloadCommand = ReactiveCommand.CreateFromTask(async () =>
+            {
+                var platform = Locator.Current.GetService<IPlatformSupport>();
+
+                try
+                {
+                    await platform.LaunchBrowser(_updateInfo.ShowUri);
+                    ShowUpdateBanner = false;
+                }
+                catch (Exception ex)
+                {
+                    await MessageBox.Show(ex.Message);
+                }
+            });
+
+            DismissUpdateCommand = ReactiveCommand.Create(() =>
+            {
+                ShowUpdateBanner = false;
+            });
+
             SignalKManager = new SignalKManager();
             _Json = "";
             _JsonError = "";
+
+            CheckNewVersion();
+        }
+
+
+
+        private async void CheckNewVersion()
+        {
+            var updateService = Locator.Current.GetService<IUpdateService>();
+
+            var result = await updateService.CheckNewVersion();
+
+            if(result.IsSuccess)
+            {
+                _updateInfo = result.Data;
+                UpdateBannerText = $"New version {result.Data.Version} is available.";
+                ShowUpdateBanner = true;
+            }
+            else
+            {
+                ShowUpdateBanner = false;
+            }
         }
 
         private async void DeleteView(WatchView view)
