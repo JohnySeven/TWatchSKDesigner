@@ -33,6 +33,10 @@ namespace TWatchSKDesigner.Views
             this.AttachDevTools();
 #endif
             InitializeEditorTemplates();
+
+            var firmwareMenu = this.Find<MenuItem>("UpdateMenuItem");
+
+            firmwareMenu.IsEnabled = Locator.Current.GetService<IEsp32ToolService>().IsPlatformSupported();
         }
 
         private static void InitializeEditorTemplates()

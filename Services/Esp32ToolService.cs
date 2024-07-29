@@ -457,5 +457,18 @@ namespace TWatchSKDesigner.Services
         {
             return GithubHelper.DownloadJson<FirmwareList>(FirmwareUrl);
         }
+
+        public bool IsPlatformSupported()
+        {
+            var ret = true;
+
+            //Raspberry Pi isn't supported by esptool for the moment
+            if(RuntimeInformation.IsOSPlatform(OSPlatform.Linux) && RuntimeInformation.ProcessArchitecture == Architecture.Arm)
+            {
+                ret = false;
+            }
+
+            return ret;
+        }
     }
 }

@@ -11,13 +11,13 @@ jobs:
 
     runs-on: ubuntu-latest
     env:
-      VERSION: 1.2
+      VERSION: 1.3
     steps:
     - uses: actions/checkout@v2
     - name: Setup .NET
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 5.0.x
+        dotnet-version: 6.0.x
     - name: Install Deb tool
       run: dotnet tool install --global dotnet-deb
     - name: Install Rpm tool
@@ -27,24 +27,30 @@ jobs:
     - name: Print version
       run: |
           echo $VERSION
-    - name: Create .deb package
-      run: dotnet publish /t:CreateDeb /p:TargetFramework=net5.0 /p:RuntimeIdentifier=linux-x64 /p:Configuration=Release -p:PublishSingleFile=true --self-contained true -p:Version=$VERSION
+    - name: Create .deb package x64
+      run: dotnet publish /t:CreateDeb /p:TargetFramework=net6.0 /p:RuntimeIdentifier=linux-x64 /p:Configuration=Release -p:PublishSingleFile=true --self-contained true -p:Version=$VERSION
+    - name: Create .deb package arm rpi
+      run: dotnet publish /t:CreateDeb /p:TargetFramework=net6.0 /p:RuntimeIdentifier=linux-arm /p:Configuration=Release -p:PublishSingleFile=true --self-contained true -p:Version=$VERSION
+    - name: Create .deb package arm rpi
+      run: dotnet publish /t:CreateDeb /p:TargetFramework=net6.0 /p:RuntimeIdentifier=linux-arm64 /p:Configuration=Release -p:PublishSingleFile=true --self-contained true -p:Version=$VERSION
     - name: Create .rpm package
-      run: dotnet publish /t:CreateRpm /p:TargetFramework=net5.0 /p:RuntimeIdentifier=linux-x64 /p:Configuration=Release -p:PublishSingleFile=true --self-contained true -p:Version=$VERSION
+      run: dotnet publish /t:CreateRpm /p:TargetFramework=net6.0 /p:RuntimeIdentifier=linux-x64 /p:Configuration=Release -p:PublishSingleFile=true --self-contained true -p:Version=$VERSION
     - name: Create .zip Win package
-      run: dotnet publish /p:TargetFramework=net5.0 /p:RuntimeIdentifier=win-x86 /p:Configuration=Release -p:PublishSingleFile=true --self-contained true -p:Version=$VERSION
+      run: dotnet publish /p:TargetFramework=net6.0 /p:RuntimeIdentifier=win-x86 /p:Configuration=Release -p:PublishSingleFile=true --self-contained true -p:Version=$VERSION
     - name: Create MacOS restore
       run: dotnet restore -r osx-x64
     - name: MacOS build package
       run: dotnet msbuild -t:BundleApp -p:RuntimeIdentifier=osx-x64 -property:Configuration=Release -p:UseAppHost=true -p:CFBundleVersion=$VERSION -p:CFBundleShortVersionString=$VERSION
     - name: Fix MacOS host permissions
-      run: chmod +x /home/runner/work/TWatchSKDesigner/TWatchSKDesigner/bin/Release/net5.0/osx-x64/publish/TWatchSK\ Designer.app/Contents/MacOS/TWatchSKDesigner
+      run: chmod +x /home/runner/work/TWatchSKDesigner/TWatchSKDesigner/bin/Release/net6.0/osx-x64/publish/TWatchSK\ Designer.app/Contents/MacOS/TWatchSKDesigner
     - name: Upload artifacts
       uses: actions/upload-artifact@v2
       with:
         name: TWatchDesigner
         path: |
-            /home/runner/work/TWatchSKDesigner/TWatchSKDesigner/bin/Release/net5.0/linux-x64/*.deb
-            /home/runner/work/TWatchSKDesigner/TWatchSKDesigner/bin/Release/net5.0/linux-x64/*.rpm
-            /home/runner/work/TWatchSKDesigner/TWatchSKDesigner/bin/Release/net5.0/win-x86/publish/
-            /home/runner/work/TWatchSKDesigner/TWatchSKDesigner/bin/Release/net5.0/osx-x64/publish/*.app
+            /home/runner/work/TWatchSKDesigner/TWatchSKDesigner/bin/Release/net6.0/linux-x64/*.deb
+            /home/runner/work/TWatchSKDesigner/TWatchSKDesigner/bin/Release/net6.0/linux-arm/*.deb
+            /home/runner/work/TWatchSKDesigner/TWatchSKDesigner/bin/Release/net6.0/linux-arm64/*.deb
+            /home/runner/work/TWatchSKDesigner/TWatchSKDesigner/bin/Release/net6.0/linux-x64/*.rpm
+            /home/runner/work/TWatchSKDesigner/TWatchSKDesigner/bin/Release/net6.0/win-x86/publish/
+            /home/runner/work/TWatchSKDesigner/TWatchSKDesigner/bin/Release/net6.0/osx-x64/publish/*.app
