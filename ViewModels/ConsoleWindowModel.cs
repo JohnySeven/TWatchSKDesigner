@@ -116,6 +116,10 @@ namespace TWatchSKDesigner.ViewModels
                 {
                     textView.AppendLine("Port closed.");
                 }
+                catch(ObjectDisposedException)
+                {
+                    textView.AppendLine("Port closed.");
+                }
                 catch (Exception ex)
                 {
                     textView.AppendLine($"Error: {ex}");

@@ -9,7 +9,7 @@
         xmlns:local="using:TWatchSKDesigner.Views"
         xmlns:ui="using:TWatchSKDesigner.Controls"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-        x:Class="TWatchSKDesigner.Views.MainWindow"
+        x:Class="TWatchSKDesigner.Views.MainWindow"        
         Icon="/Assets/avalonia-logo.ico" x:Name="Window"
         Title="TWatch SK Designer">
   <Window.Resources>
@@ -31,7 +31,7 @@
           <MenuItem Header="_New view" Click="NewView_Clicked" />
         </MenuItem>
         <MenuItem Header="Firmware">
-          <MenuItem Header="Update" Click="UploadFirmware_Clicked"  />
+          <MenuItem Header="Update" x:Name="UpdateMenuItem" Click="UploadFirmware_Clicked"  />
           <MenuItem Header="Console" Click="Console_Clicked"  />
         </MenuItem>
         <MenuItem Header="Help">

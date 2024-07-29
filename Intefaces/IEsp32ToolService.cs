@@ -18,5 +18,6 @@ namespace TWatchSKDesigner.Intefaces
         Task ConnectToConsole(string portName, ITextView textView, CancellationToken token);
         Task<Result<FirmwareVersionInfo>> LoadFirmwareInfo(string firmwareFile);
         Task<Result<FirmwareList>> DownloadFirmwareList();
+        bool IsPlatformSupported();
     }
 }
